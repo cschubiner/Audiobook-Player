@@ -28,13 +28,21 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+	PFUser * currentUser = [PFUser currentUser];
+	if (currentUser) {
+       [self performLoginSegue];
+	}
 }
 
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+- (void)performLoginSegue {
+	[self performSegueWithIdentifier:@"loginSegue" sender:nil];
 }
 
 - (IBAction)touchedLoginButton:(id)sender {
@@ -45,8 +53,20 @@
         else {
             if (user.isNew) {
                 NSLog(@"User signed up through Facebook!");
+                [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection * connection, id result, NSError * error) {
+                    if (!error) {
+                        // Store the current user's Facebook information on the user
+                        [[PFUser currentUser] setObject:[result objectForKey:@"id"] forKey:@"fbId"];
+                        [[PFUser currentUser] setObject:[result objectForKey:@"name"] forKey:@"name"];
+                        [[PFUser currentUser] setObject:[result objectForKey:@"email"] forKey:@"email"];
+                        [[PFUser currentUser] saveInBackground];
+                        [self performLoginSegue];
+                    }
+                }];
             }
-            
+            else {
+                [self performLoginSegue];
+            }
             NSLog(@"User logged in through Facebook!");
         }
     }];

@@ -7,3 +7,7 @@
 # Pods/
 
 
+
+*.xcuserstate
+
+*.xcbkptlist
