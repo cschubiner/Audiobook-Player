@@ -143,23 +143,31 @@
 		0CE27A501935B01200C5C411 /* AudiobookPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */,
-				0CE27A521935B01200C5C411 /* AudiobookPlayer-Prefix.pch */,
+				0CE27A5B1935B01200C5C411 /* iPhoneStoryboard.storyboard */,
 				0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */,
 				0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */,
+				0CE27A5C1935B01200C5C411 /* LoginViewController.h */,
+				0CE27A5D1935B01200C5C411 /* LoginViewController.m */,
+				0CE27A5F1935B01200C5C411 /* MainViewController.h */,
+				0CE27A601935B01200C5C411 /* MainViewController.m */,
+				0CE27A6C1935BF0600C5C411 /* Supporting Files */,
+			);
+			path = AudiobookPlayer;
+			sourceTree = "<group>";
+		};
+		0CE27A6C1935BF0600C5C411 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */,
+				0CE27A521935B01200C5C411 /* AudiobookPlayer-Prefix.pch */,
 				0CE27A551935B01200C5C411 /* Default-568h@2x.png */,
 				0CE27A561935B01200C5C411 /* Default.png */,
 				0CE27A571935B01200C5C411 /* Default@2x.png */,
 				0CE27A581935B01200C5C411 /* InfoPlist.strings */,
 				0CE27A5A1935B01200C5C411 /* Entitlements.plist */,
-				0CE27A5B1935B01200C5C411 /* iPhoneStoryboard.storyboard */,
-				0CE27A5C1935B01200C5C411 /* LoginViewController.h */,
-				0CE27A5D1935B01200C5C411 /* LoginViewController.m */,
 				0CE27A5E1935B01200C5C411 /* main.m */,
-				0CE27A5F1935B01200C5C411 /* MainViewController.h */,
-				0CE27A601935B01200C5C411 /* MainViewController.m */,
 			);
-			path = AudiobookPlayer;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

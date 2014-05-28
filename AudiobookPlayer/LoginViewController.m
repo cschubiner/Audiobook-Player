@@ -27,9 +27,8 @@
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-    
 	PFUser * currentUser = [PFUser currentUser];
-	if (currentUser) {
+	if (currentUser && [currentUser objectForKey:@"name"]) {
 		[self performLoginSegue];
 	}
 }
