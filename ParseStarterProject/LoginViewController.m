@@ -25,13 +25,12 @@
 	return self;
 }
 
-- (void)viewDidLoad
-{
-	[super viewDidLoad];
+-(void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
     
 	PFUser * currentUser = [PFUser currentUser];
 	if (currentUser) {
-       [self performLoginSegue];
+		[self performLoginSegue];
 	}
 }
 
@@ -43,6 +42,18 @@
 
 - (void)performLoginSegue {
 	[self performSegueWithIdentifier:@"loginSegue" sender:nil];
+}
+
+- (IBAction)touchedSkipButton:(id)sender {
+	[PFAnonymousUtils logInWithBlock:^(PFUser * user, NSError * error) {
+        if (error) {
+            NSLog(@"Anonymous login failed.");
+        }
+        else {
+            NSLog(@"Anonymous user logged in.");
+            [self performLoginSegue];
+        }
+    }];
 }
 
 - (IBAction)touchedLoginButton:(id)sender {
@@ -67,6 +78,7 @@
             else {
                 [self performLoginSegue];
             }
+            
             NSLog(@"User logged in through Facebook!");
         }
     }];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="KTs-HB-IXu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="9nc-kx-1eZ">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -27,19 +27,29 @@
                                     <action selector="touchedLoginButton:" destination="9nc-kx-1eZ" eventType="touchUpInside" id="oQO-fR-qKu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ba3-oi-r19">
+                                <rect key="frame" x="137" y="465" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchedSkipButton:" destination="9nc-kx-1eZ" eventType="touchUpInside" id="T3Q-2n-hTD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="KRe-fn-axh"/>
                     <connections>
-                        <segue destination="Vw2-7v-Xjp" kind="modal" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="alD-Uy-M6p"/>
+                        <segue destination="Vz0-Qp-ZfT" kind="modal" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="alD-Uy-M6p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L16-qO-1gb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="272" y="-280"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Main View Controller - Audiobooks-->
         <scene sceneID="yzh-Hw-7F7">
             <objects>
                 <viewController id="Vw2-7v-Xjp" customClass="MainViewController" sceneMemberID="viewController">
@@ -60,29 +70,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="quj-TE-oxE"/>
+                    <navigationItem key="navigationItem" title="Audiobooks" id="quj-TE-oxE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3n-3c-Kdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707" y="-277"/>
+            <point key="canvasLocation" x="1233" y="-277"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="0Z5-Au-EB5">
+        <scene sceneID="ghJ-l7-yis">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KTs-HB-IXu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vz0-Qp-ZfT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xoN-ZK-4Jn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Obv-lk-r72">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="9nc-kx-1eZ" kind="relationship" relationship="rootViewController" id="aDL-vd-aRf"/>
+                        <segue destination="Vw2-7v-Xjp" kind="relationship" relationship="rootViewController" id="PPh-Fo-GnI"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mXs-48-sIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HKl-gx-LQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-254" y="-280"/>
+            <point key="canvasLocation" x="707" y="-277"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
