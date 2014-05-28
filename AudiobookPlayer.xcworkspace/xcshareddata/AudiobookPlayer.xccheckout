@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C617A937-5362-4E1F-A112-76200AE2C940</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AudiobookPlayer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>879DCE2A-1FC0-48C6-86C4-435C993403BF</key>
+		<string>https://github.com/cschubiner/Audiobook-Player.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AudiobookPlayer.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>879DCE2A-1FC0-48C6-86C4-435C993403BF</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/cschubiner/Audiobook-Player.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>879DCE2A-1FC0-48C6-86C4-435C993403BF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>879DCE2A-1FC0-48C6-86C4-435C993403BF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Audiobook-Player</string>
+		</dict>
+	</array>
+</dict>
+</plist>

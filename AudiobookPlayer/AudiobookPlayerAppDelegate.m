@@ -1,7 +1,7 @@
-#import "ParseStarterProjectAppDelegate.h"
+#import "AudiobookPlayerAppDelegate.h"
 #import <Parse/Parse.h>
 
-@implementation ParseStarterProjectAppDelegate
+@implementation AudiobookPlayerAppDelegate
 
 
 #pragma mark - UIApplicationDelegate
@@ -27,13 +27,6 @@
 	[PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
 	// Override point for customization after application launch.
-	UIStoryboard * storyBoard;
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-		storyBoard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:nil];
-	else
-		storyBoard = [UIStoryboard storyboardWithName:@"iPadStoryboard" bundle:nil];
-    
-	[self.window setRootViewController:[storyBoard instantiateInitialViewController]];
     
 	if (application.applicationState != UIApplicationStateBackground) {
 		// Track an app open here if we launch with a push, unless
@@ -130,10 +123,10 @@
 
 - (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
 	if ([result boolValue]) {
-		NSLog(@"ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
+		NSLog(@"AudiobookPlayer successfully subscribed to push notifications on the broadcast channel.");
 	}
 	else {
-		NSLog(@"ParseStarterProject failed to subscribe to push notifications on the broadcast channel.");
+		NSLog(@"AudiobookPlayer failed to subscribe to push notifications on the broadcast channel.");
 	}
 }
 

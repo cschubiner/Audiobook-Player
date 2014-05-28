@@ -30,8 +30,6 @@
 	<string>1.2.19</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
 	<key>FacebookAppID</key>
 	<string>396847777018656</string>
 	<key>FacebookDisplayName</key>
@@ -45,6 +43,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>UIMainStoryboardFile</key>
+	<string>iPhoneStoryboard</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
