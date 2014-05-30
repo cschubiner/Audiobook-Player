@@ -140,7 +140,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="playAudio:" destination="tp1-cU-bUq" eventType="touchUpInside" id="8qZ-vE-fap"/>
+                                    <action selector="playPauseAudio:" destination="tp1-cU-bUq" eventType="touchUpInside" id="PRr-PI-Xv0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5s-7g-p5h">

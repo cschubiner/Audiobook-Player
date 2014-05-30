@@ -13,4 +13,7 @@
 
 @property (strong, nonatomic) NSString * audioPath;
 
+- (IBAction)playAudio:(id)sender;
+- (IBAction)playPauseAudio:(id)sender;
+- (IBAction)stopAudio:(id)sender;
 @end

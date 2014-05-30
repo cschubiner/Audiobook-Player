@@ -1,5 +1,7 @@
 #import "AudiobookPlayerAppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 #import <Parse/Parse.h>
+#import "AudioViewController.h"
 
 
 @implementation AudiobookPlayerAppDelegate
@@ -34,8 +36,7 @@
 	}
     
 	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
-	[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-
+	[self setupAudioSession];
     
 	if (application.applicationState != UIApplicationStateBackground) {
 		// Track an app open here if we launch with a push, unless
@@ -56,21 +57,45 @@
 	return YES;
 }
 
+-(void)setupAudioSession
+{
+	// Set AVAudioSession
+	NSError * sessionError = nil;
+	//	[[AVAudioSession sharedInstance] setDelegate:self];
+	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&sessionError];
+    
+	// Change the default output audio route
+	//	UInt32 doChangeDefaultRoute = 1;
+	//	AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker,
+	//	                        sizeof(doChangeDefaultRoute), &doChangeDefaultRoute);
+    
+	[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+	[self becomeFirstResponder];
+}
+
+//Make sure we can recieve remote control events
+- (BOOL)canBecomeFirstResponder {
+	return YES;
+}
+
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event
 {
-    if(event.type == UIEventTypeRemoteControl)
-    {
-        switch(event.subtype)
-        {
-            case UIEventSubtypeRemoteControlPause:
-            case UIEventSubtypeRemoteControlStop:
-                break;
-            case UIEventSubtypeRemoteControlPlay:
-                break;
-            default:
-                break;
-        }
-    }
+	//if it is a remote control event handle it correctly
+	if (event.type == UIEventTypeRemoteControl) {
+		if (event.subtype == UIEventSubtypeRemoteControlPlay) {
+			NSLog(@"UIEventSubtypeRemoteControlPlay");
+			[self.currentAudioViewController playAudio:nil];
+		}
+		else if (event.subtype == UIEventSubtypeRemoteControlPause) {
+			NSLog(@"UIEventSubtypeRemoteControlPause");
+            [self.currentAudioViewController stopAudio:nil];
+
+		}
+		else if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
+			NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
+            [self.currentAudioViewController playPauseAudio:nil];
+		}
+	}
 }
 
 

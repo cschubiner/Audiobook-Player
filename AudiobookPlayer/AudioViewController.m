@@ -7,6 +7,7 @@
 //
 
 #import "AudioViewController.h"
+#import "AudiobookPlayerAppDelegate.h"
 #import <MediaPlayer/MPMediaItem.h>
 #import <MediaPlayer/MPNowPlayingInfoCenter.h>
 
@@ -30,13 +31,9 @@
 	[super viewDidLoad];
 	[self configureAudioSession2];
 	[self configureAudioPlayer];
+	[((AudiobookPlayerAppDelegate*)UIApplication.sharedApplication.delegate)setCurrentAudioViewController : self];
+    
 }
-
--(void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-	[[UIApplication sharedApplication] endReceivingRemoteControlEvents];
-}
-
 
 - (void)tryPlayMusic {
 	// If background music or other music is already playing, nothing more to do here
@@ -66,26 +63,7 @@
 }
 
 -(void)configureAudioSession2 {
-    
-	NSError * setCategoryErr = nil;
-	NSError * activationErr  = nil;
-	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryErr];
-	[[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
-    
-    
-	NSError * audioError = nil;
-	AVAudioSession * session = [AVAudioSession sharedInstance];
-	if(![session setCategory:AVAudioSessionCategoryPlayback
-                 withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&audioError]) {
-		NSLog(@"[AppDelegate] Failed to setup audio session: %@", audioError);
-	}
-	else
-		[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    
 	[[AVAudioSession sharedInstance] setDelegate:self];
-    
-	[session setActive:YES error:&audioError];
-    
 	self.audioSession = [AVAudioSession sharedInstance];
 }
 
@@ -128,6 +106,13 @@
 
 - (IBAction)playAudio:(id)sender {
 	[self tryPlayMusic];
+}
+
+-(IBAction)playPauseAudio:(id)sender {
+    if (self.backgroundMusicPlaying)
+        [self stopAudio:nil];
+    else
+        [self playAudio:nil];
 }
 
 - (IBAction)stopAudio:(id)sender {
