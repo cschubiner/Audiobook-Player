@@ -25,6 +25,7 @@
 		0C029ED6193860FA00EB961B /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ED5193860FA00EB961B /* AudioViewController.m */; };
 		0C029ED81938628F00EB961B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029ED71938628F00EB961B /* AVFoundation.framework */; };
 		0C029EDA19389AF200EB961B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029ED919389AF200EB961B /* StoreKit.framework */; };
+		0C029EDC1938A1EE00EB961B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */; };
 		0CE27A611935B01200C5C411 /* AudiobookPlayer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */; };
 		0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */; };
 		0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A551935B01200C5C411 /* Default-568h@2x.png */; };
@@ -69,6 +70,7 @@
 		0C029ED5193860FA00EB961B /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
 		0C029ED71938628F00EB961B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0C029ED919389AF200EB961B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AudiobookPlayer-Info.plist"; sourceTree = "<group>"; };
 		0CE27A521935B01200C5C411 /* AudiobookPlayer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AudiobookPlayer-Prefix.pch"; sourceTree = "<group>"; };
 		0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudiobookPlayerAppDelegate.h; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C029EDC1938A1EE00EB961B /* MediaPlayer.framework in Frameworks */,
 				0C029ED81938628F00EB961B /* AVFoundation.framework in Frameworks */,
 				DD952FCB16E7F5CF00470144 /* CoreLocation.framework in Frameworks */,
 				743D7B6D157DA60100084B67 /* CoreGraphics.framework in Frameworks */,
@@ -143,6 +146,7 @@
 		09ABC07013A1D52D009C3FCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */,
 				0C029ED919389AF200EB961B /* StoreKit.framework */,
 				0C029ED71938628F00EB961B /* AVFoundation.framework */,
 				6372FF571613CC47002132AF /* AdSupport.framework */,

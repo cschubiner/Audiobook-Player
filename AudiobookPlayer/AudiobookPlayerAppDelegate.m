@@ -1,6 +1,7 @@
 #import "AudiobookPlayerAppDelegate.h"
 #import <Parse/Parse.h>
 
+
 @implementation AudiobookPlayerAppDelegate
 
 
@@ -33,7 +34,7 @@
 	}
     
 	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+	[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 
     
 	if (application.applicationState != UIApplicationStateBackground) {

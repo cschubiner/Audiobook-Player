@@ -7,6 +7,9 @@
 //
 
 #import "AudioViewController.h"
+#import <MediaPlayer/MPMediaItem.h>
+#import <MediaPlayer/MPNowPlayingInfoCenter.h>
+
 
 @interface AudioViewController ()
 
@@ -29,6 +32,11 @@
 	[self configureAudioPlayer];
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	[[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+}
+
 
 - (void)tryPlayMusic {
 	// If background music or other music is already playing, nothing more to do here
@@ -43,55 +51,27 @@
 	//delay when playing a sound later on.
 	[self.backgroundMusicPlayer play];
 	self.backgroundMusicPlaying = YES;
-}
-
-- (void)configureAudioSession {
-	// Implicit initialization of audio session
-	self.audioSession = [AVAudioSession sharedInstance];
     
-	// Set category of audio session
-	// See handy chart on pg. 46 of the Audio Session Programming Guide for what the categories mean
-	// Not absolutely required in this example, but good to get into the habit of doing
-	// See pg. 10 of Audio Session Programming Guide for "Why a Default Session Usually Isn't What You Want"
-    
-	NSError * setCategoryError = nil;
-	if ([self.audioSession isOtherAudioPlaying]) { // mix sound effects with music already playing
-		[self.audioSession setCategory:AVAudioSessionCategorySoloAmbient error:&setCategoryError];
-		self.backgroundMusicPlaying = NO;
+	Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
+	if (playingInfoCenter) {
+		NSMutableDictionary * songInfo = [[NSMutableDictionary alloc] init];
+		//        MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: [UIImage imagedNamed:@"AlbumArt"]];
+        
+		[songInfo setObject:@"Audio Title" forKey:MPMediaItemPropertyTitle];
+		[songInfo setObject:@"Audio Author" forKey:MPMediaItemPropertyArtist];
+		[songInfo setObject:@"Audio Album" forKey:MPMediaItemPropertyAlbumTitle];
+		//        [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
+		[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
 	}
-	else {
-		[self.audioSession setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
-	}
-    
-	if (setCategoryError) {
-		NSLog(@"Error setting category! %ld", (long)[setCategoryError code]);
-	}
-    
-	NSError * activationError = nil;
-	BOOL success = [self.audioSession setActive:YES error:&activationError];
-	if (!success) { /* handle the error condition */
-	}
-    
 }
 
 -(void)configureAudioSession2 {
-    //    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    //    NSError *setCategoryError = nil;
-    //    BOOL success = [audioSession setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
-    //    if (!success) { /* handle the error condition */ }
-    //
-    //    NSError *activationError = nil;
-    //    success = [audioSession setActive:YES error:&activationError];
-    //    if (!success) {
-    //        NSLog(@"Error activating audio session");
-    //    }
-    //
+    
 	NSError * setCategoryErr = nil;
 	NSError * activationErr  = nil;
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryErr];
 	[[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
     
-	self.audioSession = [AVAudioSession sharedInstance];
     
 	NSError * audioError = nil;
 	AVAudioSession * session = [AVAudioSession sharedInstance];
@@ -99,10 +79,14 @@
                  withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&audioError]) {
 		NSLog(@"[AppDelegate] Failed to setup audio session: %@", audioError);
 	}
+	else
+		[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
+	[[AVAudioSession sharedInstance] setDelegate:self];
     
 	[session setActive:YES error:&audioError];
     
-    
+	self.audioSession = [AVAudioSession sharedInstance];
 }
 
 - (void)configureAudioPlayer {

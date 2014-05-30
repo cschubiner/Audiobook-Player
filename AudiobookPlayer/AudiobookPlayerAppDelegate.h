@@ -1,6 +1,6 @@
 @class LoginViewController;
 
-@interface AudiobookPlayerAppDelegate : NSObject <UIApplicationDelegate> {
+@interface AudiobookPlayerAppDelegate : UIResponder <UIApplicationDelegate> {
     
 }
 
