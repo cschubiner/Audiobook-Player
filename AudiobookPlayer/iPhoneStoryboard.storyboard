@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="773" y="-48"/>
         </scene>
-        <!--Table View Controller - Audiobooks-->
+        <!--Center Panel Table View Controller - Audiobooks-->
         <scene sceneID="oYC-CT-Y88">
             <objects>
-                <tableViewController id="o5E-6H-vg8" sceneMemberID="viewController">
+                <tableViewController id="o5E-6H-vg8" customClass="CenterPanelTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rnf-a6-3QB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,6 +92,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Audiobooks" id="T2C-bg-Bkr"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="nW3-OI-1ay">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="didPullDownRefreshControl:" destination="o5E-6H-vg8" eventType="valueChanged" id="CYn-Aw-Mlq"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ibh-vi-bsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,6 +120,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w0I-BC-nOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1409" y="-512"/>
+        </scene>
+        <!--Audio View Controller-->
+        <scene sceneID="UZc-Ng-WYn">
+            <objects>
+                <viewController storyboardIdentifier="audioView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tp1-cU-bUq" customClass="AudioViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NC6-Ro-Zt2"/>
+                        <viewControllerLayoutGuide type="bottom" id="330-3A-YAo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NWh-YB-RrZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oo7-rw-3ym">
+                                <rect key="frame" x="44" y="482" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playAudio:" destination="tp1-cU-bUq" eventType="touchUpInside" id="8qZ-vE-fap"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5s-7g-p5h">
+                                <rect key="frame" x="137" y="482" width="43" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Pause">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopAudio:" destination="tp1-cU-bUq" eventType="touchUpInside" id="2cz-8P-c1A"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="B57-9f-3ga">
+                                <rect key="frame" x="42" y="345" width="118" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="adjustVolume:" destination="tp1-cU-bUq" eventType="valueChanged" id="r0R-cu-Hgs"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="volumeControl" destination="B57-9f-3ga" id="KDt-I5-1NC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ki-2i-gqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1943" y="-522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V9Y-EK-vHv">

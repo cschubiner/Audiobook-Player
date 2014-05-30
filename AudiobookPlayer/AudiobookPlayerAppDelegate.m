@@ -27,6 +27,14 @@
 	[PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
 	// Override point for customization after application launch.
+	NSURL * url = (NSURL*)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+	if (url != nil && [url isFileURL]) {
+		[self handleOpenURL:url];
+	}
+    
+	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
     
 	if (application.applicationState != UIApplicationStateBackground) {
 		// Track an app open here if we launch with a push, unless
@@ -46,6 +54,57 @@
 	 UIRemoteNotificationTypeSound];
 	return YES;
 }
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event
+{
+    if(event.type == UIEventTypeRemoteControl)
+    {
+        switch(event.subtype)
+        {
+            case UIEventSubtypeRemoteControlPause:
+            case UIEventSubtypeRemoteControlStop:
+                break;
+            case UIEventSubtypeRemoteControlPlay:
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+	if (url != nil && [url isFileURL]) {
+		[self handleOpenURL:url];
+	}
+    
+	return YES;
+    
+}
+
+- (void)handleOpenURL:(NSURL *)url {
+	NSLog(@"url: %@", url);
+}
+
+
+/*
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ /
+ */
+
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url

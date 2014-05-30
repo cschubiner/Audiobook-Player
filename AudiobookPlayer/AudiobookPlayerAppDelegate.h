@@ -8,4 +8,6 @@
 
 @property (nonatomic, strong) IBOutlet LoginViewController * viewController;
 
+@property (nonatomic, strong) UIStoryboard * storyboard;
+
 @end
