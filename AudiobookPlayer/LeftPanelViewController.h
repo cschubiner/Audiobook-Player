@@ -6,8 +6,9 @@
 //
 //
 
+#import "UIViewController+JASidePanel.h"
 #import <UIKit/UIKit.h>
 
-@interface LeftPanelViewController : JASidePanelController
+@interface LeftPanelViewController : UIViewController
 
 @end

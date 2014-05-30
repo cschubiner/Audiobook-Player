@@ -42,17 +42,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="KRe-fn-axh"/>
                     <connections>
-                        <segue destination="Vz0-Qp-ZfT" kind="modal" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="alD-Uy-M6p"/>
+                        <segue destination="Vw2-7v-Xjp" kind="modal" identifier="loginSegue" modalTransitionStyle="crossDissolve" animates="NO" id="ccC-mD-GXi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L16-qO-1gb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="272" y="-280"/>
+            <point key="canvasLocation" x="202" y="-108"/>
         </scene>
-        <!--Main View Controller - Audiobooks-->
+        <!--Panels View Controller - Audiobooks-->
         <scene sceneID="yzh-Hw-7F7">
             <objects>
-                <viewController id="Vw2-7v-Xjp" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController id="Vw2-7v-Xjp" customClass="PanelsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lsn-em-dyw"/>
                         <viewControllerLayoutGuide type="bottom" id="gR6-nX-v4d"/>
@@ -60,9 +60,28 @@
                     <view key="view" contentMode="scaleToFill" id="454-gu-ReP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Audiobooks" id="quj-TE-oxE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h3n-3c-Kdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="773" y="-48"/>
+        </scene>
+        <!--Center Panel View Controller-->
+        <scene sceneID="xBo-At-N5m">
+            <objects>
+                <viewController storyboardIdentifier="centerViewController" id="EXD-e8-dw9" customClass="CenterPanelViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sLh-2u-LP1"/>
+                        <viewControllerLayoutGuide type="bottom" id="2O3-IH-72V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zgB-xE-e1S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4U-xz-dpO">
-                                <rect key="frame" x="71" y="235" width="42" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMz-DU-7LT">
+                                <rect key="frame" x="48" y="95" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -70,29 +89,28 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Audiobooks" id="quj-TE-oxE"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h3n-3c-Kdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I7C-t1-KyG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1233" y="-277"/>
+            <point key="canvasLocation" x="1409" y="153"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ghJ-l7-yis">
+        <!--Left Panel View Controller-->
+        <scene sceneID="s31-3s-QNU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vz0-Qp-ZfT" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Obv-lk-r72">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Vw2-7v-Xjp" kind="relationship" relationship="rootViewController" id="PPh-Fo-GnI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HKl-gx-LQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="leftViewController" id="c1X-jt-TQ8" customClass="LeftPanelViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7qn-Iq-kQh"/>
+                        <viewControllerLayoutGuide type="bottom" id="dio-lr-2QS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aSP-0V-gjc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w0I-BC-nOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707" y="-277"/>
+            <point key="canvasLocation" x="1409" y="-512"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

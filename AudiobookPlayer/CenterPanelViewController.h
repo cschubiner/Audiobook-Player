@@ -6,8 +6,8 @@
 //
 //
 
-#import "JASidePanelController.h"
+#import "UIViewController+JASidePanel.h"
 
-@interface CenterPanelViewController : JASidePanelController
+@interface CenterPanelViewController : UIViewController
 
 @end

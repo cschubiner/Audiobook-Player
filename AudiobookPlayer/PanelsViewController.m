@@ -6,13 +6,13 @@
 //
 //
 
-#import "MainViewController.h"
+#import "PanelsViewController.h"
 
-@interface MainViewController ()
+@interface PanelsViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation PanelsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,6 +23,13 @@
     
 	return self;
 }
+
+-(void)awakeFromNib
+{
+	[self setLeftPanel:[self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"]];
+	[self setCenterPanel:[self.storyboard instantiateViewControllerWithIdentifier:@"centerViewController"]];
+}
+
 
 - (void)viewDidLoad
 {
