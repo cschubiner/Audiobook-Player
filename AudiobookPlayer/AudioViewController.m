@@ -9,19 +9,19 @@
 #import "AudioViewController.h"
 #import "AudiobookPlayerAppDelegate.h"
 #import <MediaPlayer/MPMediaItem.h>
+#import <MediaPlayer/MPMusicPlayerController.h>
 #import <MediaPlayer/MPNowPlayingInfoCenter.h>
 
 
 @interface AudioViewController ()
 
-@property (strong, nonatomic) IBOutlet UISlider * volumeControl;
-- (IBAction)adjustVolume:(id)sender;
 - (IBAction)playAudio:(id)sender;
 - (IBAction)stopAudio:(id)sender;
 @property (strong, nonatomic) AVAudioSession * audioSession;
 @property (strong, nonatomic) AVAudioPlayer * backgroundMusicPlayer;
 @property (assign) BOOL backgroundMusicPlaying;
 @property (assign) BOOL backgroundMusicInterrupted;
+@property (weak, nonatomic) IBOutlet UISlider * seekSlider;
 
 @end
 
@@ -29,10 +29,18 @@
 
 -(void)viewDidLoad {
 	[super viewDidLoad];
-	[self configureAudioSession2];
+	[self configureAudioSession];
 	[self configureAudioPlayer];
 	[((AudiobookPlayerAppDelegate*)UIApplication.sharedApplication.delegate)setCurrentAudioViewController : self];
     
+}
+
+- (IBAction)slide {
+	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
+}
+
+- (void)updateTime:(NSTimer *)timer {
+	self.seekSlider.value = self.backgroundMusicPlayer.currentTime;
 }
 
 - (void)tryPlayMusic {
@@ -60,9 +68,14 @@
 		//        [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
 		[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
 	}
+    
+	self.seekSlider.maximumValue = [self.backgroundMusicPlayer duration];
+	[self updateTime:nil];
+    
+	[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
 }
 
--(void)configureAudioSession2 {
+-(void)configureAudioSession {
 	[[AVAudioSession sharedInstance] setDelegate:self];
 	self.audioSession = [AVAudioSession sharedInstance];
 }
@@ -98,21 +111,15 @@
 }
 
 
-- (IBAction)adjustVolume:(id)sender {
-	if (self.backgroundMusicPlayer != nil) {
-		self.backgroundMusicPlayer.volume = _volumeControl.value;
-	}
-}
-
 - (IBAction)playAudio:(id)sender {
 	[self tryPlayMusic];
 }
 
 -(IBAction)playPauseAudio:(id)sender {
-    if (self.backgroundMusicPlaying)
-        [self stopAudio:nil];
-    else
-        [self playAudio:nil];
+	if (self.backgroundMusicPlaying)
+		[self stopAudio:nil];
+	else
+		[self playAudio:nil];
 }
 
 - (IBAction)stopAudio:(id)sender {
