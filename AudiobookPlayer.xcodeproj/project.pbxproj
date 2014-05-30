@@ -19,7 +19,7 @@
 		0C029E93193814C000EB961B /* LeftPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029E92193814C000EB961B /* LeftPanelViewController.m */; };
 		0C029EC51938153400EB961B /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029EC21938153400EB961B /* JASidePanelController.m */; };
 		0C029EC61938153400EB961B /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029EC41938153400EB961B /* UIViewController+JASidePanel.m */; };
-		0C029ECA1938177D00EB961B /* CenterPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029EC91938177D00EB961B /* CenterPanelViewController.m */; };
+		0C029ECD19381A9B00EB961B /* CenterPanelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */; };
 		0CE27A611935B01200C5C411 /* AudiobookPlayer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */; };
 		0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */; };
 		0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A551935B01200C5C411 /* Default-568h@2x.png */; };
@@ -55,8 +55,8 @@
 		0C029EC21938153400EB961B /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JASidePanelController.m; path = JASidePanels/JASidePanels/Source/JASidePanelController.m; sourceTree = "<group>"; };
 		0C029EC31938153400EB961B /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+JASidePanel.h"; path = "JASidePanels/JASidePanels/Source/UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
 		0C029EC41938153400EB961B /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+JASidePanel.m"; path = "JASidePanels/JASidePanels/Source/UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
-		0C029EC81938177D00EB961B /* CenterPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterPanelViewController.h; sourceTree = "<group>"; };
-		0C029EC91938177D00EB961B /* CenterPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterPanelViewController.m; sourceTree = "<group>"; };
+		0C029ECB19381A9B00EB961B /* CenterPanelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterPanelTableViewController.h; sourceTree = "<group>"; };
+		0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterPanelTableViewController.m; sourceTree = "<group>"; };
 		0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AudiobookPlayer-Info.plist"; sourceTree = "<group>"; };
 		0CE27A521935B01200C5C411 /* AudiobookPlayer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AudiobookPlayer-Prefix.pch"; sourceTree = "<group>"; };
 		0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudiobookPlayerAppDelegate.h; sourceTree = "<group>"; };
@@ -170,8 +170,8 @@
 				0CE27A5B1935B01200C5C411 /* iPhoneStoryboard.storyboard */,
 				0C029E91193814C000EB961B /* LeftPanelViewController.h */,
 				0C029E92193814C000EB961B /* LeftPanelViewController.m */,
-				0C029EC81938177D00EB961B /* CenterPanelViewController.h */,
-				0C029EC91938177D00EB961B /* CenterPanelViewController.m */,
+				0C029ECB19381A9B00EB961B /* CenterPanelTableViewController.h */,
+				0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */,
 				0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */,
 				0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */,
 				0CE27A5C1935B01200C5C411 /* LoginViewController.h */,
@@ -311,7 +311,7 @@
 				0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */,
 				0CE27A6B1935B01200C5C411 /* PanelsViewController.m in Sources */,
 				0C029E93193814C000EB961B /* LeftPanelViewController.m in Sources */,
-				0C029ECA1938177D00EB961B /* CenterPanelViewController.m in Sources */,
+				0C029ECD19381A9B00EB961B /* CenterPanelTableViewController.m in Sources */,
 				0C029EC61938153400EB961B /* UIViewController+JASidePanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

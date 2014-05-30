@@ -68,31 +68,34 @@
             </objects>
             <point key="canvasLocation" x="773" y="-48"/>
         </scene>
-        <!--Center Panel View Controller-->
-        <scene sceneID="xBo-At-N5m">
+        <!--Table View Controller - Audiobooks-->
+        <scene sceneID="oYC-CT-Y88">
             <objects>
-                <viewController storyboardIdentifier="centerViewController" id="EXD-e8-dw9" customClass="CenterPanelViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="sLh-2u-LP1"/>
-                        <viewControllerLayoutGuide type="bottom" id="2O3-IH-72V"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zgB-xE-e1S">
+                <tableViewController id="o5E-6H-vg8" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rnf-a6-3QB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMz-DU-7LT">
-                                <rect key="frame" x="48" y="95" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I7C-t1-KyG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="audiobookCell" id="I8q-tF-Z12">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I8q-tF-Z12" id="o51-fB-tYV">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="o5E-6H-vg8" id="yhd-TK-ZiF"/>
+                            <outlet property="delegate" destination="o5E-6H-vg8" id="pa4-4o-bas"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Audiobooks" id="T2C-bg-Bkr"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ibh-vi-bsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409" y="153"/>
+            <point key="canvasLocation" x="1951" y="250"/>
         </scene>
         <!--Left Panel View Controller-->
         <scene sceneID="s31-3s-QNU">
@@ -111,6 +114,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w0I-BC-nOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1409" y="-512"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="V9Y-EK-vHv">
+            <objects>
+                <navigationController storyboardIdentifier="centerViewController" automaticallyAdjustsScrollViewInsets="NO" id="0F2-r9-MhW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jo6-7p-Iog">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="o5E-6H-vg8" kind="relationship" relationship="rootViewController" id="ozr-aZ-FcZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fcj-lQ-vOX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1409" y="153"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
