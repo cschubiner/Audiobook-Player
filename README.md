@@ -8,3 +8,6 @@ Final project for CS 193p
 - Background audio
 - Supports iTunes file sharing - transfer audiobooks to AP with iTunes
 - Custom UITableViewCells that display current progress in audiobook
+- Swipe in different directions to skip different amounts
+- Tap to play/pause
+- Custom UISlider to seek at different rates

@@ -34,9 +34,20 @@
 	[self.seekSlider setDelegate:self];
 	self.seekSlider.scrubbingSpeedPositions = [NSArray arrayWithObjects:
 	                                           [NSNumber numberWithInt:0],
-	                                           [NSNumber numberWithInt:self.view.frame.size.height / 5],
-	                                           [NSNumber numberWithInt:2 * self.view.frame.size.height / 5],
-	                                           [NSNumber numberWithInt:3 * self.view.frame.size.height / 5], nil];
+	                                           [NSNumber numberWithInt:self.view.frame.size.height / 6.3],
+	                                           [NSNumber numberWithInt:2 * self.view.frame.size.height / 6],
+	                                           [NSNumber numberWithInt:3 * self.view.frame.size.height / 6], nil];
+    
+    [self.seekSlider addTarget:self
+                  action:@selector(sliderDidEndSliding:)
+        forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
+}
+
+- (void)sliderDidEndSliding:(NSNotification *)notification {
+	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
+    if (musicWasPlaying)
+        [self.backgroundMusicPlayer play];
+    canChangePlayingState = true;
 }
 
 -(void)viewDidLoad {
@@ -69,8 +80,14 @@
 	[self flashGestureLabelWithDuration:2];
 }
 
+BOOL musicWasPlaying = false;
+BOOL canChangePlayingState = true;
 - (IBAction)slide {
-	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
+    if (canChangePlayingState)
+        musicWasPlaying = self.backgroundMusicPlayer.isPlaying;
+    canChangePlayingState = false;
+    [self.backgroundMusicPlayer stop];
+    
 	if (self.seekSlider.currentScrubbingSpeed >= .999) {
 		[self.gestureLabel setText:[NSString stringWithFormat:@"Slide down to scrub slower"]];
 		[self flashGestureLabelWithDuration:2];

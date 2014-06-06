@@ -165,6 +165,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XsX-Iq-Nh0">
+                                <rect key="frame" x="0.0" y="115" width="320" height="359"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="EMm-1D-rVg" appends="YES" id="SNj-YU-jp7"/>
+                                </connections>
+                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Slide down to scrub slower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="doc-Rl-iER">
                                 <rect key="frame" x="20" y="230" width="280" height="107"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -176,7 +185,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="EMm-1D-rVg" appends="YES" id="gdN-eQ-MAg"/>
                             <outletCollection property="gestureRecognizers" destination="nkH-qd-pkS" appends="YES" id="QhP-Rp-1Md"/>
                         </connections>
                     </view>
@@ -188,16 +196,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ki-2i-gqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="EMm-1D-rVg">
-                    <connections>
-                        <action selector="didTapView:" destination="tp1-cU-bUq" id="tfG-TB-7JY"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="nkH-qd-pkS">
                     <connections>
                         <action selector="didPan:" destination="tp1-cU-bUq" id="lGB-HU-XnW"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="EMm-1D-rVg">
+                    <connections>
+                        <action selector="didTapView:" destination="tp1-cU-bUq" id="tfG-TB-7JY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1983" y="-549"/>
         </scene>
