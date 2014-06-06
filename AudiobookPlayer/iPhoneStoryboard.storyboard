@@ -153,7 +153,7 @@
                                     <action selector="stopAudio:" destination="tp1-cU-bUq" eventType="touchUpInside" id="2cz-8P-c1A"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WsN-3d-tyB">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WsN-3d-tyB" customClass="CPSlider">
                                 <rect key="frame" x="14" y="77" width="292" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -165,23 +165,41 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Slide down to scrub slower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="doc-Rl-iER">
+                                <rect key="frame" x="20" y="230" width="280" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="71"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="EMm-1D-rVg" appends="YES" id="gdN-eQ-MAg"/>
+                            <outletCollection property="gestureRecognizers" destination="nkH-qd-pkS" appends="YES" id="QhP-Rp-1Md"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Wlx-Sg-312"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="gestureLabel" destination="doc-Rl-iER" id="a6O-6B-d0N"/>
                         <outlet property="seekSlider" destination="WsN-3d-tyB" id="MQa-vA-yh9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ki-2i-gqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="EMm-1D-rVg"/>
+                <tapGestureRecognizer id="EMm-1D-rVg">
+                    <connections>
+                        <action selector="didTapView:" destination="tp1-cU-bUq" id="tfG-TB-7JY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="nkH-qd-pkS">
+                    <connections>
+                        <action selector="didPan:" destination="tp1-cU-bUq" id="lGB-HU-XnW"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2250" y="-543"/>
+            <point key="canvasLocation" x="1983" y="-549"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V9Y-EK-vHv">

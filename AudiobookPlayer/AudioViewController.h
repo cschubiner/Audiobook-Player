@@ -6,11 +6,12 @@
 //
 //
 
+#import "CPSlider.h"
 #import "Song.h"
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 
-@interface AudioViewController : UIViewController <AVAudioPlayerDelegate>
+@interface AudioViewController : UIViewController <AVAudioPlayerDelegate, CPSliderDelegate>
 
 @property (strong, nonatomic) Song * song;
 
