@@ -11,3 +11,4 @@ Final project for CS 193p
 - Swipe in different directions to skip different amounts
 - Tap to play/pause
 - Custom UISlider to seek at different rates
+- Tracks save position
