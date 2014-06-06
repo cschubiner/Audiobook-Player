@@ -31,29 +31,47 @@
 	[super viewDidLoad];
 	[self configureAudioSession];
 	[self configureAudioPlayer];
-	[((AudiobookPlayerAppDelegate*)UIApplication.sharedApplication.delegate)setCurrentAudioViewController : self];
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+	if (self != delegate.currentAudioViewController) {
+        [delegate.currentAudioViewController recordCurrentPosition];
+        [delegate.managedObjectContext save:nil];
+		[[delegate.currentAudioViewController backgroundMusicPlayer]stop];
+//		[delegate.currentAudioViewController setBackgroundMusicPlayer:nil];
+		[delegate setCurrentAudioViewController:self];
+	}
     
+	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
+	[self tryPlayMusic];
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    [self recordCurrentPosition];
+    [delegate.managedObjectContext save:nil];
 }
 
 - (IBAction)slide {
 	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
+    [self recordCurrentPosition];
+}
+
+-(void)recordCurrentPosition {
+//	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext performBlock :^{
+        self.song.currentPosition = [NSNumber numberWithDouble:self.backgroundMusicPlayer.currentTime];
+//    }];
 }
 
 - (void)updateTime:(NSTimer *)timer {
 	self.seekSlider.value = self.backgroundMusicPlayer.currentTime;
+    [self recordCurrentPosition];
 }
 
 - (void)tryPlayMusic {
-	// If background music or other music is already playing, nothing more to do here
 	if (self.backgroundMusicPlaying || [self.audioSession isOtherAudioPlaying]) {
 		return;
 	}
     
-	// Play background music if no other music is playing and we aren't playing already
-	//Note: prepareToPlay preloads the music file and can help avoid latency. If you don't
-	//call it, then it is called anyway implicitly as a result of [self.backgroundMusicPlayer play];
-	//It can be worthwhile to call prepareToPlay as soon as possible so as to avoid needless
-	//delay when playing a sound later on.
 	[self.backgroundMusicPlayer play];
 	self.backgroundMusicPlaying = YES;
     
@@ -62,9 +80,9 @@
 		NSMutableDictionary * songInfo = [[NSMutableDictionary alloc] init];
 		//        MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: [UIImage imagedNamed:@"AlbumArt"]];
         
-		[songInfo setObject:@"Audio Title" forKey:MPMediaItemPropertyTitle];
-		[songInfo setObject:@"Audio Author" forKey:MPMediaItemPropertyArtist];
-		[songInfo setObject:@"Audio Album" forKey:MPMediaItemPropertyAlbumTitle];
+		[songInfo setObject:self.song.title forKey:MPMediaItemPropertyTitle];
+//		[songInfo setObject:@"Audio Author" forKey:MPMediaItemPropertyArtist];
+//		[songInfo setObject:@"Audio Album" forKey:MPMediaItemPropertyAlbumTitle];
 		//        [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
 		[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
 	}
@@ -82,7 +100,7 @@
 
 - (void)configureAudioPlayer {
 	// Create audio player with background music
-	NSURL * backgroundMusicURL = [NSURL fileURLWithPath:self.audioPath];
+	NSURL * backgroundMusicURL = [NSURL fileURLWithPath:self.song.path];
 	self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:nil];
 	self.backgroundMusicPlayer.delegate = self; // We need this so we can restart after interruptions
 	self.backgroundMusicPlayer.numberOfLoops = 1;
@@ -93,19 +111,11 @@
 #pragma mark - AVAudioPlayerDelegate methods
 
 - (void)audioPlayerBeginInterruption: (AVAudioPlayer *)player {
-	//It is often not necessary to implement this method since by the time
-	//this method is called, the sound has already stopped. You don't need to
-	//stop it yourself.
-	//In this case the backgroundMusicPlaying flag could be used in any
-	//other portion of the code that needs to know if your music is playing.
-    
 	self.backgroundMusicInterrupted = YES;
 	self.backgroundMusicPlaying = NO;
 }
 
 - (void)audioPlayerEndInterruption: (AVAudioPlayer *)player withOptions:(NSUInteger)flags {
-	//Since this method is only called if music was previously interrupted
-	//you know that the music has stopped playing and can now be resumed.
 	[self tryPlayMusic];
 	self.backgroundMusicInterrupted = NO;
 }

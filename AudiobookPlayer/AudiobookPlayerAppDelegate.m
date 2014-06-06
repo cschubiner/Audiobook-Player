@@ -1,13 +1,31 @@
+#import "AudioViewController.h"
 #import "AudiobookPlayerAppDelegate.h"
+#import "SongDatabase.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Parse/Parse.h>
-#import "AudioViewController.h"
 
 
 @implementation AudiobookPlayerAppDelegate
 
 
 #pragma mark - UIApplicationDelegate
+
+- (void)setupDB {
+	SongDatabase * flickrdb = [SongDatabase sharedDefaultSongDatabase];
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+	if (flickrdb.managedObjectContext) {
+		delegate.managedObjectContext = flickrdb.managedObjectContext;
+	}
+	else {
+		id observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
+                                                                        object:flickrdb
+                                                                         queue:[NSOperationQueue mainQueue]
+                                                                    usingBlock:^(NSNotification * note) {
+                                                                        delegate.managedObjectContext = flickrdb.managedObjectContext;
+                                                                        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                                    }];
+	}
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// ****************************************************************************
@@ -37,6 +55,7 @@
     
 	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
 	[self setupAudioSession];
+	[self setupDB];
     
 	if (application.applicationState != UIApplicationStateBackground) {
 		// Track an app open here if we launch with a push, unless
@@ -88,12 +107,12 @@
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlPause) {
 			NSLog(@"UIEventSubtypeRemoteControlPause");
-            [self.currentAudioViewController stopAudio:nil];
-
+			[self.currentAudioViewController stopAudio:nil];
+            
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
 			NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
-            [self.currentAudioViewController playPauseAudio:nil];
+			[self.currentAudioViewController playPauseAudio:nil];
 		}
 	}
 }

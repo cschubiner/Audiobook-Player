@@ -11,6 +11,8 @@
 
 @property (nonatomic, strong) UIStoryboard * storyboard;
 
-@property (nonatomic, weak) AudioViewController * currentAudioViewController;
+@property (nonatomic, strong) NSManagedObjectContext * managedObjectContext;
+
+@property (nonatomic, strong) AudioViewController * currentAudioViewController;
 
 @end

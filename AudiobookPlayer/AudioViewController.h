@@ -6,12 +6,13 @@
 //
 //
 
+#import "Song.h"
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 
 @interface AudioViewController : UIViewController <AVAudioPlayerDelegate>
 
-@property (strong, nonatomic) NSString * audioPath;
+@property (strong, nonatomic) Song * song;
 
 - (IBAction)playAudio:(id)sender;
 - (IBAction)playPauseAudio:(id)sender;

@@ -37,6 +37,12 @@
 		0CE27A691935B01200C5C411 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A5D1935B01200C5C411 /* LoginViewController.m */; };
 		0CE27A6A1935B01200C5C411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A5E1935B01200C5C411 /* main.m */; };
 		0CE27A6B1935B01200C5C411 /* PanelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A601935B01200C5C411 /* PanelsViewController.m */; };
+		0CEA204419418D1500A833D8 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA204219418D1500A833D8 /* Model.xcdatamodeld */; };
+		0CEA204B19418E7400A833D8 /* Song+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA204A19418E7400A833D8 /* Song+Create.m */; };
+		0CEA204E19418ED600A833D8 /* SongDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA204D19418ED600A833D8 /* SongDatabase.m */; };
+		0CEA205319419CD000A833D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEA205219419CD000A833D8 /* CoreMedia.framework */; };
+		0CEA205519419CEE00A833D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEA205419419CEE00A833D8 /* CoreData.framework */; };
+		0CEA20581941A71A00A833D8 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA20571941A71A00A833D8 /* Song.m */; };
 		2FCDD6B014A573F500295AAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCDD6AF14A573F500295AAC /* QuartzCore.framework */; };
 		5DD0FC4F489F46089224B4D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADFCB70F35384ED48E94A608 /* libPods.a */; };
 		743D7B6D157DA60100084B67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743D7B6C157DA60100084B67 /* CoreGraphics.framework */; };
@@ -86,6 +92,15 @@
 		0CE27A5E1935B01200C5C411 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0CE27A5F1935B01200C5C411 /* PanelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelsViewController.h; sourceTree = "<group>"; };
 		0CE27A601935B01200C5C411 /* PanelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelsViewController.m; sourceTree = "<group>"; };
+		0CEA204319418D1500A833D8 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		0CEA204919418E7400A833D8 /* Song+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Song+Create.h"; sourceTree = "<group>"; };
+		0CEA204A19418E7400A833D8 /* Song+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Song+Create.m"; sourceTree = "<group>"; };
+		0CEA204C19418ED600A833D8 /* SongDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDatabase.h; sourceTree = "<group>"; };
+		0CEA204D19418ED600A833D8 /* SongDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDatabase.m; sourceTree = "<group>"; };
+		0CEA205219419CD000A833D8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0CEA205419419CEE00A833D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0CEA20561941A71A00A833D8 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		0CEA20571941A71A00A833D8 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		164177ABC0BF41C6946CDFA7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		2FCDD6AF14A573F500295AAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6332375315E438E900AE2736 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -102,6 +117,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CEA205519419CEE00A833D8 /* CoreData.framework in Frameworks */,
+				0CEA205319419CD000A833D8 /* CoreMedia.framework in Frameworks */,
 				0C029EDC1938A1EE00EB961B /* MediaPlayer.framework in Frameworks */,
 				0C029ED81938628F00EB961B /* AVFoundation.framework in Frameworks */,
 				DD952FCB16E7F5CF00470144 /* CoreLocation.framework in Frameworks */,
@@ -146,6 +163,8 @@
 		09ABC07013A1D52D009C3FCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CEA205419419CEE00A833D8 /* CoreData.framework */,
+				0CEA205219419CD000A833D8 /* CoreMedia.framework */,
 				0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */,
 				0C029ED919389AF200EB961B /* StoreKit.framework */,
 				0C029ED71938628F00EB961B /* AVFoundation.framework */,
@@ -195,12 +214,13 @@
 				0C029E92193814C000EB961B /* LeftPanelViewController.m */,
 				0C029ECB19381A9B00EB961B /* CenterPanelTableViewController.h */,
 				0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */,
-				0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */,
-				0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */,
 				0CE27A5C1935B01200C5C411 /* LoginViewController.h */,
 				0CE27A5D1935B01200C5C411 /* LoginViewController.m */,
 				0CE27A5F1935B01200C5C411 /* PanelsViewController.h */,
 				0CE27A601935B01200C5C411 /* PanelsViewController.m */,
+				0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */,
+				0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */,
+				0CEA204819418E5400A833D8 /* Core Data */,
 				0CE27A6C1935BF0600C5C411 /* Supporting Files */,
 			);
 			path = AudiobookPlayer;
@@ -219,6 +239,20 @@
 				0CE27A5E1935B01200C5C411 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0CEA204819418E5400A833D8 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				0CEA204219418D1500A833D8 /* Model.xcdatamodeld */,
+				0CEA20561941A71A00A833D8 /* Song.h */,
+				0CEA20571941A71A00A833D8 /* Song.m */,
+				0CEA204C19418ED600A833D8 /* SongDatabase.h */,
+				0CEA204D19418ED600A833D8 /* SongDatabase.m */,
+				0CEA204919418E7400A833D8 /* Song+Create.h */,
+				0CEA204A19418E7400A833D8 /* Song+Create.m */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,7 +367,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CEA20581941A71A00A833D8 /* Song.m in Sources */,
 				0CE27A691935B01200C5C411 /* LoginViewController.m in Sources */,
+				0CEA204E19418ED600A833D8 /* SongDatabase.m in Sources */,
 				0CE27A6A1935B01200C5C411 /* main.m in Sources */,
 				0C029EC51938153400EB961B /* JASidePanelController.m in Sources */,
 				0C029ED31938512F00EB961B /* FolderCellTableViewCell.m in Sources */,
@@ -344,6 +380,8 @@
 				0C029ECD19381A9B00EB961B /* CenterPanelTableViewController.m in Sources */,
 				0C029ED6193860FA00EB961B /* AudioViewController.m in Sources */,
 				0C029EC61938153400EB961B /* UIViewController+JASidePanel.m in Sources */,
+				0CEA204B19418E7400A833D8 /* Song+Create.m in Sources */,
+				0CEA204419418D1500A833D8 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +522,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0CEA204219418D1500A833D8 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0CEA204319418D1500A833D8 /* Model.xcdatamodel */,
+			);
+			currentVersion = 0CEA204319418D1500A833D8 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 09ABC06413A1D52D009C3FCF /* Project object */;
 }

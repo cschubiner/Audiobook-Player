@@ -6,7 +6,9 @@
 //
 //
 
+#import "AudiobookPlayerAppDelegate.h"
 #import "PanelsViewController.h"
+#import "SongDatabase.h"
 
 @interface PanelsViewController ()
 
@@ -30,6 +32,9 @@
 	[self setCenterPanel:[self.storyboard instantiateViewControllerWithIdentifier:@"centerViewController"]];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+}
 
 - (void)viewDidLoad
 {
