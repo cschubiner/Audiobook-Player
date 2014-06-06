@@ -23,6 +23,7 @@
 @property (assign) BOOL backgroundMusicInterrupted;
 @property (weak, nonatomic) IBOutlet CPSlider * seekSlider;
 @property (weak, nonatomic) IBOutlet UILabel * gestureLabel;
+@property (weak, nonatomic) Song * song;
 
 #define PI 3.1415926535897932384626
 
@@ -38,20 +39,26 @@
 	                                           [NSNumber numberWithInt:2 * self.view.frame.size.height / 6],
 	                                           [NSNumber numberWithInt:3 * self.view.frame.size.height / 6], nil];
     
-    [self.seekSlider addTarget:self
-                  action:@selector(sliderDidEndSliding:)
-        forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
+	[self.seekSlider addTarget:self
+                        action:@selector(sliderDidEndSliding:)
+              forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
 }
 
 - (void)sliderDidEndSliding:(NSNotification *)notification {
 	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
-    if (musicWasPlaying)
-        [self.backgroundMusicPlayer play];
-    canChangePlayingState = true;
+	if (musicWasPlaying)
+		[self.backgroundMusicPlayer play];
+    
+	canChangePlayingState = true;
+}
+
+-(Song *)getSong {
+	return self.song;
 }
 
 -(void)viewDidLoad {
 	[super viewDidLoad];
+	self.song = [self.songs objectAtIndex:0];
 	[self configureAudioSession];
 	[self configureAudioPlayer];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
@@ -83,10 +90,11 @@
 BOOL musicWasPlaying = false;
 BOOL canChangePlayingState = true;
 - (IBAction)slide {
-    if (canChangePlayingState)
-        musicWasPlaying = self.backgroundMusicPlayer.isPlaying;
-    canChangePlayingState = false;
-    [self.backgroundMusicPlayer stop];
+	if (canChangePlayingState)
+		musicWasPlaying = self.backgroundMusicPlayer.isPlaying;
+    
+	canChangePlayingState = false;
+	[self.backgroundMusicPlayer stop];
     
 	if (self.seekSlider.currentScrubbingSpeed >= .999) {
 		[self.gestureLabel setText:[NSString stringWithFormat:@"Slide down to scrub slower"]];
@@ -168,7 +176,13 @@ BOOL canChangePlayingState = true;
 	self.seekSlider.maximumValue = [self.backgroundMusicPlayer duration];
 	[self updateTime:nil];
     
-	[NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+	static NSTimer * timer;
+	if (timer) {
+		[timer invalidate];
+		timer = nil;
+	}
+    
+	timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
 }
 
 -(void)configureAudioSession {
@@ -181,7 +195,7 @@ BOOL canChangePlayingState = true;
 	NSURL * backgroundMusicURL = [NSURL fileURLWithPath:self.song.path];
 	self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:nil];
 	self.backgroundMusicPlayer.delegate = self; // We need this so we can restart after interruptions
-	self.backgroundMusicPlayer.numberOfLoops = 1;
+	self.backgroundMusicPlayer.numberOfLoops = 0;
 	[self.backgroundMusicPlayer prepareToPlay];
 }
 
@@ -232,14 +246,22 @@ BOOL canChangePlayingState = true;
 	[self flashGestureLabel];
 }
 
-- (IBAction)stopAudio:(id)sender {
+-(void)stopAudio:(id)sender {
 	[self setBackgroundMusicPlaying:NO];
 	[self.backgroundMusicPlayer stop];
 }
 
+- (IBAction)nextSong:(id)sender {
+	[self stopAudio:nil];
+	NSUInteger currIndex = [self.songs indexOfObject:self.song];
+	self.song = [self.songs objectAtIndex:(currIndex + 1) % self.songs.count];
+	[self configureAudioPlayer];
+	[self tryPlayMusic];
+}
 
 -(void)audioPlayerDidFinishPlaying: (AVAudioPlayer *)player successfully:(BOOL)flag
 {
+	[self nextSong:nil];
 }
 
 -(void)audioPlayerDecodeErrorDidOccur: (AVAudioPlayer *)player error:(NSError *)error

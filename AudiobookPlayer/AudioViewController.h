@@ -13,9 +13,12 @@
 
 @interface AudioViewController : UIViewController <AVAudioPlayerDelegate, CPSliderDelegate>
 
-@property (strong, nonatomic) Song * song;
+@property (strong, nonatomic) NSMutableArray * songs;
 
 - (IBAction)playAudio:(id)sender;
 - (IBAction)playPauseAudio:(id)sender;
 - (IBAction)stopAudio:(id)sender;
+- (IBAction)nextSong:(id)sender;
+
+-(Song*)getSong;
 @end

@@ -108,11 +108,14 @@
 		else if (event.subtype == UIEventSubtypeRemoteControlPause) {
 			NSLog(@"UIEventSubtypeRemoteControlPause");
 			[self.currentAudioViewController stopAudio:nil];
-            
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
 			NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
 			[self.currentAudioViewController playPauseAudio:nil];
+		}
+		else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
+			NSLog(@"UIEventSubtypeRemoteControlNextTrack");
+			[self.currentAudioViewController nextSong:nil];
 		}
 	}
 }

@@ -65,18 +65,22 @@
 }
 
 -(void)refreshTableView {
-	[self reloadFiles];
-	[self.tableView reloadData];
-	[self.refreshControl endRefreshing];
+	[self.refreshControl beginRefreshing];
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+	[delegate.managedObjectContext performBlock:^{
+        [self reloadFiles];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+        });
+    }];
 }
 
 - (void)viewDidLoad
 {
 	[self.tableView registerClass:[FolderCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
 	[super viewDidLoad];
-    
-	[self reloadFiles];
-    
+	[self refreshTableView];
 	id observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
                                                                     object:[SongDatabase sharedDefaultSongDatabase]
                                                                      queue:[NSOperationQueue mainQueue]
@@ -103,12 +107,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//	FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
-    FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
+	//	FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
+	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
     
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
-	BOOL isDirectory = [DirectoryTableViewController isDirectory:pathName];
+	BOOL isDirectory = [DirectoryTableViewController isDirectory:fullPath];
     
 	UIFont * italicFont = [UIFont fontWithName:@"HelveticaNeue-UltraLightItalic" size:15];
 	UIFont * font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
@@ -161,7 +165,7 @@
 		//			NSLog(@"%@ is a file", item);
 	}
     
-	return ret;
+	return ([path rangeOfString:@".m"].location == NSNotFound) && (ret || isDirectory);
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -175,15 +179,22 @@
 	}
 	else {
 		AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
-		Song * song = [Song songWithSongFullPath:fullPath];
         
-		if ([fullPath isEqualToString:delegate.currentAudioViewController.song.path]) {
+		if ([fullPath isEqualToString:((Song*)delegate.currentAudioViewController.getSong).path]) {
+            //		if ([fullPath isEqualToString:((Song*)delegate.currentAudioViewController.songs[0]).path]) {
 			[self.navigationController pushViewController:delegate.currentAudioViewController animated:YES];
 		}
 		else {
 			UIStoryboard * storyboard = [((AudiobookPlayerAppDelegate*)[[UIApplication sharedApplication]delegate])storyboard];
 			AudioViewController * next = [storyboard instantiateViewControllerWithIdentifier:@"audioView"];
-			[next setSong:song];
+			NSMutableArray * songs = [[NSMutableArray alloc]init];
+			for (int i = indexPath.row; i < self.files.count; i++) {
+				NSString * songPath = [self.directoryPath stringByAppendingPathComponent:[self.files objectAtIndex:i]];
+				if (![DirectoryTableViewController isDirectory:songPath])
+					[songs addObject:[Song songWithSongFullPath:songPath]];
+			}
+            
+			[next setSongs:songs];
 			[self.navigationController pushViewController:next animated:YES];
 		}
 	}

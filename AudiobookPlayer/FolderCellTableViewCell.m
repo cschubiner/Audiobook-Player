@@ -19,6 +19,8 @@
 -(void)updateProgress {
     if (!self.song) return;
     double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
+    if (isnan(progress))
+        progress = 0;
 	[self.progressView setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width * progress, self.frame.size.height)];
 }
 
