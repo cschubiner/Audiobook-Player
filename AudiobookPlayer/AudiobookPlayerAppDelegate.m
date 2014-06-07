@@ -100,8 +100,8 @@
 
 -(DownloadWebViewController *)downloadViewController {
 	if (!_downloadViewController) {
-		NSString * startURL = @"https://dl.dropboxusercontent.com/u/46621227/mp3site.html";
-		//        NSString * startURL = @"http://google.com";
+		//		NSString * startURL = @"https://dl.dropboxusercontent.com/u/46621227/mp3site.html"; //site you can test with. contains a link to an mp3
+		NSString * startURL = @"http://google.com";
 		_downloadViewController = [[DownloadWebViewController alloc] initWithAddress:startURL];
         
 	}

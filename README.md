@@ -39,6 +39,17 @@ Final project for CS 193p
 - Asynchronous file downloading
 - Push notifications
 - Landscape orientation supported with AutoLayout
+- NSTimers for automatically updating custom UITableViewCells and UISliders
+- MPVolumeView to control volume and synchronize it with the system volume
+
+Collaboration:
+Collaborated with Sherwin Yuyang Xia, a design student. He was very helpful, providing ideas and prototypes. You can check out his prototype here:
+https://www.fluidui.com/editor/live/preview/p_aeg8t3w9BdN6cQ3NxqFmM3QkwxPMqZhB.1401104878677
+
+Additionally, you can see all of the layouts he created here:
+https://www.dropbox.com/s/o9z94up5yaozc14/alllayouts.png
+
+
 
 
 	Features:

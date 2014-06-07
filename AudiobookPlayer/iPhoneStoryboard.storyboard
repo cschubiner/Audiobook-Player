@@ -17,28 +17,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noj-8z-cOS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundLogin.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZFy-W0-7gN">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noj-8z-cOS">
                                 <rect key="frame" x="89" y="427" width="143" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login with Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="touchedLoginButton:" destination="9nc-kx-1eZ" eventType="touchUpInside" id="oQO-fR-qKu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ba3-oi-r19">
-                                <rect key="frame" x="137" y="465" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ba3-oi-r19">
+                                <rect key="frame" x="94" y="465" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Skip">
+                                <state key="normal" title="Login anonymously">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="touchedSkipButton:" destination="9nc-kx-1eZ" eventType="touchUpInside" id="T3Q-2n-hTD"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audiobook Player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYJ-xZ-DNT">
+                                <rect key="frame" x="33" y="246" width="255" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ZFy-W0-7gN" secondAttribute="bottom" id="6cg-HB-Wbi"/>
+                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="lYJ-xZ-DNT" secondAttribute="centerX" id="70n-5x-5Uf"/>
+                            <constraint firstItem="Ba3-oi-r19" firstAttribute="top" secondItem="noj-8z-cOS" secondAttribute="bottom" constant="8" symbolic="YES" id="Drb-bX-wab"/>
+                            <constraint firstItem="Ba3-oi-r19" firstAttribute="centerX" secondItem="noj-8z-cOS" secondAttribute="centerX" id="Nrl-XS-s32"/>
+                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="centerY" secondItem="ZFy-W0-7gN" secondAttribute="centerY" id="aKZ-Qm-f57"/>
+                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="ZFy-W0-7gN" secondAttribute="centerX" id="dCB-za-Kro"/>
+                            <constraint firstAttribute="trailing" secondItem="ZFy-W0-7gN" secondAttribute="trailing" id="e8g-WC-nGC"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" id="gTJ-s3-wPg"/>
+                            <constraint firstItem="7IB-p6-e5T" firstAttribute="top" secondItem="Ba3-oi-r19" secondAttribute="bottom" constant="73" id="q5C-T6-QDt"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="top" secondItem="Oo6-D8-TMn" secondAttribute="top" id="sqe-XG-x37"/>
+                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" constant="33" id="vtB-Zs-o4K"/>
+                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="top" secondItem="knR-I3-qdQ" secondAttribute="bottom" constant="226" id="xUH-xH-Zcl"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KRe-fn-axh"/>
                     <connections>
@@ -47,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L16-qO-1gb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="202" y="-108"/>
+            <point key="canvasLocation" x="272" y="-123"/>
         </scene>
         <!--Panels View Controller - Audiobooks-->
         <scene sceneID="yzh-Hw-7F7">
@@ -334,6 +361,9 @@
             <point key="canvasLocation" x="1389" y="-596"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="backgroundLogin.png" width="640" height="1136"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
