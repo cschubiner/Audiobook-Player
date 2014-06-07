@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet CPSlider * seekSlider;
 @property (weak, nonatomic) IBOutlet UILabel * gestureLabel;
 @property (weak, nonatomic) Song * song;
+@property (weak, nonatomic) IBOutlet UILabel * currentTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel * durationLabel;
 
 #define PI 3.1415926535897932384626
 
@@ -63,6 +65,7 @@
 	[self configureAudioPlayer];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
 	if (self != delegate.currentAudioViewController) {
+		delegate.currentAudioViewController.getSong.isLastPlayed = [NSNumber numberWithBool:FALSE];
 		[delegate.currentAudioViewController recordCurrentPosition];
 		[delegate.managedObjectContext save:nil];
 		[[delegate.currentAudioViewController backgroundMusicPlayer]stop];
@@ -90,6 +93,7 @@
 BOOL musicWasPlaying = false;
 BOOL canChangePlayingState = true;
 - (IBAction)slide {
+	self.currentTimeLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.seekSlider.value / 60), ((int)self.seekSlider.value % 60)];
 	if (canChangePlayingState)
 		musicWasPlaying = self.backgroundMusicPlayer.isPlaying;
     
@@ -100,6 +104,10 @@ BOOL canChangePlayingState = true;
 		[self.gestureLabel setText:[NSString stringWithFormat:@"Slide down to scrub slower"]];
 		[self flashGestureLabelWithDuration:2];
 	}
+}
+
+- (void)updateCurrentTimeLabel {
+	self.currentTimeLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.seekSlider.value / 60), ((int)self.seekSlider.value % 60)];
 }
 
 - (IBAction)didPan:(UIPanGestureRecognizer *)sender {
@@ -115,10 +123,12 @@ BOOL canChangePlayingState = true;
         
 		const CGFloat maxSecondsToSkip = 30;
 		CGFloat skipDuration = -(fabsf(angle) - PI / 2) * maxSecondsToSkip * 30.0 / 7.0 / PI / 2;
-		[self.gestureLabel setText:[NSString stringWithFormat:@"%@ %d secs", skipDuration >= 0 ? @"Jumping" :@"Reversing", (int)skipDuration]];
+		[self.gestureLabel setText:[NSString stringWithFormat:@"%@ %d secs", skipDuration >= 0 ? @"Jumping" :@"Reversing", abs((int)skipDuration)]];
 		[self flashGestureLabel];
 		self.backgroundMusicPlayer.currentTime += skipDuration;
 		self.seekSlider.value += skipDuration;
+		[self updateCurrentTimeLabel];
+        
 		[self recordCurrentPosition];
 	}
     
@@ -150,6 +160,7 @@ BOOL canChangePlayingState = true;
 
 - (void)updateTime:(NSTimer *)timer {
 	self.seekSlider.value = self.backgroundMusicPlayer.currentTime;
+    [self updateCurrentTimeLabel];
 	[self recordCurrentPosition];
 }
 
@@ -160,6 +171,10 @@ BOOL canChangePlayingState = true;
     
 	[self.backgroundMusicPlayer play];
 	self.backgroundMusicPlaying = YES;
+    
+	self.song.isLastPlayed = [NSNumber numberWithBool:TRUE];
+	self.durationLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.song.duration.floatValue / 60), ((int)self.song.duration.floatValue % 60)];
+
     
 	Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
 	if (playingInfoCenter) {
@@ -182,7 +197,7 @@ BOOL canChangePlayingState = true;
 		timer = nil;
 	}
     
-	timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+	timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
 }
 
 -(void)configureAudioSession {
@@ -254,6 +269,7 @@ BOOL canChangePlayingState = true;
 - (IBAction)nextSong:(id)sender {
 	[self stopAudio:nil];
 	NSUInteger currIndex = [self.songs indexOfObject:self.song];
+	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
 	self.song = [self.songs objectAtIndex:(currIndex + 1) % self.songs.count];
 	[self configureAudioPlayer];
 	[self tryPlayMusic];

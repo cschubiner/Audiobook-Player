@@ -11,9 +11,10 @@
 
 @implementation Song
 
-@dynamic duration;
 @dynamic currentPosition;
-@dynamic title;
+@dynamic duration;
 @dynamic path;
+@dynamic title;
+@dynamic isLastPlayed;
 
 @end

@@ -12,9 +12,10 @@
 
 @interface Song : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * duration;
 @property (nonatomic, retain) NSNumber * currentPosition;
-@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * duration;
 @property (nonatomic, retain) NSString * path;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * isLastPlayed;
 
 @end

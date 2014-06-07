@@ -6,8 +6,8 @@
 //
 //
 
-#import <UIKit/UIKit.h>
 #import "Song.h"
+#import <UIKit/UIKit.h>
 
 @interface FolderCellTableViewCell : UITableViewCell
 
@@ -15,5 +15,7 @@
 -(void)updateProgress;
 
 
-@property (nonatomic, weak) Song * song;
+@property (nonatomic, strong) Song * song;
+@property (nonatomic) BOOL isDirectory;
+
 @end

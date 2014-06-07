@@ -107,8 +107,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//	FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
-	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
+		FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
+//	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
     
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
@@ -119,6 +119,7 @@
     
 	if (isDirectory) {
 		font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.5];
+		[cell setIsDirectory:TRUE];
 	}
     
 	NSString * title = [DirectoryTableViewController pathNameToSongTitle:pathName];
@@ -126,16 +127,13 @@
 	if (!isDirectory)
 		song = [Song songWithSongTitle:title];
     
-	NSNumber * duration = song.duration;
-    
-    
 	NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:title];
 	[string addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, string.length)];
     
 	NSString * durString = @"Folder";
 	if (!isDirectory) {
 		if (song) {
-			durString = [NSString stringWithFormat:@"%d:%02d", ((int)duration.floatValue / 60), ((int)duration.floatValue % 60)];
+			durString = [NSString stringWithFormat:@"%d:%02d", ((int)song.duration.floatValue / 60), ((int)song.duration.floatValue % 60)];
 			[cell setSong:song];
 			[cell updateProgress];
 		}
@@ -181,7 +179,7 @@
 		AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
         
 		if ([fullPath isEqualToString:((Song*)delegate.currentAudioViewController.getSong).path]) {
-            //		if ([fullPath isEqualToString:((Song*)delegate.currentAudioViewController.songs[0]).path]) {
+			//		if ([fullPath isEqualToString:((Song*)delegate.currentAudioViewController.songs[0]).path]) {
 			[self.navigationController pushViewController:delegate.currentAudioViewController animated:YES];
 		}
 		else {

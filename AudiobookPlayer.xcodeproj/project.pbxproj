@@ -26,6 +26,7 @@
 		0C029ED81938628F00EB961B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029ED71938628F00EB961B /* AVFoundation.framework */; };
 		0C029EDA19389AF200EB961B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029ED919389AF200EB961B /* StoreKit.framework */; };
 		0C029EDC1938A1EE00EB961B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */; };
+		0C4E446A1942906A00EC4C71 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4E44691942906A00EC4C71 /* Song.m */; };
 		0CE27A611935B01200C5C411 /* AudiobookPlayer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */; };
 		0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */; };
 		0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A551935B01200C5C411 /* Default-568h@2x.png */; };
@@ -42,7 +43,6 @@
 		0CEA204E19418ED600A833D8 /* SongDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA204D19418ED600A833D8 /* SongDatabase.m */; };
 		0CEA205319419CD000A833D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEA205219419CD000A833D8 /* CoreMedia.framework */; };
 		0CEA205519419CEE00A833D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEA205419419CEE00A833D8 /* CoreData.framework */; };
-		0CEA20581941A71A00A833D8 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA20571941A71A00A833D8 /* Song.m */; };
 		2FCDD6B014A573F500295AAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCDD6AF14A573F500295AAC /* QuartzCore.framework */; };
 		5DD0FC4F489F46089224B4D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADFCB70F35384ED48E94A608 /* libPods.a */; };
 		743D7B6D157DA60100084B67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743D7B6C157DA60100084B67 /* CoreGraphics.framework */; };
@@ -77,6 +77,8 @@
 		0C029ED71938628F00EB961B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0C029ED919389AF200EB961B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0C4E44681942906A00EC4C71 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		0C4E44691942906A00EC4C71 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AudiobookPlayer-Info.plist"; sourceTree = "<group>"; };
 		0CE27A521935B01200C5C411 /* AudiobookPlayer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AudiobookPlayer-Prefix.pch"; sourceTree = "<group>"; };
 		0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudiobookPlayerAppDelegate.h; sourceTree = "<group>"; };
@@ -99,8 +101,6 @@
 		0CEA204D19418ED600A833D8 /* SongDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDatabase.m; sourceTree = "<group>"; };
 		0CEA205219419CD000A833D8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0CEA205419419CEE00A833D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		0CEA20561941A71A00A833D8 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
-		0CEA20571941A71A00A833D8 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		164177ABC0BF41C6946CDFA7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		2FCDD6AF14A573F500295AAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6332375315E438E900AE2736 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -244,9 +244,9 @@
 		0CEA204819418E5400A833D8 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				0C4E44681942906A00EC4C71 /* Song.h */,
+				0C4E44691942906A00EC4C71 /* Song.m */,
 				0CEA204219418D1500A833D8 /* Model.xcdatamodeld */,
-				0CEA20561941A71A00A833D8 /* Song.h */,
-				0CEA20571941A71A00A833D8 /* Song.m */,
 				0CEA204C19418ED600A833D8 /* SongDatabase.h */,
 				0CEA204D19418ED600A833D8 /* SongDatabase.m */,
 				0CEA204919418E7400A833D8 /* Song+Create.h */,
@@ -367,7 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CEA20581941A71A00A833D8 /* Song.m in Sources */,
+				0C4E446A1942906A00EC4C71 /* Song.m in Sources */,
 				0CE27A691935B01200C5C411 /* LoginViewController.m in Sources */,
 				0CEA204E19418ED600A833D8 /* SongDatabase.m in Sources */,
 				0CE27A6A1935B01200C5C411 /* main.m in Sources */,
