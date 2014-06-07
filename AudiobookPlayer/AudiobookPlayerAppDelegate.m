@@ -103,7 +103,6 @@
 		//		NSString * startURL = @"https://dl.dropboxusercontent.com/u/46621227/mp3site.html"; //site you can test with. contains a link to an mp3
 		NSString * startURL = @"http://google.com";
 		_downloadViewController = [[DownloadWebViewController alloc] initWithAddress:startURL];
-        
 	}
     
 	return _downloadViewController;
