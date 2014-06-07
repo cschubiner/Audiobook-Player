@@ -33,24 +33,24 @@
 	if (!self.song) return;
     
 	BOOL isPlaying = self.lastPosition.doubleValue + .00001 < self.song.currentPosition.doubleValue;
-    isPlaying = self.song.isLastPlayed.boolValue;
+	isPlaying = self.song.isLastPlayed.boolValue;
     
-    if (self.song.currentPosition.doubleValue > 0) {
+	if (self.song.currentPosition.doubleValue > 0) {
 		if (isPlaying)
 			[self.progressView setBackgroundColor:[UIColor colorWithRed:0.7 green:.5 blue:1.0 alpha:.30]];
 		else
 			[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.5 blue:1.0 alpha:.30]];
-    
-	if (isPlaying) {
-		double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
-		if (isnan(progress))
-			progress = 0;
         
-		[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, originalFrame.size.width * progress, self.progressView.frame.size.height)];
-		[self bringSubviewToFront:self.progressView];
-		self.lastPosition = self.song.currentPosition;
+		if (isPlaying) {
+			double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
+			if (isnan(progress))
+				progress = 0;
+            
+			[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, originalFrame.size.width * progress, self.progressView.frame.size.height)];
+			[self bringSubviewToFront:self.progressView];
+			self.lastPosition = self.song.currentPosition;
+		}
 	}
-    }
     
 }
 
@@ -86,8 +86,8 @@ NSTimer* timer;
     
 	//        [self addSubview:self.progressView];
 	[self bringSubviewToFront:self.progressView];
-    self.lastPosition = [NSNumber numberWithDouble:0];
-    [self updateProgress];
+	self.lastPosition = [NSNumber numberWithDouble:0];
+	[self updateProgress];
     
 	// Configure the view for the selected state
 }

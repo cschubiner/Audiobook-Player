@@ -14,7 +14,7 @@
 #import "Song.h"
 #import "SongDatabase.h"
 
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed : ((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green : ((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue : ((float)(rgbValue & 0xFF)) / 255.0 alpha : 1.0]
 
 
 @interface DirectoryTableViewController ()
@@ -79,22 +79,32 @@
     }];
 }
 
+-(void)updateColorScheme {
+	NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
+	NSInteger colorScheme = [standardUserDefaults integerForKey:@"colorScheme"];
+	if (colorScheme == 0) {
+		[self.tableView setBackgroundColor:[UIColor lightGrayColor]];
+		[self.tableView setSeparatorColor:[UIColor lightGrayColor]];
+		[self.navigationController.navigationBar setBarTintColor:[UIColor darkGrayColor]];
+		[self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+		[self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+	}
+	else {
+		[self.tableView setBackgroundColor:[UIColor whiteColor]];
+		[self.tableView setSeparatorColor:[UIColor whiteColor]];
+		[self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+		[self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+		[self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+	}
+}
+
 - (void)viewDidLoad
 {
 	[self.tableView registerClass:[FolderCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
 	[super viewDidLoad];
-    [self.tableView setBackgroundColor:[UIColor lightGrayColor]];
-    [self.tableView setSeparatorColor:[UIColor lightGrayColor]];
-    
-    [self.navigationController.navigationBar setBarTintColor:[UIColor darkGrayColor]];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-
-    
+	[self updateColorScheme];
 	[self refreshTableView];
     
-
 	id observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
                                                                     object:[SongDatabase sharedDefaultSongDatabase]
                                                                      queue:[NSOperationQueue mainQueue]
@@ -121,8 +131,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-		FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
-//	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
+	FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
+    //	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
     
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
@@ -187,7 +197,7 @@
 	if ([DirectoryTableViewController isDirectory:fullPath]) {
 		DirectoryTableViewController * next = [[DirectoryTableViewController alloc]init];
 		[next setDirectoryPath:fullPath];
-        [next setTitle:pathName];
+		[next setTitle:pathName];
 		[self.navigationController pushViewController:next animated:YES];
 	}
 	else {

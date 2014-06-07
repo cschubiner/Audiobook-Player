@@ -27,6 +27,7 @@ Final project for CS 193p
 - File directory browsing with NSFileManager
 - Side panels
 - Settings stored in NSUserDefaults
+- UIAlertView 
 
 
 	Features:
