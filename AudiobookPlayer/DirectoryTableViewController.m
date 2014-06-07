@@ -100,13 +100,8 @@
 
 - (void)viewDidLoad
 {
-	UIViewController * c = [[UIViewController alloc]init];
-	[self presentViewController:c animated:NO completion:nil];
-	[self dismissViewControllerAnimated:NO completion:nil];
-    
 	[self.tableView registerClass:[FolderCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
 	[super viewDidLoad];
-	[super willRotateToInterfaceOrientation:UIInterfaceOrientationPortrait duration:0];
 	[self updateColorScheme];
 	[self refreshTableView];
     
