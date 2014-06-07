@@ -24,6 +24,7 @@ Final project for CS 193p
 - Airplay
 - Tap gestures
 - Customized pan gestures
+- Swipe gestures
 - "Open in" functionality
 - Control center integration
 - Subclassed UITableViewCells
@@ -37,6 +38,7 @@ Final project for CS 193p
 - Modified SVWebViewController to allow access to _shouldStartLoadWithRequest_ delegate method.
 - Asynchronous file downloading
 - Push notifications
+- Landscape orientation supported with AutoLayout
 
 
 	Features:
