@@ -1,5 +1,7 @@
 @class LoginViewController;
 @class AudioViewController;
+@class CenterPanelTableViewController;
+@class DownloadWebViewController;
 
 @interface AudiobookPlayerAppDelegate : UIResponder <UIApplicationDelegate> {
     
@@ -14,5 +16,7 @@
 @property (nonatomic, strong) NSManagedObjectContext * managedObjectContext;
 
 @property (nonatomic, strong) AudioViewController * currentAudioViewController;
+@property (nonatomic, weak) CenterPanelTableViewController * centerPanelController;
+@property (nonatomic, strong) DownloadWebViewController * downloadViewController;
 
 @end

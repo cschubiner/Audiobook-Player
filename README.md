@@ -14,6 +14,9 @@ Final project for CS 193p
 - Tracks save position
 - Can play audio via AirPlay
 - Play and pause and switch audio files through Control Center
+- Login via Facebook or anonymously
+- Download and play audio files from the Internet
+- Choose between light and dark themes
 
 ## SDK Breadth
 - AVAudioPlayer
@@ -28,6 +31,11 @@ Final project for CS 193p
 - Side panels
 - Settings stored in NSUserDefaults
 - UIAlertView 
+- Parse integration
+- Background audio
+- UIWebView
+- Asynchronous file downloading
+- Push notifications
 
 
 	Features:

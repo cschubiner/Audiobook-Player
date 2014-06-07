@@ -9,6 +9,9 @@
 #import "LeftPanelViewController.h"
 #import "UITableViewCell+FlatUI.h"
 #import <FlatUIKit/UIColor+FlatUI.h>
+#import "DownloadWebViewController.h"
+#import "CenterPanelTableViewController.h"
+#import "AudiobookPlayerAppDelegate.h"
 
 @implementation LeftPanelViewController
 
@@ -53,7 +56,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	// Return the number of rows in the section.
-	return 2;
+	return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,6 +89,9 @@
 			cell.textLabel.text = @"Dark Colors";
 		}
 	}
+	else if (indexPath.row == 2) {
+        cell.textLabel.text = @"Downloader";
+    }
     
 	return cell;
 }
@@ -106,6 +112,12 @@
                                                otherButtonTitles:nil];
 		[alert show];
 	}
+    else if (indexPath.row == 2) {
+        AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+        DownloadWebViewController *webViewController = delegate.downloadViewController;
+        [self presentViewController:webViewController animated:YES completion:nil];
+        return;
+    }
     
 	[standardUserDefaults synchronize];
 	[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
