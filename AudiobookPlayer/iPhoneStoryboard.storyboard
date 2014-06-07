@@ -53,18 +53,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ZFy-W0-7gN" secondAttribute="bottom" id="6cg-HB-Wbi"/>
-                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="lYJ-xZ-DNT" secondAttribute="centerX" id="70n-5x-5Uf"/>
-                            <constraint firstItem="Ba3-oi-r19" firstAttribute="top" secondItem="noj-8z-cOS" secondAttribute="bottom" constant="8" symbolic="YES" id="Drb-bX-wab"/>
-                            <constraint firstItem="Ba3-oi-r19" firstAttribute="centerX" secondItem="noj-8z-cOS" secondAttribute="centerX" id="Nrl-XS-s32"/>
-                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="centerY" secondItem="ZFy-W0-7gN" secondAttribute="centerY" id="aKZ-Qm-f57"/>
-                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="ZFy-W0-7gN" secondAttribute="centerX" id="dCB-za-Kro"/>
-                            <constraint firstAttribute="trailing" secondItem="ZFy-W0-7gN" secondAttribute="trailing" id="e8g-WC-nGC"/>
-                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" id="gTJ-s3-wPg"/>
-                            <constraint firstItem="7IB-p6-e5T" firstAttribute="top" secondItem="Ba3-oi-r19" secondAttribute="bottom" constant="73" id="q5C-T6-QDt"/>
-                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="top" secondItem="Oo6-D8-TMn" secondAttribute="top" id="sqe-XG-x37"/>
-                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" constant="33" id="vtB-Zs-o4K"/>
-                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="top" secondItem="knR-I3-qdQ" secondAttribute="bottom" constant="226" id="xUH-xH-Zcl"/>
+                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="top" secondItem="knR-I3-qdQ" secondAttribute="bottom" constant="226" id="Bh2-UB-auA"/>
+                            <constraint firstAttribute="bottom" secondItem="ZFy-W0-7gN" secondAttribute="bottom" id="XrW-Ep-LSZ"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" id="Y6H-bO-79t"/>
+                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="centerY" secondItem="ZFy-W0-7gN" secondAttribute="centerY" id="YbW-8p-x9B"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="top" secondItem="Oo6-D8-TMn" secondAttribute="top" id="b4q-th-Wfm"/>
+                            <constraint firstAttribute="trailing" secondItem="ZFy-W0-7gN" secondAttribute="trailing" id="bb6-BU-zHG"/>
+                            <constraint firstItem="7IB-p6-e5T" firstAttribute="top" secondItem="Ba3-oi-r19" secondAttribute="bottom" constant="73" id="jhE-9M-i0L"/>
+                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="lYJ-xZ-DNT" secondAttribute="centerX" id="lNL-5E-9H5"/>
+                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="centerX" secondItem="ZFy-W0-7gN" secondAttribute="centerX" id="uqX-AN-say"/>
+                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" constant="33" id="vCv-km-9Gt"/>
+                            <constraint firstItem="Ba3-oi-r19" firstAttribute="centerX" secondItem="noj-8z-cOS" secondAttribute="centerX" id="yUx-HY-Aak"/>
+                            <constraint firstItem="Ba3-oi-r19" firstAttribute="top" secondItem="noj-8z-cOS" secondAttribute="bottom" constant="8" symbolic="YES" id="yjM-I6-dzL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KRe-fn-axh"/>
@@ -178,13 +178,14 @@
                                 <rect key="frame" x="122" y="488" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Play/Pause">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="playPauseAudio:" destination="tp1-cU-bUq" eventType="touchUpInside" id="PRr-PI-Xv0"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundLogin.png" translatesAutoresizingMaskIntoConstraints="NO" id="kuo-Xk-Iyd">
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="backgroundLogin.png" translatesAutoresizingMaskIntoConstraints="NO" id="kuo-Xk-Iyd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -192,15 +193,17 @@
                                 <rect key="frame" x="268" y="488" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="nextSong:" destination="tp1-cU-bUq" eventType="touchUpInside" id="gN5-MC-dvm"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WsN-3d-tyB" customClass="CPSlider">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WsN-3d-tyB" customClass="CPSlider">
                                 <rect key="frame" x="54" y="77" width="213" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <connections>
                                     <action selector="slide" destination="tp1-cU-bUq" eventType="valueChanged" id="cgW-7F-LX4"/>
                                 </connections>
@@ -209,22 +212,23 @@
                                 <rect key="frame" x="20" y="527" width="280" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsX-Iq-Nh0">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XsX-Iq-Nh0">
                                 <rect key="frame" x="0.0" y="115" width="320" height="359"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide down to scrub slower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="doc-Rl-iER">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Slide down to scrub slower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="doc-Rl-iER">
                                         <rect key="frame" x="20" y="126" width="280" height="107"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="107" id="Td6-iB-B6a"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="71"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap or swipe below to navigate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-Ej-jGi">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap or swipe below to navigate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-Ej-jGi">
                                         <rect key="frame" x="41" y="0.0" width="238" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -255,7 +259,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23:44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DxP-gh-ggr">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DxP-gh-ggr">
                                 <rect key="frame" x="273" y="81" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -276,6 +280,7 @@
                                 <rect key="frame" x="20" y="488" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Previous">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
