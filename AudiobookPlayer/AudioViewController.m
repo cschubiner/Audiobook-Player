@@ -267,13 +267,16 @@ BOOL canChangePlayingState = true;
 }
 
 - (IBAction)nextSong:(id)sender {
-	[self stopAudio:nil];
 	NSUInteger currIndex = [self.songs indexOfObject:self.song];
 	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
     
-	if (currIndex == self.songs.count - 1)
+	if (currIndex == self.songs.count - 1) {
+		self.gestureLabel.text = @"No songs in queue";
+		[self flashGestureLabel];
 		return;
+	}
     
+	[self stopAudio:nil];
 	self.song = [self.songs objectAtIndex:(currIndex + 1) % self.songs.count];
 	[self configureAudioPlayer];
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
@@ -281,10 +284,14 @@ BOOL canChangePlayingState = true;
 }
 
 - (IBAction)previousSong:(UIButton *)sender {
-	[self stopAudio:nil];
 	NSUInteger currIndex = [self.songs indexOfObject:self.song];
-	if (currIndex == 0) return;
+	if (currIndex == 0) {
+		self.gestureLabel.text = @"No previous songs";
+		[self flashGestureLabel];
+		return;
+	}
     
+	[self stopAudio:nil];
 	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
 	self.song = [self.songs objectAtIndex:(currIndex - 1) % self.songs.count];
 	[self configureAudioPlayer];
