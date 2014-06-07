@@ -177,6 +177,11 @@ BOOL canChangePlayingState = true;
 	[self.backgroundMusicPlayer play];
 	self.backgroundMusicPlaying = YES;
     
+    if (fabsf(self.song.duration.doubleValue - self.song.currentPosition.doubleValue) < 1) {
+        //if the song ended or is about to end, we'll restart it
+        self.backgroundMusicPlayer.currentTime = 0;
+    }
+    
 	self.song.isLastPlayed = [NSNumber numberWithBool:TRUE];
 	self.durationLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.song.duration.floatValue / 60), ((int)self.song.duration.floatValue % 60)];
     
