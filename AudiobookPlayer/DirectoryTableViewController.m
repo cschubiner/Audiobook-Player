@@ -14,6 +14,9 @@
 #import "Song.h"
 #import "SongDatabase.h"
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
 @interface DirectoryTableViewController ()
 @property (nonatomic, strong) NSArray* files;
 
@@ -80,7 +83,18 @@
 {
 	[self.tableView registerClass:[FolderCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
 	[super viewDidLoad];
+    [self.tableView setBackgroundColor:[UIColor lightGrayColor]];
+    [self.tableView setSeparatorColor:[UIColor lightGrayColor]];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkGrayColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+
+    
 	[self refreshTableView];
+    
+
 	id observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
                                                                     object:[SongDatabase sharedDefaultSongDatabase]
                                                                      queue:[NSOperationQueue mainQueue]

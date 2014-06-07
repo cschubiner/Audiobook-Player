@@ -13,6 +13,20 @@ Final project for CS 193p
 - Custom UISlider to seek at different rates
 - Tracks save position
 - Can play audio via AirPlay
+- Play and pause and switch audio files through Control Center
+
+## SDK Breadth
+- AVAudioPlayer
+- Attributed strings
+- Airplay
+- Tap gestures
+- Customized pan gestures
+- "Open in" functionality
+- Control center integration
+- Subclassed UITableViewCells
+- File directory browsing with NSFileManager
+- Side panels
+- Settings stored in NSUserDefaults
 
 
 	Features:
