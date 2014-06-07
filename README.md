@@ -33,7 +33,8 @@ Final project for CS 193p
 - UIAlertView 
 - Parse integration
 - Background audio
-- UIWebView
+- Subclassed UIWebView
+- Modified SVWebViewController to allow access to _shouldStartLoadWithRequest_ delegate method.
 - Asynchronous file downloading
 - Push notifications
 
