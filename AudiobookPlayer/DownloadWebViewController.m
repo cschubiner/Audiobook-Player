@@ -115,4 +115,8 @@
 	return YES;
 }
 
+-(BOOL)shouldAutorotate {
+    return YES;
+}
+
 @end

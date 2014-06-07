@@ -100,8 +100,13 @@
 
 - (void)viewDidLoad
 {
+	UIViewController * c = [[UIViewController alloc]init];
+	[self presentViewController:c animated:NO completion:nil];
+	[self dismissViewControllerAnimated:NO completion:nil];
+    
 	[self.tableView registerClass:[FolderCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
 	[super viewDidLoad];
+	[super willRotateToInterfaceOrientation:UIInterfaceOrientationPortrait duration:0];
 	[self updateColorScheme];
 	[self refreshTableView];
     
@@ -132,7 +137,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
-    //	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
+	//	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
     
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
@@ -221,6 +226,15 @@
 		}
 	}
 }
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+	return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
+-(NSUInteger)supportedInterfaceOrientations {
+	return UIInterfaceOrientationMaskPortrait;
+}
+
 
 /*
  // Override to support conditional editing of the table view.

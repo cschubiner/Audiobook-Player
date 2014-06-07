@@ -31,13 +31,16 @@
 	}
     
 	if (!self.song) {
-//		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.2 blue:.2 alpha:.30]];
-//        [self.progressView setFrame:self.frame];
-        return;
-    }
+        //		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.2 blue:.2 alpha:.30]];
+        //        [self.progressView setFrame:self.frame];
+		return;
+	}
     
 	BOOL isPlaying = self.lastPosition.doubleValue + .00001 < self.song.currentPosition.doubleValue;
 	isPlaying = self.song.isLastPlayed.boolValue;
+    
+	BOOL didSetFrame = false;
+	originalFrame = self.frame;
     
 	if (self.song.currentPosition.doubleValue > 0) {
 		if (isPlaying)
@@ -51,10 +54,16 @@
 				progress = 0;
             
 			[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, originalFrame.size.width * progress, self.progressView.frame.size.height)];
-			[self bringSubviewToFront:self.progressView];
+			didSetFrame = true;
 			self.lastPosition = self.song.currentPosition;
 		}
 	}
+    
+	if (didSetFrame == false) {
+        //        [self.progressView setFrame:self.frame];
+	}
+    
+	[self bringSubviewToFront:self.progressView];
     
 }
 

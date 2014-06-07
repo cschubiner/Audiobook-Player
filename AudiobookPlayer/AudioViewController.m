@@ -313,4 +313,8 @@ BOOL canChangePlayingState = true;
 {
 }
 
+-(BOOL)shouldAutorotate {
+    return YES;
+}
+
 @end

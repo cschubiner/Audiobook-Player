@@ -27,6 +27,7 @@
 		0C029EDA19389AF200EB961B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029ED919389AF200EB961B /* StoreKit.framework */; };
 		0C029EDC1938A1EE00EB961B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */; };
 		0C4E446A1942906A00EC4C71 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4E44691942906A00EC4C71 /* Song.m */; };
+		0CB642D81942DF2D0032D616 /* UINavigationController+rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */; };
 		0CE27A611935B01200C5C411 /* AudiobookPlayer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */; };
 		0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */; };
 		0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A551935B01200C5C411 /* Default-568h@2x.png */; };
@@ -96,6 +97,8 @@
 		0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0C4E44681942906A00EC4C71 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		0C4E44691942906A00EC4C71 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		0CB642D61942DF2D0032D616 /* UINavigationController+rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+rotation.h"; sourceTree = "<group>"; };
+		0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+rotation.m"; sourceTree = "<group>"; };
 		0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AudiobookPlayer-Info.plist"; sourceTree = "<group>"; };
 		0CE27A521935B01200C5C411 /* AudiobookPlayer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AudiobookPlayer-Prefix.pch"; sourceTree = "<group>"; };
 		0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudiobookPlayerAppDelegate.h; sourceTree = "<group>"; };
@@ -265,6 +268,8 @@
 				0CF72BE61942BF1200469DD0 /* DownloadWebViewController.m */,
 				0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */,
 				0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */,
+				0CB642D61942DF2D0032D616 /* UINavigationController+rotation.h */,
+				0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */,
 				0CF72BE01942A02B00469DD0 /* Media.xcassets */,
 				0CF72C171942C64000469DD0 /* SVWebViewController */,
 				0CEA204819418E5400A833D8 /* Core Data */,
@@ -496,6 +501,7 @@
 				0C029ED019382B8B00EB961B /* DirectoryTableViewController.m in Sources */,
 				0CF72C311942C64000469DD0 /* SVModalWebViewController.m in Sources */,
 				0C029E93193814C000EB961B /* LeftPanelViewController.m in Sources */,
+				0CB642D81942DF2D0032D616 /* UINavigationController+rotation.m in Sources */,
 				0C029ECD19381A9B00EB961B /* CenterPanelTableViewController.m in Sources */,
 				0CF72BE71942BF1200469DD0 /* DownloadWebViewController.m in Sources */,
 				0C029ED6193860FA00EB961B /* AudioViewController.m in Sources */,
