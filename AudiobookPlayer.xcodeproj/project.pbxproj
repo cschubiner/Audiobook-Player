@@ -21,7 +21,7 @@
 		0C029EC61938153400EB961B /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029EC41938153400EB961B /* UIViewController+JASidePanel.m */; };
 		0C029ECD19381A9B00EB961B /* CenterPanelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */; };
 		0C029ED019382B8B00EB961B /* DirectoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ECF19382B8B00EB961B /* DirectoryTableViewController.m */; };
-		0C029ED31938512F00EB961B /* FolderCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ED21938512F00EB961B /* FolderCellTableViewCell.m */; };
+		0C029ED31938512F00EB961B /* ProgressCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ED21938512F00EB961B /* ProgressCellTableViewCell.m */; };
 		0C029ED6193860FA00EB961B /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ED5193860FA00EB961B /* AudioViewController.m */; };
 		0C029ED81938628F00EB961B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029ED71938628F00EB961B /* AVFoundation.framework */; };
 		0C029EDA19389AF200EB961B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029ED919389AF200EB961B /* StoreKit.framework */; };
@@ -29,7 +29,6 @@
 		0C0CD9C91942E9AD0086BBE2 /* backgroundLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C0CD9C81942E9AD0086BBE2 /* backgroundLogin.png */; };
 		0C4E446A1942906A00EC4C71 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4E44691942906A00EC4C71 /* Song.m */; };
 		0CB642D81942DF2D0032D616 /* UINavigationController+rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */; };
-		0CE27A611935B01200C5C411 /* AudiobookPlayer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */; };
 		0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */; };
 		0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A551935B01200C5C411 /* Default-568h@2x.png */; };
 		0CE27A641935B01200C5C411 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A561935B01200C5C411 /* Default.png */; };
@@ -89,8 +88,8 @@
 		0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterPanelTableViewController.m; sourceTree = "<group>"; };
 		0C029ECE19382B8B00EB961B /* DirectoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryTableViewController.h; sourceTree = "<group>"; };
 		0C029ECF19382B8B00EB961B /* DirectoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryTableViewController.m; sourceTree = "<group>"; };
-		0C029ED11938512F00EB961B /* FolderCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderCellTableViewCell.h; sourceTree = "<group>"; };
-		0C029ED21938512F00EB961B /* FolderCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderCellTableViewCell.m; sourceTree = "<group>"; };
+		0C029ED11938512F00EB961B /* ProgressCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressCellTableViewCell.h; sourceTree = "<group>"; };
+		0C029ED21938512F00EB961B /* ProgressCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressCellTableViewCell.m; sourceTree = "<group>"; };
 		0C029ED4193860FA00EB961B /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		0C029ED5193860FA00EB961B /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
 		0C029ED71938628F00EB961B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -191,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				0CE27A501935B01200C5C411 /* AudiobookPlayer */,
-				0C029EC71938153700EB961B /* JASidePanelController */,
 				09ABC07013A1D52D009C3FCF /* Frameworks */,
 				09ABC06E13A1D52D009C3FCF /* Products */,
 				164177ABC0BF41C6946CDFA7 /* Pods.xcconfig */,
@@ -244,39 +242,65 @@
 				0C029EC41938153400EB961B /* UIViewController+JASidePanel.m */,
 			);
 			name = JASidePanelController;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		0C4191321943C3B200AF020D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0CF72C401942C8F400469DD0 /* NSString+Addons.h */,
+				0CF72C411942C8F400469DD0 /* NSString+Addons.m */,
+				0CB642D61942DF2D0032D616 /* UINavigationController+rotation.h */,
+				0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		0C4191331943C3CD00AF020D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0C0CD9C81942E9AD0086BBE2 /* backgroundLogin.png */,
+				0CF72BE01942A02B00469DD0 /* Media.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		0C4191341943C3DE00AF020D /* Panels */ = {
+			isa = PBXGroup;
+			children = (
+				0C029E91193814C000EB961B /* LeftPanelViewController.h */,
+				0C029E92193814C000EB961B /* LeftPanelViewController.m */,
+				0C029ECB19381A9B00EB961B /* CenterPanelTableViewController.h */,
+				0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */,
+				0CE27A5F1935B01200C5C411 /* PanelsViewController.h */,
+				0CE27A601935B01200C5C411 /* PanelsViewController.m */,
+				0C029EC71938153700EB961B /* JASidePanelController */,
+			);
+			name = Panels;
 			sourceTree = "<group>";
 		};
 		0CE27A501935B01200C5C411 /* AudiobookPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				0CF72C401942C8F400469DD0 /* NSString+Addons.h */,
-				0CF72C411942C8F400469DD0 /* NSString+Addons.m */,
 				0CE27A5B1935B01200C5C411 /* iPhoneStoryboard.storyboard */,
 				0C029ED4193860FA00EB961B /* AudioViewController.h */,
 				0C029ED5193860FA00EB961B /* AudioViewController.m */,
-				0C029ED11938512F00EB961B /* FolderCellTableViewCell.h */,
-				0C029ED21938512F00EB961B /* FolderCellTableViewCell.m */,
+				0C029ED11938512F00EB961B /* ProgressCellTableViewCell.h */,
+				0C029ED21938512F00EB961B /* ProgressCellTableViewCell.m */,
 				0C029ECE19382B8B00EB961B /* DirectoryTableViewController.h */,
 				0C029ECF19382B8B00EB961B /* DirectoryTableViewController.m */,
-				0C029E91193814C000EB961B /* LeftPanelViewController.h */,
-				0C029E92193814C000EB961B /* LeftPanelViewController.m */,
-				0C029ECB19381A9B00EB961B /* CenterPanelTableViewController.h */,
-				0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */,
 				0CE27A5C1935B01200C5C411 /* LoginViewController.h */,
 				0CE27A5D1935B01200C5C411 /* LoginViewController.m */,
-				0CE27A5F1935B01200C5C411 /* PanelsViewController.h */,
-				0CE27A601935B01200C5C411 /* PanelsViewController.m */,
 				0CF72BE51942BF1200469DD0 /* DownloadWebViewController.h */,
 				0CF72BE61942BF1200469DD0 /* DownloadWebViewController.m */,
 				0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */,
 				0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */,
-				0CB642D61942DF2D0032D616 /* UINavigationController+rotation.h */,
-				0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */,
-				0C0CD9C81942E9AD0086BBE2 /* backgroundLogin.png */,
-				0CF72BE01942A02B00469DD0 /* Media.xcassets */,
-				0CF72C171942C64000469DD0 /* SVWebViewController */,
+				0C4191341943C3DE00AF020D /* Panels */,
+				0C4191321943C3B200AF020D /* Categories */,
+				0C4191331943C3CD00AF020D /* Assets */,
 				0CEA204819418E5400A833D8 /* Core Data */,
 				0CE27A6C1935BF0600C5C411 /* Supporting Files */,
+				0CF72C171942C64000469DD0 /* SVWebViewController */,
 			);
 			path = AudiobookPlayer;
 			sourceTree = "<group>";
@@ -439,7 +463,6 @@
 				0CF72C2F1942C64000469DD0 /* LICENSE.txt in Resources */,
 				0C0CD9C91942E9AD0086BBE2 /* backgroundLogin.png in Resources */,
 				0CE27A681935B01200C5C411 /* iPhoneStoryboard.storyboard in Resources */,
-				0CE27A611935B01200C5C411 /* AudiobookPlayer-Info.plist in Resources */,
 				0CE27A641935B01200C5C411 /* Default.png in Resources */,
 				0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */,
 				0CF72C341942C64000469DD0 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
@@ -497,7 +520,7 @@
 				0CE27A6A1935B01200C5C411 /* main.m in Sources */,
 				0CF72C361942C64000469DD0 /* SVWebViewControllerActivityChrome.m in Sources */,
 				0C029EC51938153400EB961B /* JASidePanelController.m in Sources */,
-				0C029ED31938512F00EB961B /* FolderCellTableViewCell.m in Sources */,
+				0C029ED31938512F00EB961B /* ProgressCellTableViewCell.m in Sources */,
 				0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */,
 				0CF72C3C1942C64000469DD0 /* SVWebViewControllerActivity.m in Sources */,
 				0CE27A6B1935B01200C5C411 /* PanelsViewController.m in Sources */,

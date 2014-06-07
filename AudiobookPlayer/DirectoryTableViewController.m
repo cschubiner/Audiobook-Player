@@ -9,7 +9,7 @@
 #import "AudioViewController.h"
 #import "AudiobookPlayerAppDelegate.h"
 #import "DirectoryTableViewController.h"
-#import "FolderCellTableViewCell.h"
+#import "ProgressCellTableViewCell.h"
 #import "Song+Create.h"
 #import "Song.h"
 #import "SongDatabase.h"
@@ -100,18 +100,19 @@
 
 - (void)viewDidLoad
 {
-	[self.tableView registerClass:[FolderCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
+	[self.tableView registerClass:[ProgressCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
 	[super viewDidLoad];
 	[self updateColorScheme];
 	[self refreshTableView];
     
-	id observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
-                                                                    object:[SongDatabase sharedDefaultSongDatabase]
-                                                                     queue:[NSOperationQueue mainQueue]
-                                                                usingBlock:^(NSNotification * note) {
-                                                                    [self refreshTableView];
-                                                                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                }];
+	id observer = NULL;
+	observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
+                                                                 object:[SongDatabase sharedDefaultSongDatabase]
+                                                                  queue:[NSOperationQueue mainQueue]
+                                                             usingBlock:^(NSNotification * note) {
+                                                                 [self refreshTableView];
+                                                                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                             }];
     
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -131,7 +132,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	FolderCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
+	ProgressCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
 	//	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
     
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];

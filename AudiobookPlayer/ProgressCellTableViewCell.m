@@ -6,16 +6,16 @@
 //
 //
 
-#import "FolderCellTableViewCell.h"
+#import "ProgressCellTableViewCell.h"
 
-@interface FolderCellTableViewCell ()
+@interface ProgressCellTableViewCell ()
 
 @property (nonatomic, strong) UIView * progressView;
 @property (nonatomic, strong) NSNumber * lastPosition;
 
 @end
 
-@implementation FolderCellTableViewCell
+@implementation ProgressCellTableViewCell
 
 -(void)setIsDirectory:(BOOL)isDirectory {
 	if (isDirectory) {
@@ -37,7 +37,7 @@
 	}
     
 	BOOL isPlaying = self.lastPosition.doubleValue + .000001 < self.song.currentPosition.doubleValue;
-    //	isPlaying = self.song.isLastPlayed.boolValue;
+	//	isPlaying = self.song.isLastPlayed.boolValue;
     
 	originalFrame = self.frame;
     

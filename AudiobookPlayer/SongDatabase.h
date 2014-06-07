@@ -19,7 +19,4 @@
 
 @property (nonatomic, readonly) NSManagedObjectContext * managedObjectContext;
 
-- (void)fetch;
-- (void)fetchWithCompletionHandler:(void (^)(BOOL success))completionHandler;
-
 @end

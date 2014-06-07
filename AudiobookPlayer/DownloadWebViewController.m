@@ -101,6 +101,7 @@
 	NSString * downloadsPath = [documentsDirectoryPath stringByAppendingPathComponent:@"/Downloads"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:downloadsPath])
 		[[NSFileManager defaultManager] createDirectoryAtPath:downloadsPath withIntermediateDirectories:NO attributes:nil error:nil];
+    
 	return downloadsPath;
 }
 
@@ -116,7 +117,7 @@
 }
 
 -(BOOL)shouldAutorotate {
-    return YES;
+	return YES;
 }
 
 @end

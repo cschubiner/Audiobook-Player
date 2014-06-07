@@ -9,7 +9,7 @@
 #import "Song.h"
 #import <UIKit/UIKit.h>
 
-@interface FolderCellTableViewCell : UITableViewCell
+@interface ProgressCellTableViewCell : UITableViewCell
 
 
 -(void)updateProgress;

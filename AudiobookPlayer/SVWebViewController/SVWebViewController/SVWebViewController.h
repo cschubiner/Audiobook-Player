@@ -13,6 +13,8 @@
 - (id)initWithAddress:(NSString*)urlString;
 - (id)initWithURL:(NSURL*)URL;
 
+- (void)doneButtonClicked:(id)sender;
+
 @property (nonatomic, strong) UIWebView * webView;
 
 @end

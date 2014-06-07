@@ -18,13 +18,14 @@
 		delegate.managedObjectContext = flickrdb.managedObjectContext;
 	}
 	else {
-		id observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
-                                                                        object:flickrdb
-                                                                         queue:[NSOperationQueue mainQueue]
-                                                                    usingBlock:^(NSNotification * note) {
-                                                                        delegate.managedObjectContext = flickrdb.managedObjectContext;
-                                                                        [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                    }];
+		id observer = [NSObject new];
+		observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
+                                                                     object:flickrdb
+                                                                      queue:[NSOperationQueue mainQueue]
+                                                                 usingBlock:^(NSNotification * note) {
+                                                                     delegate.managedObjectContext = flickrdb.managedObjectContext;
+                                                                     [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                                 }];
 	}
 }
 
