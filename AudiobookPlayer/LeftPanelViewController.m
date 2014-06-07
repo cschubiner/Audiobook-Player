@@ -8,7 +8,7 @@
 
 #import "LeftPanelViewController.h"
 #import "UITableViewCell+FlatUI.h"
-#import <FlatUIKit/UIColor+FlatUI.h>j
+#import <FlatUIKit/UIColor+FlatUI.h>
 
 @implementation LeftPanelViewController
 
