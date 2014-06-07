@@ -11,6 +11,7 @@
 #import <FlatUIKit/UIColor+FlatUI.h>
 #import "DownloadWebViewController.h"
 #import "CenterPanelTableViewController.h"
+#import <Parse/Parse.h>
 #import "AudiobookPlayerAppDelegate.h"
 
 @implementation LeftPanelViewController
@@ -56,6 +57,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	// Return the number of rows in the section.
+    if ([PFUser currentUser] && [[PFUser currentUser] objectForKey:@"name"])
+        return 4;
 	return 3;
 }
 
@@ -92,9 +95,16 @@
 	else if (indexPath.row == 2) {
         cell.textLabel.text = @"Downloader";
     }
+	else if (indexPath.row == 3) {
+        cell.textLabel.text = [[PFUser currentUser] objectForKey:@"name"];
+    }
     
 	return cell;
 }
+
+//-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return indexPath.row != 3;
+//}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -117,6 +127,14 @@
         DownloadWebViewController *webViewController = delegate.downloadViewController;
         [self presentViewController:webViewController animated:YES completion:nil];
         return;
+    }
+    else if (indexPath.row == 3) {
+        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"View profile"
+                                                         message:@"Sorry, the profile viewer is currently unimplemented."
+                                                        delegate:self
+                                               cancelButtonTitle:@"Dismiss"
+                                               otherButtonTitles:nil];
+		[alert show];
     }
     
 	[standardUserDefaults synchronize];
