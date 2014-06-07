@@ -173,6 +173,7 @@
 	if ([DirectoryTableViewController isDirectory:fullPath]) {
 		DirectoryTableViewController * next = [[DirectoryTableViewController alloc]init];
 		[next setDirectoryPath:fullPath];
+        [next setTitle:pathName];
 		[self.navigationController pushViewController:next animated:YES];
 	}
 	else {

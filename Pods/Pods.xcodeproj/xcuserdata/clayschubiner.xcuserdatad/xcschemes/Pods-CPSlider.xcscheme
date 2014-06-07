@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A155AD88DB4742D48F1CEC6D"
+               BlueprintIdentifier = "80812AFBAF7F43A3838A09B8"
                BuildableName = "libPods-CPSlider.a"
                BlueprintName = "Pods-CPSlider"
                ReferencedContainer = "container:Pods.xcodeproj">

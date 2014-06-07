@@ -43,6 +43,7 @@
 		0CEA204E19418ED600A833D8 /* SongDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA204D19418ED600A833D8 /* SongDatabase.m */; };
 		0CEA205319419CD000A833D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEA205219419CD000A833D8 /* CoreMedia.framework */; };
 		0CEA205519419CEE00A833D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEA205419419CEE00A833D8 /* CoreData.framework */; };
+		0CF72BE11942A02B00469DD0 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF72BE01942A02B00469DD0 /* Media.xcassets */; };
 		2FCDD6B014A573F500295AAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCDD6AF14A573F500295AAC /* QuartzCore.framework */; };
 		5DD0FC4F489F46089224B4D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADFCB70F35384ED48E94A608 /* libPods.a */; };
 		743D7B6D157DA60100084B67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743D7B6C157DA60100084B67 /* CoreGraphics.framework */; };
@@ -101,6 +102,7 @@
 		0CEA204D19418ED600A833D8 /* SongDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDatabase.m; sourceTree = "<group>"; };
 		0CEA205219419CD000A833D8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0CEA205419419CEE00A833D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0CF72BE01942A02B00469DD0 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		164177ABC0BF41C6946CDFA7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		2FCDD6AF14A573F500295AAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6332375315E438E900AE2736 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -220,6 +222,7 @@
 				0CE27A601935B01200C5C411 /* PanelsViewController.m */,
 				0CE27A531935B01200C5C411 /* AudiobookPlayerAppDelegate.h */,
 				0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */,
+				0CF72BE01942A02B00469DD0 /* Media.xcassets */,
 				0CEA204819418E5400A833D8 /* Core Data */,
 				0CE27A6C1935BF0600C5C411 /* Supporting Files */,
 			);
@@ -319,6 +322,7 @@
 			files = (
 				0CE27A671935B01200C5C411 /* Entitlements.plist in Resources */,
 				0CE27A651935B01200C5C411 /* Default@2x.png in Resources */,
+				0CF72BE11942A02B00469DD0 /* Media.xcassets in Resources */,
 				0CE27A681935B01200C5C411 /* iPhoneStoryboard.storyboard in Resources */,
 				0CE27A611935B01200C5C411 /* AudiobookPlayer-Info.plist in Resources */,
 				0CE27A641935B01200C5C411 /* Default.png in Resources */,

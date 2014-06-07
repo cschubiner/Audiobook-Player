@@ -29,6 +29,7 @@
 -(void)awakeFromNib
 {
 	[self setLeftPanel:[self.storyboard instantiateViewControllerWithIdentifier:@"leftViewController"]];
+    [self setLeftFixedWidth:150];
 	[self setCenterPanel:[self.storyboard instantiateViewControllerWithIdentifier:@"centerViewController"]];
 }
 
