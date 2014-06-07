@@ -180,7 +180,6 @@
 		AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
         
 		if ([fullPath isEqualToString:((Song*)delegate.currentAudioViewController.getSong).path]) {
-			//		if ([fullPath isEqualToString:((Song*)delegate.currentAudioViewController.songs[0]).path]) {
 			[self.navigationController pushViewController:delegate.currentAudioViewController animated:YES];
 		}
 		else {
