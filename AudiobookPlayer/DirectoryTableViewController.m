@@ -114,7 +114,7 @@
                                                                  [[NSNotificationCenter defaultCenter] removeObserver:observer];
                                                              }];
     
-	 self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 #pragma mark - Table view data source
@@ -212,7 +212,7 @@
 			NSMutableArray * songs = [[NSMutableArray alloc]init];
 			for (NSInteger i = indexPath.row; i < self.files.count; i++) {
 				NSString * songPath = [self.directoryPath stringByAppendingPathComponent:[self.files objectAtIndex:i]];
-                songPath = [self.files objectAtIndex:i];
+				songPath = [self.files objectAtIndex:i];
 				if (![DirectoryTableViewController isDirectory:songPath])
 					[songs addObject:[Song songWithSongTitle:[DirectoryTableViewController pathNameToSongTitle:songPath]]];
 			}
@@ -252,23 +252,11 @@
 		NSError * error;
 		[fileManager removeItemAtPath:fullPath error:&error];
 		if (!error) {
-            self.files = [NSMutableArray arrayWithArray:self.files];
-            [((NSMutableArray*)self.files) removeObjectAtIndex:indexPath.row];
+			self.files = [NSMutableArray arrayWithArray:self.files];
+			[((NSMutableArray*)self.files)removeObjectAtIndex : indexPath.row];
 			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
+		}
 	}
 }
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
