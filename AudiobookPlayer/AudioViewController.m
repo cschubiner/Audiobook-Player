@@ -110,6 +110,15 @@ BOOL canChangePlayingState = true;
 	self.currentTimeLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.seekSlider.value / 60), ((int)self.seekSlider.value % 60)];
 }
 
+- (void)skipWithDuration:(CGFloat)skipDuration {
+	[self.gestureLabel setText:[NSString stringWithFormat:@"%@ %d secs", skipDuration >= 0 ? @"Jumping" :@"Reversing", abs((int)skipDuration)]];
+	[self flashGestureLabel];
+	self.backgroundMusicPlayer.currentTime += skipDuration;
+	self.seekSlider.value += skipDuration;
+	[self updateCurrentTimeLabel];
+	[self recordCurrentPosition];
+}
+
 - (IBAction)didPan:(UIPanGestureRecognizer *)sender {
 	static CGPoint startingPoint;
 	static CGPoint endPoint;
@@ -120,32 +129,30 @@ BOOL canChangePlayingState = true;
 	else if (sender.state == UIGestureRecognizerStateEnded) {
 		endPoint = [sender locationInView:sender.view];
 		CGFloat angle = atan2(startingPoint.y - endPoint.y, endPoint.x - startingPoint.x);
-        
-		const CGFloat maxSecondsToSkip = 30;
-		CGFloat skipDuration = -(fabsf(angle) - PI / 2) * maxSecondsToSkip * 30.0 / 7.0 / PI / 2;
-		[self.gestureLabel setText:[NSString stringWithFormat:@"%@ %d secs", skipDuration >= 0 ? @"Jumping" :@"Reversing", abs((int)skipDuration)]];
-		[self flashGestureLabel];
-		self.backgroundMusicPlayer.currentTime += skipDuration;
-		self.seekSlider.value += skipDuration;
-		[self updateCurrentTimeLabel];
-        
-		[self recordCurrentPosition];
+		NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
+		BOOL isPanMode = [standardUserDefaults integerForKey:@"panMode"] == 0;
+		if (isPanMode) {
+			const CGFloat maxSecondsToSkip = 29.5;
+			CGFloat skipDuration = -(fabsf(angle) - PI / 2) * maxSecondsToSkip * 30.0 / 7.0 / PI / 2;
+			[self skipWithDuration:skipDuration];
+		}
+		else {
+			//we're in swipe mode
+			CGFloat angle2 =fabsf(angle) - PI / 2;
+			if (angle2 < -1)
+				[self skipWithDuration:15];
+			else if (angle2 > 1)
+				[self skipWithDuration:-15];
+			else {
+				//handle up/down swipes
+				if (angle > 1)
+					[self skipWithDuration:-5];
+				else if (angle < -1)
+					[self skipWithDuration:5];
+			}
+		}
 	}
-    
-	//	switch (sender.state) {
-	//        case UIGestureRecognizerStateBegan:
-	//            CGFloat angle = atan2f(velocity.y, velocity.x);
-	//            NSLog(@"angle %f", angle);
-	//
-	//            break;
-	//        case UIGestureRecognizerStateEnded:
-	//            CGPoint velocity = [sender velocityInView:[sender.view superview]];
-	//            // If needed: CGFloat slope = velocity.y / velocity.x;
-	//
-	//            break;
-	//	}
 }
-
 
 - (IBAction)didTapView:(id)sender {
 	[self playPauseAudio:nil];
@@ -153,9 +160,7 @@ BOOL canChangePlayingState = true;
 }
 
 -(void)recordCurrentPosition {
-	//	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext performBlock :^{
 	self.song.currentPosition = [NSNumber numberWithDouble:self.backgroundMusicPlayer.currentTime];
-	//    }];
 }
 
 - (void)updateTime:(NSTimer *)timer {
@@ -206,10 +211,9 @@ BOOL canChangePlayingState = true;
 }
 
 - (void)configureAudioPlayer {
-	// Create audio player with background music
 	NSURL * backgroundMusicURL = [NSURL fileURLWithPath:self.song.path];
 	self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:nil];
-	self.backgroundMusicPlayer.delegate = self; // We need this so we can restart after interruptions
+	self.backgroundMusicPlayer.delegate = self;
 	self.backgroundMusicPlayer.numberOfLoops = 0;
 	[self.backgroundMusicPlayer prepareToPlay];
 }
@@ -303,6 +307,7 @@ BOOL canChangePlayingState = true;
 {
 	[self nextSong:nil];
 }
+
 
 -(void)audioPlayerDecodeErrorDidOccur: (AVAudioPlayer *)player error:(NSError *)error
 {

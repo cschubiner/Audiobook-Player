@@ -72,7 +72,7 @@
 	if (indexPath.row == 0) {
 		NSInteger isPanMode = [standardUserDefaults integerForKey:@"panMode"];
         
-		if (isPanMode == 1) {
+		if (isPanMode == 0) {
 			cell.textLabel.text = @"Pan Mode";
 		}
 		else {
