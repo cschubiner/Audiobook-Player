@@ -31,36 +31,28 @@
 	}
     
 	if (!self.song) {
-        //		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.2 blue:.2 alpha:.30]];
-        //        [self.progressView setFrame:self.frame];
+		//		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.2 blue:.2 alpha:.30]];
+		//        [self.progressView setFrame:self.frame];
 		return;
 	}
     
-	BOOL isPlaying = self.lastPosition.doubleValue + .00001 < self.song.currentPosition.doubleValue;
-	isPlaying = self.song.isLastPlayed.boolValue;
+	BOOL isPlaying = self.lastPosition.doubleValue + .000001 < self.song.currentPosition.doubleValue;
+    //	isPlaying = self.song.isLastPlayed.boolValue;
     
-	BOOL didSetFrame = false;
 	originalFrame = self.frame;
     
-	if (self.song.currentPosition.doubleValue > 0) {
-		if (isPlaying)
-			[self.progressView setBackgroundColor:[UIColor colorWithRed:0.7 green:.5 blue:1.0 alpha:.30]];
-		else
-			[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.5 blue:1.0 alpha:.30]];
-        
-		if (isPlaying) {
-			double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
-			if (isnan(progress))
-				progress = 0;
-            
-			[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, originalFrame.size.width * progress, self.progressView.frame.size.height)];
-			didSetFrame = true;
-			self.lastPosition = self.song.currentPosition;
-		}
-	}
+	if (isPlaying)
+		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.7 green:.5 blue:1.0 alpha:.30]];
+	else
+		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.5 blue:1.0 alpha:.30]];
     
-	if (didSetFrame == false) {
-        //        [self.progressView setFrame:self.frame];
+	if (isPlaying) {
+		double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
+		if (isnan(progress))
+			progress = 0;
+        
+		[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, originalFrame.size.width * progress, self.progressView.frame.size.height)];
+		self.lastPosition = self.song.currentPosition;
 	}
     
 	[self bringSubviewToFront:self.progressView];
