@@ -114,8 +114,7 @@
                                                                  [[NSNotificationCenter defaultCenter] removeObserver:observer];
                                                              }];
     
-	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	 self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 #pragma mark - Table view data source
@@ -211,10 +210,11 @@
 			UIStoryboard * storyboard = [((AudiobookPlayerAppDelegate*)[[UIApplication sharedApplication]delegate])storyboard];
 			AudioViewController * next = [storyboard instantiateViewControllerWithIdentifier:@"audioView"];
 			NSMutableArray * songs = [[NSMutableArray alloc]init];
-			for (int i = indexPath.row; i < self.files.count; i++) {
+			for (NSInteger i = indexPath.row; i < self.files.count; i++) {
 				NSString * songPath = [self.directoryPath stringByAppendingPathComponent:[self.files objectAtIndex:i]];
+                songPath = [self.files objectAtIndex:i];
 				if (![DirectoryTableViewController isDirectory:songPath])
-					[songs addObject:[Song songWithSongFullPath:songPath]];
+					[songs addObject:[Song songWithSongTitle:[DirectoryTableViewController pathNameToSongTitle:songPath]]];
 			}
             
 			[next setSongs:songs];
@@ -232,43 +232,33 @@
 }
 
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	NSString * pathName = [self.files objectAtIndex:indexPath.row];
+	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
+    
+	return ![DirectoryTableViewController isDirectory:fullPath];
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		// Delete the row from the data source
+		NSString * pathName = [self.files objectAtIndex:indexPath.row];
+		NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
+        
+		NSFileManager * fileManager = [NSFileManager defaultManager];
+		NSError * error;
+		[fileManager removeItemAtPath:fullPath error:&error];
+		if (!error) {
+            self.files = [NSMutableArray arrayWithArray:self.files];
+            [((NSMutableArray*)self.files) removeObjectAtIndex:indexPath.row];
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+	}
+}
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 /*
  #pragma mark - Navigation
