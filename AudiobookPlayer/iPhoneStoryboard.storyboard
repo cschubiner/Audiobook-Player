@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audiobook Player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYJ-xZ-DNT">
-                                <rect key="frame" x="33" y="246" width="255" height="76"/>
+                                <rect key="frame" x="39" y="266" width="242" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,18 +53,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="top" secondItem="knR-I3-qdQ" secondAttribute="bottom" constant="226" id="Bh2-UB-auA"/>
-                            <constraint firstAttribute="bottom" secondItem="ZFy-W0-7gN" secondAttribute="bottom" id="XrW-Ep-LSZ"/>
-                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" id="Y6H-bO-79t"/>
-                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="centerY" secondItem="ZFy-W0-7gN" secondAttribute="centerY" id="YbW-8p-x9B"/>
-                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="top" secondItem="Oo6-D8-TMn" secondAttribute="top" id="b4q-th-Wfm"/>
-                            <constraint firstAttribute="trailing" secondItem="ZFy-W0-7gN" secondAttribute="trailing" id="bb6-BU-zHG"/>
-                            <constraint firstItem="7IB-p6-e5T" firstAttribute="top" secondItem="Ba3-oi-r19" secondAttribute="bottom" constant="73" id="jhE-9M-i0L"/>
-                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="lYJ-xZ-DNT" secondAttribute="centerX" id="lNL-5E-9H5"/>
-                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="centerX" secondItem="ZFy-W0-7gN" secondAttribute="centerX" id="uqX-AN-say"/>
-                            <constraint firstItem="lYJ-xZ-DNT" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" constant="33" id="vCv-km-9Gt"/>
-                            <constraint firstItem="Ba3-oi-r19" firstAttribute="centerX" secondItem="noj-8z-cOS" secondAttribute="centerX" id="yUx-HY-Aak"/>
-                            <constraint firstItem="Ba3-oi-r19" firstAttribute="top" secondItem="noj-8z-cOS" secondAttribute="bottom" constant="8" symbolic="YES" id="yjM-I6-dzL"/>
+                            <constraint firstItem="7IB-p6-e5T" firstAttribute="top" secondItem="Ba3-oi-r19" secondAttribute="bottom" constant="73" id="0HN-CH-QAj"/>
+                            <constraint firstItem="Ba3-oi-r19" firstAttribute="top" secondItem="noj-8z-cOS" secondAttribute="bottom" constant="8" symbolic="YES" id="4hp-OY-FZP"/>
+                            <constraint firstAttribute="bottom" secondItem="ZFy-W0-7gN" secondAttribute="bottom" id="BnV-Js-zaT"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" id="Dxm-D8-cFa"/>
+                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="lYJ-xZ-DNT" secondAttribute="centerX" id="M0q-sz-Jlj"/>
+                            <constraint firstItem="noj-8z-cOS" firstAttribute="centerX" secondItem="Ba3-oi-r19" secondAttribute="centerX" id="STp-jg-WTe"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="top" secondItem="Oo6-D8-TMn" secondAttribute="top" id="eGt-EJ-Xmo"/>
+                            <constraint firstAttribute="trailing" secondItem="ZFy-W0-7gN" secondAttribute="trailing" id="k8d-23-vPI"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="centerY" secondItem="lYJ-xZ-DNT" secondAttribute="centerY" id="tmy-vJ-4M1"/>
+                            <constraint firstItem="ZFy-W0-7gN" firstAttribute="centerX" secondItem="lYJ-xZ-DNT" secondAttribute="centerX" id="vK3-rK-vdh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KRe-fn-axh"/>
