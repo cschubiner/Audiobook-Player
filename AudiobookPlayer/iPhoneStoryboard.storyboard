@@ -198,7 +198,7 @@
                                     <action selector="nextSong:" destination="tp1-cU-bUq" eventType="touchUpInside" id="gN5-MC-dvm"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WsN-3d-tyB" customClass="CPSlider">
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WsN-3d-tyB" customClass="CPSlider">
                                 <rect key="frame" x="54" y="77" width="213" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -224,11 +224,20 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap or swipe below to navigate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-Ej-jGi">
+                                        <rect key="frame" x="41" y="0.0" width="238" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="gQc-Ej-jGi" firstAttribute="top" secondItem="XsX-Iq-Nh0" secondAttribute="top" id="2gE-DG-gwr"/>
                                     <constraint firstAttribute="trailing" secondItem="doc-Rl-iER" secondAttribute="trailing" constant="20" symbolic="YES" id="99d-Gh-NxS"/>
                                     <constraint firstItem="doc-Rl-iER" firstAttribute="centerY" secondItem="XsX-Iq-Nh0" secondAttribute="centerY" id="Vuc-3h-B8z"/>
+                                    <constraint firstItem="gQc-Ej-jGi" firstAttribute="centerX" secondItem="doc-Rl-iER" secondAttribute="centerX" id="Wl3-HB-6yf"/>
                                     <constraint firstItem="doc-Rl-iER" firstAttribute="leading" secondItem="XsX-Iq-Nh0" secondAttribute="leading" constant="20" symbolic="YES" id="h6x-uM-2vU"/>
                                 </constraints>
                                 <connections>
@@ -246,7 +255,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DxP-gh-ggr">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23:44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DxP-gh-ggr">
                                 <rect key="frame" x="273" y="81" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
