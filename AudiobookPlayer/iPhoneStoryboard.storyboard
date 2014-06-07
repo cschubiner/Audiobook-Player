@@ -22,7 +22,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noj-8z-cOS">
-                                <rect key="frame" x="89" y="427" width="143" height="30"/>
+                                <rect key="frame" x="89" y="457" width="143" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login with Facebook">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ba3-oi-r19">
-                                <rect key="frame" x="94" y="465" width="133" height="30"/>
+                                <rect key="frame" x="94" y="495" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login anonymously">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,7 +53,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7IB-p6-e5T" firstAttribute="top" secondItem="Ba3-oi-r19" secondAttribute="bottom" constant="73" id="0HN-CH-QAj"/>
+                            <constraint firstItem="7IB-p6-e5T" firstAttribute="top" secondItem="Ba3-oi-r19" secondAttribute="bottom" constant="43" id="0HN-CH-QAj"/>
                             <constraint firstItem="Ba3-oi-r19" firstAttribute="top" secondItem="noj-8z-cOS" secondAttribute="bottom" constant="8" symbolic="YES" id="4hp-OY-FZP"/>
                             <constraint firstAttribute="bottom" secondItem="ZFy-W0-7gN" secondAttribute="bottom" id="BnV-Js-zaT"/>
                             <constraint firstItem="ZFy-W0-7gN" firstAttribute="leading" secondItem="Oo6-D8-TMn" secondAttribute="leading" id="Dxm-D8-cFa"/>
