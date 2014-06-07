@@ -160,7 +160,7 @@ BOOL canChangePlayingState = true;
 
 - (void)updateTime:(NSTimer *)timer {
 	self.seekSlider.value = self.backgroundMusicPlayer.currentTime;
-    [self updateCurrentTimeLabel];
+	[self updateCurrentTimeLabel];
 	[self recordCurrentPosition];
 }
 
@@ -174,7 +174,7 @@ BOOL canChangePlayingState = true;
     
 	self.song.isLastPlayed = [NSNumber numberWithBool:TRUE];
 	self.durationLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.song.duration.floatValue / 60), ((int)self.song.duration.floatValue % 60)];
-
+    
     
 	Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
 	if (playingInfoCenter) {
@@ -270,8 +270,25 @@ BOOL canChangePlayingState = true;
 	[self stopAudio:nil];
 	NSUInteger currIndex = [self.songs indexOfObject:self.song];
 	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
+    
+	if (currIndex == self.songs.count - 1)
+		return;
+    
 	self.song = [self.songs objectAtIndex:(currIndex + 1) % self.songs.count];
 	[self configureAudioPlayer];
+	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
+	[self tryPlayMusic];
+}
+
+- (IBAction)previousSong:(UIButton *)sender {
+	[self stopAudio:nil];
+	NSUInteger currIndex = [self.songs indexOfObject:self.song];
+	if (currIndex == 0) return;
+    
+	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
+	self.song = [self.songs objectAtIndex:(currIndex - 1) % self.songs.count];
+	[self configureAudioPlayer];
+	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
 	[self tryPlayMusic];
 }
 

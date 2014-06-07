@@ -18,6 +18,7 @@
 - (IBAction)playAudio:(id)sender;
 - (IBAction)playPauseAudio:(id)sender;
 - (IBAction)stopAudio:(id)sender;
+- (IBAction)previousSong:(UIButton *)sender;
 - (IBAction)nextSong:(id)sender;
 
 -(Song*)getSong;

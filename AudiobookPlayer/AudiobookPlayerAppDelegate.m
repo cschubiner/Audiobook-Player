@@ -113,6 +113,10 @@
 			NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
 			[self.currentAudioViewController playPauseAudio:nil];
 		}
+		else if (event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {
+			NSLog(@"UIEventSubtypeRemoteControlPreviousTrack");
+			[self.currentAudioViewController previousSong:nil];
+		}
 		else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
 			NSLog(@"UIEventSubtypeRemoteControlNextTrack");
 			[self.currentAudioViewController nextSong:nil];
@@ -223,6 +227,8 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
 	 */
+	[self.currentAudioViewController.getSong setIsLastPlayed:[NSNumber numberWithBool:FALSE]];
+	[[self managedObjectContext]save:nil];
 }
 
 
