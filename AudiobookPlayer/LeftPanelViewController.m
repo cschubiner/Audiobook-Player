@@ -103,6 +103,10 @@
 	return cell;
 }
 
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	return indexPath.row != 3;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (indexPath.row == 0) {

@@ -46,7 +46,10 @@
 	else
 		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.5 blue:1.0 alpha:.30]];
     
-	if (isPlaying) {
+    if ([self.song.currentPosition isEqualToNumber:[NSNumber numberWithInt:0]]) {
+		[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, 0, self.progressView.frame.size.height)];
+    }
+    else if (isPlaying) {
 		double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
 		if (isnan(progress))
 			progress = 0;
