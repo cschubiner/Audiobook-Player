@@ -1,0 +1,50 @@
+*** SEASONAL SALE -- FREE FOR A LIMITED TIME ***
+
+Play any audio file using intuitive gesture controls. Download any audio file from the Web straight into Audiobook Player and play them offline!
+
+--- DOWNLOAD AUDIO FILES ONLINE ---
+Download audio files from the Web to play in Audiobook Player using our embedded browser.
+
+--- GESTURE CONTROL --- 
+Swipe and tap to seek and pause your music. Swipe in different directions to jump through your audiobook more precisely!
+
+--- SAVE YOUR SPOT ---
+With Audiobook Player, your position in any audio track is never lost.
+
+--- THEMES --- 
+With a light and dark theme, you can comfortably use Audiobook Player at night or during the day.
+
+Audiobook Player is the best audiobook player on the App Store.
+
+Keywords:
+audiobook,player,audio,download,web,gesture,save position,mp3,internet,online,offline,playback,play
+
+Review notes:
+Use any Facebook account to test Facebook login functionality. Or you can just press "Skip"
+
+
+
+- Supports iTunes file sharing - transfer audiobooks to AP with iTunes
+- Custom colorful UITableViewCells that display current progress in audiobook
+- Swipe in different directions to skip different amounts
+- Tap to play/pause
+- Custom UISlider to seek at different rates
+- Tracks save position
+- Can play audio via AirPlay
+- Play and pause and switch audio files through Control Center
+- Login via Facebook or anonymously
+- Download and play audio files from the Internet
+- Choose between light and dark themes
+
+Features:
+	- Open audio files gotten through other applications (register itself as an audio player with the system, so other applications can choose this application as an "Open in..." option for audio files)
+	- Position in each audio file will be saved
+	- Swipe gestures to skip forward and back in the audio file. 
+	- Tap gesture to pause/play audio
+	- Browse files and allow for creation of new folders and moving files between folders
+
+Possible extra features:
+	- Browse the internet using a built-in UIWebView to download audio files
+	- Sleep timer (stop playing audio after a specified period of time)
+	- Customize gestures
+	- Light/dark theme
