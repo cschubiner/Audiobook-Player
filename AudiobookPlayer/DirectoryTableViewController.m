@@ -18,7 +18,6 @@
 
 
 @interface DirectoryTableViewController ()
-@property (nonatomic, strong) NSArray* files;
 
 @end
 
@@ -41,7 +40,7 @@
 
 -(void)reloadFiles {
 	self.files = [NSMutableArray arrayWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.directoryPath error:NULL]];
-	int databaseIndex = -1;
+	NSInteger databaseIndex = -1;
 	for (NSString * pathName in self.files) {
 		if ([pathName isEqualToString:DATABASE_NAME]) {
 			databaseIndex = [self.files indexOfObject:pathName];

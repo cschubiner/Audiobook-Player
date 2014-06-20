@@ -14,4 +14,6 @@
 
 -(void)refreshTableView;
 
+@property (nonatomic, strong) NSArray* files;
+
 @end
