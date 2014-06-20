@@ -218,8 +218,7 @@ bool isLoading = false;
 			AudioViewController * next = [storyboard instantiateViewControllerWithIdentifier:@"audioView"];
 			NSMutableArray * songs = [[NSMutableArray alloc]init];
 			for (NSInteger i = indexPath.row; i < self.files.count; i++) {
-				NSString * songPath = [self.directoryPath stringByAppendingPathComponent:[self.files objectAtIndex:i]];
-				songPath = [self.files objectAtIndex:i];
+				NSString * songPath = [self.files objectAtIndex:i];
 				if (![DirectoryTableViewController isDirectory:songPath])
 					[songs addObject:[Song songWithSongTitle:[DirectoryTableViewController pathNameToSongTitle:songPath]]];
 			}

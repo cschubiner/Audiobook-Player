@@ -10,6 +10,7 @@
 #import "SongDatabase.h"
 #import "DirectoryTableViewController.h"
 #import "ProgressCellTableViewCell.h"
+#import "AudiobookPlayerAppDelegate.h"
 
 @interface CenterPanelTableViewController ()
 
@@ -25,6 +26,8 @@
 
 -(void)viewDidLoad {
 	[self setDirectoryPath:[CenterPanelTableViewController documentsDirectory]];
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    [delegate setCenterPanelController:self];
 	[super viewDidLoad];
 	id observer = NULL;
 	observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
@@ -45,7 +48,7 @@
         [super tableView:tableView didSelectRowAtIndexPath:indexPath];
         return;
     }
-    UIAlertView * filenameAlert = [[UIAlertView alloc] initWithTitle:@"Welcome!" message:@"Download new files with the Downloader. Or select \"Audiobook Player\" when opening audio files in other apps." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView * filenameAlert = [[UIAlertView alloc] initWithTitle:@"Welcome!" message:@"Download new files with the Downloader (swipe right). Or select \"Audiobook Player\" when opening audio files in other apps." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [filenameAlert show];
 }
 
