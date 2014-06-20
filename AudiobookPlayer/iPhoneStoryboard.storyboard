@@ -218,7 +218,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide down to scrub slower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="doc-Rl-iER">
-                                        <rect key="frame" x="20" y="133" width="280" height="103"/>
+                                        <rect key="frame" x="20" y="132" width="280" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="103" id="Td6-iB-B6a"/>
@@ -239,7 +239,7 @@
                                 <constraints>
                                     <constraint firstItem="gQc-Ej-jGi" firstAttribute="top" secondItem="XsX-Iq-Nh0" secondAttribute="top" id="2gE-DG-gwr"/>
                                     <constraint firstAttribute="trailing" secondItem="doc-Rl-iER" secondAttribute="trailing" constant="20" symbolic="YES" id="99d-Gh-NxS"/>
-                                    <constraint firstItem="doc-Rl-iER" firstAttribute="centerY" secondItem="XsX-Iq-Nh0" secondAttribute="centerY" id="Vuc-3h-B8z"/>
+                                    <constraint firstItem="doc-Rl-iER" firstAttribute="centerY" secondItem="XsX-Iq-Nh0" secondAttribute="centerY" constant="-1" id="Vuc-3h-B8z"/>
                                     <constraint firstItem="gQc-Ej-jGi" firstAttribute="centerX" secondItem="doc-Rl-iER" secondAttribute="centerX" id="Wl3-HB-6yf"/>
                                     <constraint firstItem="doc-Rl-iER" firstAttribute="leading" secondItem="XsX-Iq-Nh0" secondAttribute="leading" constant="20" symbolic="YES" id="h6x-uM-2vU"/>
                                 </constraints>
