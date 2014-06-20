@@ -276,9 +276,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihc-uC-krj">
-                                <rect key="frame" x="20" y="493" width="12" height="22"/>
+                                <rect key="frame" x="20" y="489" width="56" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="SVWebViewControllerBack.png">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Previous">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -291,17 +292,16 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="XsX-Iq-Nh0" firstAttribute="top" secondItem="WsN-3d-tyB" secondAttribute="bottom" constant="8" symbolic="YES" id="0q8-a3-FYE"/>
-                            <constraint firstItem="Oo7-rw-3ym" firstAttribute="centerY" secondItem="ihc-uC-krj" secondAttribute="centerY" id="4KT-Ky-wTz"/>
-                            <constraint firstItem="ihc-uC-krj" firstAttribute="leading" secondItem="NWh-YB-RrZ" secondAttribute="leading" constant="20" symbolic="YES" id="8Ja-4A-6mZ"/>
                             <constraint firstItem="330-3A-YAo" firstAttribute="top" secondItem="Euj-Va-tlv" secondAttribute="bottom" constant="10" id="8lL-Dc-Gst"/>
                             <constraint firstItem="xKc-6c-cEk" firstAttribute="trailing" secondItem="F5s-7g-p5h" secondAttribute="trailing" id="9Hq-SM-hgo"/>
                             <constraint firstItem="kuo-Xk-Iyd" firstAttribute="trailing" secondItem="XsX-Iq-Nh0" secondAttribute="trailing" id="9xo-tr-WuL"/>
-                            <constraint firstItem="xKc-6c-cEk" firstAttribute="top" secondItem="ihc-uC-krj" secondAttribute="bottom" constant="15" id="BXv-JN-VX3"/>
+                            <constraint firstItem="ihc-uC-krj" firstAttribute="baseline" secondItem="F5s-7g-p5h" secondAttribute="baseline" id="AaM-uD-bEP"/>
                             <constraint firstAttribute="bottom" secondItem="xKc-6c-cEk" secondAttribute="bottom" constant="-7" id="EZH-SE-OQb"/>
+                            <constraint firstItem="ihc-uC-krj" firstAttribute="top" secondItem="XsX-Iq-Nh0" secondAttribute="bottom" constant="10" id="HLS-RX-57c"/>
                             <constraint firstItem="Oo7-rw-3ym" firstAttribute="centerX" secondItem="xKc-6c-cEk" secondAttribute="centerX" id="ITp-lS-ecL"/>
                             <constraint firstItem="DxP-gh-ggr" firstAttribute="baseline" secondItem="tag-bG-BY4" secondAttribute="baseline" id="LTp-D2-MRw"/>
                             <constraint firstItem="XsX-Iq-Nh0" firstAttribute="centerX" secondItem="WsN-3d-tyB" secondAttribute="centerX" id="O9S-6z-2bx"/>
-                            <constraint firstItem="ihc-uC-krj" firstAttribute="leading" secondItem="xKc-6c-cEk" secondAttribute="leading" id="Ty0-CZ-1jx"/>
+                            <constraint firstItem="xKc-6c-cEk" firstAttribute="top" secondItem="ihc-uC-krj" secondAttribute="bottom" constant="12" id="RwH-Ox-90L"/>
                             <constraint firstItem="Oo7-rw-3ym" firstAttribute="centerY" secondItem="F5s-7g-p5h" secondAttribute="centerY" id="UAq-hA-E76"/>
                             <constraint firstItem="kuo-Xk-Iyd" firstAttribute="top" secondItem="NWh-YB-RrZ" secondAttribute="top" id="UOF-An-fzR"/>
                             <constraint firstItem="kuo-Xk-Iyd" firstAttribute="leading" secondItem="XsX-Iq-Nh0" secondAttribute="leading" id="Xqb-AS-SYN"/>
@@ -310,13 +310,14 @@
                             <constraint firstAttribute="trailing" secondItem="F5s-7g-p5h" secondAttribute="trailing" constant="20" symbolic="YES" id="ZWQ-jB-bzn"/>
                             <constraint firstItem="tag-bG-BY4" firstAttribute="leading" secondItem="NWh-YB-RrZ" secondAttribute="leading" constant="6" id="bfn-6B-3Yf"/>
                             <constraint firstItem="Euj-Va-tlv" firstAttribute="top" secondItem="F5s-7g-p5h" secondAttribute="bottom" constant="19" id="fRu-3N-xAc"/>
+                            <constraint firstItem="ihc-uC-krj" firstAttribute="leading" secondItem="NWh-YB-RrZ" secondAttribute="leading" constant="20" symbolic="YES" id="fWt-jK-qfV"/>
                             <constraint firstItem="XsX-Iq-Nh0" firstAttribute="leading" secondItem="NWh-YB-RrZ" secondAttribute="leading" id="ffK-Gm-68u"/>
+                            <constraint firstItem="ihc-uC-krj" firstAttribute="leading" secondItem="xKc-6c-cEk" secondAttribute="leading" id="msd-QQ-uV6"/>
                             <constraint firstItem="WsN-3d-tyB" firstAttribute="top" secondItem="NC6-Ro-Zt2" secondAttribute="bottom" constant="20" symbolic="YES" id="na5-bD-5eE"/>
                             <constraint firstItem="Oo7-rw-3ym" firstAttribute="centerX" secondItem="XsX-Iq-Nh0" secondAttribute="centerX" id="rjE-5v-AHf"/>
                             <constraint firstAttribute="bottom" secondItem="kuo-Xk-Iyd" secondAttribute="bottom" id="uGZ-VI-M4x"/>
                             <constraint firstAttribute="trailing" secondItem="Euj-Va-tlv" secondAttribute="trailing" constant="2" id="wUy-g1-HN8"/>
                             <constraint firstItem="XsX-Iq-Nh0" firstAttribute="top" secondItem="tag-bG-BY4" secondAttribute="bottom" constant="13" id="xkx-ur-m2p"/>
-                            <constraint firstItem="ihc-uC-krj" firstAttribute="top" secondItem="XsX-Iq-Nh0" secondAttribute="bottom" constant="14" id="xm0-Pk-1Ae"/>
                             <constraint firstItem="WsN-3d-tyB" firstAttribute="leading" secondItem="tag-bG-BY4" secondAttribute="trailing" constant="8" symbolic="YES" id="xpM-i4-m7Y"/>
                         </constraints>
                     </view>
@@ -382,7 +383,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SVWebViewControllerBack.png" width="12" height="21"/>
         <image name="backgroundLogin.png" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
