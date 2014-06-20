@@ -27,9 +27,12 @@
 @property (weak, nonatomic) IBOutlet UILabel * currentTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel * durationLabel;
 
+
 #define PI 3.1415926535897932384626
 
 @end
+
+BOOL isSliding;
 
 @implementation AudioViewController
 
@@ -44,9 +47,17 @@
 	[self.seekSlider addTarget:self
                         action:@selector(sliderDidEndSliding:)
               forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
+	[self.seekSlider addTarget:self
+                        action:@selector(sliderDidStartSliding:)
+              forControlEvents:(UIControlEventTouchDragInside | UIControlEventTouchDragOutside)];
+}
+
+- (void)sliderDidStartSliding:(NSNotification *)notification {
+	isSliding = true;
 }
 
 - (void)sliderDidEndSliding:(NSNotification *)notification {
+	isSliding = false;
 	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
 	if (musicWasPlaying)
 		[self.backgroundMusicPlayer play];
@@ -164,6 +175,9 @@ BOOL canChangePlayingState = true;
 }
 
 - (void)updateTime:(NSTimer *)timer {
+	if (isSliding)
+		return;
+    
 	self.seekSlider.value = self.backgroundMusicPlayer.currentTime;
 	[self updateCurrentTimeLabel];
 	[self recordCurrentPosition];
