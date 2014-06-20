@@ -17,27 +17,6 @@
 
 @implementation DownloadWebViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-		// Custom initialization
-	}
-    
-	return self;
-}
-
-- (void)viewDidLoad
-{
-	[super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-	[super didReceiveMemoryWarning];
-	// Dispose of any resources that can be recreated.
-}
 
 -(id)initWithAddress:(NSString *)urlString {
 	id ret = [super initWithAddress:urlString];
@@ -46,6 +25,7 @@
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.webViewController webViewDidFinishLoad:webView];
 	NSLog(@"%@", webView.request);
 }
 
@@ -64,7 +44,8 @@
                 [tmp writeToFile:pathToDownloadTo options:NSDataWritingAtomic error:&error];
                 if (error != nil) {
                     NSLog(@"Failed to save the file: %@", [error description]);
-                    [self displayFileDownloadError];
+                    if ([pathToDownloadTo contains:@".mp3"])
+                        [self displayFileDownloadError];
                 }
                 else {
                     dispatch_async(dispatch_get_main_queue(), ^{

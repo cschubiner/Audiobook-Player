@@ -17,8 +17,8 @@
 
 @implementation SVModalWebViewController
 
-#pragma mark - Initialization
 
+#pragma mark - Initialization
 
 - (id)initWithAddress:(NSString*)urlString {
     return [self initWithURL:[NSURL URLWithString:urlString]];

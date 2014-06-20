@@ -16,5 +16,6 @@
 - (void)doneButtonClicked:(id)sender;
 
 @property (nonatomic, strong) UIWebView * webView;
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
 
 @end
