@@ -122,7 +122,7 @@ bool isLoading = false;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return max((self.refreshControl.isRefreshing || isLoading) ? 0 : 1, self.files.count);
+	return max(1, self.files.count);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,7 +132,7 @@ bool isLoading = false;
     
     
     if (self.files.count == 0) {
-        cell.textLabel.text = @"Empty folder";
+        cell.textLabel.text = isLoading ? @"Loading..." : @"Empty folder";
         [cell setSong:nil];
         return cell;
     }
