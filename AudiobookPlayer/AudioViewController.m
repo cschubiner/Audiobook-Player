@@ -170,8 +170,17 @@ BOOL canChangePlayingState = true;
 	[self recordCurrentPosition];
 }
 
+
 -(void)recordCurrentPosition {
 	self.song.currentPosition = [NSNumber numberWithDouble:self.backgroundMusicPlayer.currentTime];
+	static int recordCounter = 0;
+	if (recordCounter % 3 == 0) {
+		recordCounter = 0;
+		AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+		[delegate.managedObjectContext save:nil];
+	}
+    
+	recordCounter++;
 }
 
 - (void)updateTime:(NSTimer *)timer {
@@ -211,6 +220,8 @@ BOOL canChangePlayingState = true;
 		//        [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
 		[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
 	}
+    
+	[self.navigationItem setTitle:self.song.title];
     
 	self.seekSlider.maximumValue = [self.backgroundMusicPlayer duration];
 	[self updateTime:nil];

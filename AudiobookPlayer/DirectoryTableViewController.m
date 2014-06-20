@@ -67,12 +67,16 @@
 		[(NSMutableArray*)self.files removeObjectAtIndex : databaseIndex];
 }
 
+bool isLoading = false;
+
 -(void)refreshTableView {
+    isLoading = true;
 	[self.refreshControl beginRefreshing];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
 	[delegate.managedObjectContext performBlock:^{
         [self reloadFiles];
         dispatch_async(dispatch_get_main_queue(), ^{
+            isLoading = false;
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
         });
@@ -105,14 +109,6 @@
 	[self updateColorScheme];
 	[self refreshTableView];
     
-	id observer = NULL;
-	observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
-                                                                 object:[SongDatabase sharedDefaultSongDatabase]
-                                                                  queue:[NSOperationQueue mainQueue]
-                                                             usingBlock:^(NSNotification * note) {
-                                                                 [self refreshTableView];
-                                                                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                             }];
     
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -126,13 +122,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return self.files.count;
+	return max((self.refreshControl.isRefreshing || isLoading) ? 0 : 1, self.files.count);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	ProgressCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FolderCellTableViewCell" forIndexPath:indexPath];
 	//	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
+    
+    
+    if (self.files.count == 0) {
+        cell.textLabel.text = @"Empty folder";
+        [cell setSong:nil];
+        return cell;
+    }
     
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
@@ -177,7 +180,7 @@
 +(BOOL)isDirectory:(NSString*)path {
 	BOOL isDirectory;
 	isDirectory = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory];
-	NSURL * item = [NSURL URLWithString:path];
+	NSURL * item = [NSURL fileURLWithPath:path];
 	NSNumber * isDir;
 	BOOL ret = [item getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:nil];
 	if (ret) {
@@ -190,7 +193,12 @@
 	return ([path rangeOfString:@".m"].location == NSNotFound) && (ret || isDirectory);
 }
 
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.files.count != 0;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.files.count == 0) return;
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
     
@@ -235,6 +243,7 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.files.count == 0) return false;
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
     
@@ -243,6 +252,8 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.files.count == 0) return;
+    
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		// Delete the row from the data source
 		NSString * pathName = [self.files objectAtIndex:indexPath.row];

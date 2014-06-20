@@ -7,6 +7,8 @@
 //
 
 #import "CenterPanelTableViewController.h"
+#import "SongDatabase.h"
+#import "DirectoryTableViewController.h"
 
 @interface CenterPanelTableViewController ()
 
@@ -23,6 +25,15 @@
 -(void)viewDidLoad {
 	[self setDirectoryPath:[CenterPanelTableViewController documentsDirectory]];
 	[super viewDidLoad];
+	id observer = NULL;
+	observer = [[NSNotificationCenter defaultCenter] addObserverForName:FlickrDatabaseAvailable
+                                                                 object:[SongDatabase sharedDefaultSongDatabase]
+                                                                  queue:[NSOperationQueue mainQueue]
+                                                             usingBlock:^(NSNotification * note) {
+                                                                 [self refreshTableView];
+                                                                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                             }];
 }
+
 
 @end

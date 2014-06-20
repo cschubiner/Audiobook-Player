@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSString * directoryPath;
 
+-(void)refreshTableView;
+
 @end
