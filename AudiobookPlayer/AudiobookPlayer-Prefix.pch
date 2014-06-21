@@ -20,3 +20,9 @@
 #ifndef max
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
 #endif
+
+#ifdef DEBUG
+#define DebugLog(...) NSLog(__VA_ARGS__)
+#else
+#define DebugLog(...) { }
+#endif

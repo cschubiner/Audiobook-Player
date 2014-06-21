@@ -7,9 +7,9 @@
 //
 
 #import "AudiobookPlayerAppDelegate.h"
+#import "CenterPanelTableViewController.h"
 #import "DownloadWebViewController.h"
 #import "NSString+Addons.h"
-#import "CenterPanelTableViewController.h"
 #import "SVWebViewController.h"
 
 @interface DownloadWebViewController ()
@@ -26,12 +26,12 @@
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.webViewController webViewDidFinishLoad:webView];
+	[self.webViewController webViewDidFinishLoad:webView];
 	NSLog(@"%@", webView.request);
 }
 
 -(BOOL)isValidExtension:(NSString*)fileExtension {
-    return [fileExtension isEqualToString:@"mp3"] || [fileExtension isEqualToString:@"wma"] || [fileExtension isEqualToString:@"wav"] || [fileExtension isEqualToString:@"aac"] || [fileExtension isEqualToString:@"ape"] || [fileExtension isEqualToString:@"flac"] || [fileExtension isEqualToString:@"m4p"] || [fileExtension isEqualToString:@"alac"];
+	return [fileExtension isEqualToString:@"mp3"] || [fileExtension isEqualToString:@"wma"] || [fileExtension isEqualToString:@"wav"] || [fileExtension isEqualToString:@"aac"] || [fileExtension isEqualToString:@"ape"] || [fileExtension isEqualToString:@"flac"] || [fileExtension isEqualToString:@"m4p"] || [fileExtension isEqualToString:@"alac"];
 }
 
 - (void)saveFile:(NSURL*)url {
@@ -40,7 +40,7 @@
         NSString * fileExtension = [url pathExtension];
         if ([self isValidExtension:fileExtension]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
                 UIAlertView * filenameAlert = [[UIAlertView alloc] initWithTitle:@"Initializing download" message:@"Your download is currently in progress" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
                 [filenameAlert show];
             });
@@ -54,12 +54,12 @@
                 [tmp writeToFile:pathToDownloadTo options:NSDataWritingAtomic error:&error];
                 if (error != nil) {
                     NSLog(@"Failed to save the file: %@", [error description]);
-        if ([self isValidExtension:fileExtension])
+                    if ([self isValidExtension:fileExtension])
                         [self displayFileDownloadError];
                 }
                 else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+                        AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
                         [delegate.centerPanelController refreshTableView];
                         UIAlertView * filenameAlert = [[UIAlertView alloc] initWithTitle:@"Download complete" message:[NSString stringWithFormat:@"The audio file %@ has been saved.", filename] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                         [filenameAlert show];
@@ -68,13 +68,13 @@
                 }
             }
             else {
-        if ([self isValidExtension:fileExtension])
+                if ([self isValidExtension:fileExtension])
                     [self displayFileDownloadError];
             }
         }
         else {
             // File type not supported
-        if ([self isValidExtension:fileExtension])
+            if ([self isValidExtension:fileExtension])
                 [self displayFileDownloadError];
         }
     });
@@ -102,7 +102,7 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	NSLog(@"%@", request);
-    if ([self isValidExtension:[[request.URL absoluteString]pathExtension]]) {
+	if ([self isValidExtension:[[request.URL absoluteString]pathExtension]]) {
 		NSLog(@"mp3!!");
 		[self saveFile:request.URL.absoluteURL];
 		return NO;

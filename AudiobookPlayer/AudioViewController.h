@@ -22,4 +22,5 @@
 - (IBAction)nextSong:(id)sender;
 
 -(Song*)getSong;
+-(void)recordCurrNoSave;
 @end

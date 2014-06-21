@@ -78,7 +78,7 @@ BOOL isSliding;
 	if (self != delegate.currentAudioViewController) {
 		delegate.currentAudioViewController.getSong.isLastPlayed = [NSNumber numberWithBool:FALSE];
 		[delegate.currentAudioViewController recordCurrentPosition];
-		[delegate.managedObjectContext save:nil];
+		[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
 		[[delegate.currentAudioViewController backgroundMusicPlayer]stop];
 		[delegate setCurrentAudioViewController:self];
 	}
@@ -91,9 +91,8 @@ BOOL isSliding;
 
 -(void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
 	[self recordCurrentPosition];
-	[delegate.managedObjectContext save:nil];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
 }
 
 -(void)slider:(CPSlider *)slider didChangeToSpeed:(CGFloat)speed whileTracking:(BOOL)tracking {
@@ -151,15 +150,15 @@ BOOL canChangePlayingState = true;
 			//we're in swipe mode
 			CGFloat angle2 =fabsf(angle) - PI / 2;
 			if (angle2 < -1)
-				[self skipWithDuration:15];
+				[self skipWithDuration:25];
 			else if (angle2 > 1)
-				[self skipWithDuration:-15];
+				[self skipWithDuration:-20];
 			else {
 				//handle up/down swipes
 				if (angle > 1)
-					[self skipWithDuration:-5];
+					[self skipWithDuration:-7];
 				else if (angle < -1)
-					[self skipWithDuration:5];
+					[self skipWithDuration:7];
 			}
 		}
 	}
@@ -172,15 +171,13 @@ BOOL canChangePlayingState = true;
 
 
 -(void)recordCurrentPosition {
+    [self recordCurrNoSave];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
+}
+
+-(void)recordCurrNoSave {
 	self.song.currentPosition = [NSNumber numberWithDouble:self.backgroundMusicPlayer.currentTime];
-	static int recordCounter = 0;
-	if (recordCounter % 3 == 0) {
-		recordCounter = 0;
-		AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
-		[delegate.managedObjectContext save:nil];
-	}
-    
-	recordCounter++;
+    NSLog(@"recorded position: %@", self.song.currentPosition);
 }
 
 - (void)updateTime:(NSTimer *)timer {
@@ -215,7 +212,7 @@ BOOL canChangePlayingState = true;
 		//        MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: [UIImage imagedNamed:@"AlbumArt"]];
         
 		[songInfo setObject:self.song.title forKey:MPMediaItemPropertyTitle];
-		//		[songInfo setObject:@"Audio Author" forKey:MPMediaItemPropertyArtist];
+		[songInfo setObject:@"Audiobook Player" forKey:MPMediaItemPropertyArtist];
 		//		[songInfo setObject:@"Audio Album" forKey:MPMediaItemPropertyAlbumTitle];
 		//        [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
 		[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];

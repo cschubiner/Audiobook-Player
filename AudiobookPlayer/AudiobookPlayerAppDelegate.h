@@ -19,4 +19,6 @@
 @property (nonatomic, weak) CenterPanelTableViewController * centerPanelController;
 @property (nonatomic, strong) DownloadWebViewController * downloadViewController;
 
+-(void)saveContext;
+
 @end

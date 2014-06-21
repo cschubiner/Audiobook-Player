@@ -1,10 +1,10 @@
 #import "AudioViewController.h"
 #import "AudiobookPlayerAppDelegate.h"
+#import "CenterPanelTableViewController.h"
 #import "DownloadWebViewController.h"
 #import "SongDatabase.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Parse/Parse.h>
-#import "CenterPanelTableViewController.h"
 
 
 @implementation AudiobookPlayerAppDelegate
@@ -57,6 +57,9 @@
 	}
     
 	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
+	NSTimer * timer;
+	timer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(enableSave2) userInfo:nil repeats:YES];
+    
 	[self setupAudioSession];
 	[self setupDB];
     
@@ -182,6 +185,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 	[FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
 }
 
 
@@ -219,7 +223,91 @@
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 	 */
-	[[self managedObjectContext] save:nil];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContextAndForce : YES];
+    
+}
+
+BOOL canSave;
+
+-(void)enableSave2 {
+	canSave = true;
+}
+
+
+-(void)saveContextAndForce:(BOOL)shouldForce {
+	if (canSave || shouldForce) {
+        
+		NSManagedObjectContext * context = self.managedObjectContext;
+		if (!context) {
+			NSLog(@"NO CONTEXT!");
+			return;
+		}
+        
+		@try {
+			//			if (shouldForce)
+			[self.currentAudioViewController recordCurrNoSave];
+		}
+		@catch (NSException * exception) {
+			NSLog(@"exception: %@", exception);
+		}
+		@finally {
+		}
+        
+		NSError * error;
+		BOOL success = [context save:&error];
+		if (error || !success) {
+			NSLog(@"success: %@ - error: %@", success ? @"true" : @"false", error);
+			abort();
+		}
+        
+		[context performSelectorOnMainThread:@selector(save:) withObject:nil waitUntilDone:YES];
+		[context performSelector:@selector(save:) withObject:nil afterDelay:1.0];
+		[context setStalenessInterval:6.0];
+		while (context) {
+			[context performBlock:^(){
+                NSError * error;
+                bool success =  [context save:&error];
+                if (error || !success)
+                    NSLog(@"success: %@ - error: %@", success ? @"true" : @"false", error);
+                
+            }];
+			context = context.parentContext;
+		}
+        
+        //		[self pStore];
+		NSLog(@"successful save!");
+		canSave = false;
+	}
+    
+	//	else NSLog(@"not saving");
+}
+
+-(void)pStore {
+	NSPersistentStoreCoordinator * psc = self.managedObjectContext.persistentStoreCoordinator;
+    
+	NSMutableDictionary * pragmaOptions = [NSMutableDictionary dictionary];
+	[pragmaOptions setObject:@"FULL" forKey:@"synchronous"];
+	[pragmaOptions setObject:@"2" forKey:@"fullfsync"];
+    
+	NSDictionary * storeOptions =
+    [NSDictionary dictionaryWithObject:pragmaOptions forKey:NSSQLitePragmasOption];
+	NSPersistentStore * store;
+	NSError * error = nil;
+	store = [psc addPersistentStoreWithType:NSSQLiteStoreType
+                              configuration:nil
+                                        URL:((NSPersistentStore*)psc.persistentStores[0]).URL
+                                    options:storeOptions
+                                      error:&error];
+}
+
+-(void)saveContext {
+	[self saveContextAndForce:NO];
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+	[self saveContextAndForce:YES];
+	completionHandler(UIBackgroundFetchResultNoData);
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -227,15 +315,15 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 	 */
-	[[self managedObjectContext] save:nil];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContextAndForce : YES];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
 	/*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 	 */
-	[[self managedObjectContext] save:nil];
-    [self.centerPanelController refreshTableView];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
+	[self.centerPanelController refreshTableView];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -244,9 +332,8 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
 	 */
-	[[self managedObjectContext] save:nil];
 	[self.currentAudioViewController.getSong setIsLastPlayed:[NSNumber numberWithBool:FALSE]];
-	[[self managedObjectContext] save:nil];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContextAndForce : YES];
 }
 
 

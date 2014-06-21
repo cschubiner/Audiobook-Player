@@ -59,8 +59,7 @@
 		}
 	}
     
-	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
-	[delegate.managedObjectContext save:nil];
+	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
     
 	if (databaseIndex >= 0)
 		[(NSMutableArray*)self.files removeObjectAtIndex : databaseIndex];
@@ -69,7 +68,7 @@
 bool isLoading = false;
 
 -(void)refreshTableView {
-    isLoading = true;
+	isLoading = true;
 	[self.refreshControl beginRefreshing];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
 	[delegate.managedObjectContext performBlock:^{
@@ -108,7 +107,6 @@ bool isLoading = false;
 	[self updateColorScheme];
 	[self refreshTableView];
     
-    
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
@@ -130,11 +128,11 @@ bool isLoading = false;
 	//	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
     
     
-    if (self.files.count == 0) {
-        cell.textLabel.text = isLoading ? @"Loading..." : @"Empty folder";
-        [cell setSong:nil];
-        return cell;
-    }
+	if (self.files.count == 0) {
+		cell.textLabel.text = isLoading ? @"Loading..." : @"Empty folder";
+		[cell setSong:nil];
+		return cell;
+	}
     
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
@@ -193,11 +191,12 @@ bool isLoading = false;
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.files.count != 0;
+	return self.files.count != 0;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.files.count == 0) return;
+	if (self.files.count == 0) return;
+    
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
     
@@ -241,7 +240,8 @@ bool isLoading = false;
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.files.count == 0) return false;
+	if (self.files.count == 0) return false;
+    
 	NSString * pathName = [self.files objectAtIndex:indexPath.row];
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
     
@@ -250,7 +250,7 @@ bool isLoading = false;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.files.count == 0) return;
+	if (self.files.count == 0) return;
     
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		// Delete the row from the data source
