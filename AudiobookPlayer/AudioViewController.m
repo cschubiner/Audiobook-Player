@@ -177,7 +177,7 @@ BOOL canChangePlayingState = true;
 
 -(void)recordCurrNoSave {
 	self.song.currentPosition = [NSNumber numberWithDouble:self.backgroundMusicPlayer.currentTime];
-    NSLog(@"recorded position: %@", self.song.currentPosition);
+    DebugLog(@"recorded position: %@", self.song.currentPosition);
 }
 
 - (void)updateTime:(NSTimer *)timer {

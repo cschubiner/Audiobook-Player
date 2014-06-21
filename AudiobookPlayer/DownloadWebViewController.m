@@ -27,7 +27,7 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 	[self.webViewController webViewDidFinishLoad:webView];
-	NSLog(@"%@", webView.request);
+	DebugLog(@"%@", webView.request);
 }
 
 -(BOOL)isValidExtension:(NSString*)fileExtension {
@@ -53,7 +53,7 @@
                 NSError * error = nil;
                 [tmp writeToFile:pathToDownloadTo options:NSDataWritingAtomic error:&error];
                 if (error != nil) {
-                    NSLog(@"Failed to save the file: %@", [error description]);
+                    DebugLog(@"Failed to save the file: %@", [error description]);
                     if ([self isValidExtension:fileExtension])
                         [self displayFileDownloadError];
                 }
@@ -101,9 +101,9 @@
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-	NSLog(@"%@", request);
+	DebugLog(@"%@", request);
 	if ([self isValidExtension:[[request.URL absoluteString]pathExtension]]) {
-		NSLog(@"mp3!!");
+		DebugLog(@"mp3!!");
 		[self saveFile:request.URL.absoluteURL];
 		return NO;
 	}

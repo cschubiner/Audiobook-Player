@@ -24,7 +24,7 @@
     
 	if (error || !matches || ([matches count] > 1)) {
 		// handle error
-		NSLog(@"Error: %@", error);
+		DebugLog(@"Error: %@", error);
 	}
 	else if (![matches count]) {
 		song = [NSEntityDescription insertNewObjectForEntityForName:@"Song"
@@ -51,7 +51,7 @@
     
 	if (error || !matches || ([matches count] > 1)) {
 		// handle error
-		NSLog(@"Error: %@", error);
+		DebugLog(@"Error: %@", error);
 	}
 	else if (![matches count]) {
 		song = [NSEntityDescription insertNewObjectForEntityForName:@"Song"
@@ -79,7 +79,7 @@
     
 	if (error || !matches || ([matches count] > 1)) {
 		// handle error
-		NSLog(@"Error: %@", error);
+		DebugLog(@"Error: %@", error);
 	}
 	else if (![matches count]) {
 		song = [NSEntityDescription insertNewObjectForEntityForName:@"Song"

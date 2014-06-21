@@ -118,23 +118,23 @@
 	//if it is a remote control event handle it correctly
 	if (event.type == UIEventTypeRemoteControl) {
 		if (event.subtype == UIEventSubtypeRemoteControlPlay) {
-			NSLog(@"UIEventSubtypeRemoteControlPlay");
+			DebugLog(@"UIEventSubtypeRemoteControlPlay");
 			[self.currentAudioViewController playAudio:nil];
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlPause) {
-			NSLog(@"UIEventSubtypeRemoteControlPause");
+			DebugLog(@"UIEventSubtypeRemoteControlPause");
 			[self.currentAudioViewController stopAudio:nil];
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
-			NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
+			DebugLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
 			[self.currentAudioViewController playPauseAudio:nil];
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {
-			NSLog(@"UIEventSubtypeRemoteControlPreviousTrack");
+			DebugLog(@"UIEventSubtypeRemoteControlPreviousTrack");
 			[self.currentAudioViewController previousSong:nil];
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
-			NSLog(@"UIEventSubtypeRemoteControlNextTrack");
+			DebugLog(@"UIEventSubtypeRemoteControlNextTrack");
 			[self.currentAudioViewController nextSong:nil];
 		}
 	}
@@ -151,7 +151,7 @@
 }
 
 - (void)handleOpenURL:(NSURL *)url {
-	NSLog(@"url: %@", url);
+	DebugLog(@"url: %@", url);
 }
 
 
@@ -196,11 +196,11 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 	if (error.code == 3010) {
-		NSLog(@"Push notifications are not supported in the iOS Simulator.");
+		DebugLog(@"Push notifications are not supported in the iOS Simulator.");
 	}
 	else {
 		// show some alert or otherwise handle the failure to register.
-		NSLog(@"application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
+		DebugLog(@"application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
 	}
 }
 
@@ -239,7 +239,7 @@ BOOL canSave;
         
 		NSManagedObjectContext * context = self.managedObjectContext;
 		if (!context) {
-			NSLog(@"NO CONTEXT!");
+			DebugLog(@"NO CONTEXT!");
 			return;
 		}
         
@@ -248,7 +248,7 @@ BOOL canSave;
 			[self.currentAudioViewController recordCurrNoSave];
 		}
 		@catch (NSException * exception) {
-			NSLog(@"exception: %@", exception);
+			DebugLog(@"exception: %@", exception);
 		}
 		@finally {
 		}
@@ -256,7 +256,7 @@ BOOL canSave;
 		NSError * error;
 		BOOL success = [context save:&error];
 		if (error || !success) {
-			NSLog(@"success: %@ - error: %@", success ? @"true" : @"false", error);
+			DebugLog(@"success: %@ - error: %@", success ? @"true" : @"false", error);
 			abort();
 		}
         
@@ -268,18 +268,18 @@ BOOL canSave;
                 NSError * error;
                 bool success =  [context save:&error];
                 if (error || !success)
-                    NSLog(@"success: %@ - error: %@", success ? @"true" : @"false", error);
+                    DebugLog(@"success: %@ - error: %@", success ? @"true" : @"false", error);
                 
             }];
 			context = context.parentContext;
 		}
         
         //		[self pStore];
-		NSLog(@"successful save!");
+		DebugLog(@"successful save!");
 		canSave = false;
 	}
     
-	//	else NSLog(@"not saving");
+	//	else DebugLog(@"not saving");
 }
 
 -(void)pStore {
@@ -341,10 +341,10 @@ BOOL canSave;
 
 - (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
 	if ([result boolValue]) {
-		NSLog(@"AudiobookPlayer successfully subscribed to push notifications on the broadcast channel.");
+		DebugLog(@"AudiobookPlayer successfully subscribed to push notifications on the broadcast channel.");
 	}
 	else {
-		NSLog(@"AudiobookPlayer failed to subscribe to push notifications on the broadcast channel.");
+		DebugLog(@"AudiobookPlayer failed to subscribe to push notifications on the broadcast channel.");
 	}
 }
 

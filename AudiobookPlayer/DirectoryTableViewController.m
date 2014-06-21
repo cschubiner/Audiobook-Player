@@ -182,9 +182,9 @@ bool isLoading = false;
 	BOOL ret = [item getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:nil];
 	if (ret) {
 		//		if ([isDir boolValue])
-		//			NSLog(@"%@ is a directory", item);
+		//			DebugLog(@"%@ is a directory", item);
 		//		else
-		//			NSLog(@"%@ is a file", item);
+		//			DebugLog(@"%@ is a file", item);
 	}
     
 	return ([path rangeOfString:@".m"].location == NSNotFound) && (ret || isDirectory);

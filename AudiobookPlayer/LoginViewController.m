@@ -46,10 +46,10 @@
 - (IBAction)touchedSkipButton:(id)sender {
 	[PFAnonymousUtils logInWithBlock:^(PFUser * user, NSError * error) {
         if (error) {
-            NSLog(@"Anonymous login failed.");
+            DebugLog(@"Anonymous login failed.");
         }
         else {
-            NSLog(@"Anonymous user logged in.");
+            DebugLog(@"Anonymous user logged in.");
             [self performLoginSegue];
         }
     }];
@@ -58,11 +58,11 @@
 - (IBAction)touchedLoginButton:(id)sender {
 	[PFFacebookUtils logInWithPermissions:@[@"public_profile", @"email", @"user_friends"] block:^(PFUser * user, NSError * error) {
         if (!user) {
-            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            DebugLog(@"Uh oh. The user cancelled the Facebook login.");
         }
         else {
             if (user.isNew) {
-                NSLog(@"User signed up through Facebook!");
+                DebugLog(@"User signed up through Facebook!");
                 [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection * connection, id result, NSError * error) {
                     if (!error) {
                         // Store the current user's Facebook information on the user
@@ -78,7 +78,7 @@
                 [self performLoginSegue];
             }
             
-            NSLog(@"User logged in through Facebook!");
+            DebugLog(@"User logged in through Facebook!");
         }
     }];
 }
