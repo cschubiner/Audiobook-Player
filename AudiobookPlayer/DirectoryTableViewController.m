@@ -71,16 +71,16 @@ bool isLoading = false;
 	isLoading = true;
 	[self.refreshControl beginRefreshing];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
-    if (delegate.managedObjectContext) {
-	[delegate.managedObjectContext performBlock:^{
-        [self reloadFiles];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            isLoading = false;
-            [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
-        });
-    }];
-    }
+	if (delegate.managedObjectContext) {
+		[delegate.managedObjectContext performBlock:^{
+            [self reloadFiles];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                isLoading = false;
+                [self.tableView reloadData];
+                [self.refreshControl endRefreshing];
+            });
+        }];
+	}
 }
 
 -(void)updateColorScheme {
@@ -218,13 +218,20 @@ bool isLoading = false;
 			UIStoryboard * storyboard = [((AudiobookPlayerAppDelegate*)[[UIApplication sharedApplication]delegate])storyboard];
 			AudioViewController * next = [storyboard instantiateViewControllerWithIdentifier:@"audioView"];
 			NSMutableArray * songs = [[NSMutableArray alloc]init];
-			for (NSInteger i = indexPath.row; i < self.files.count; i++) {
+			Song * thisSong;
+			for (NSInteger i = 0; i < self.files.count; i++) {
 				NSString * songPath = [self.files objectAtIndex:i];
-				if (![DirectoryTableViewController isDirectory:songPath])
-					[songs addObject:[Song songWithSongTitle:[DirectoryTableViewController pathNameToSongTitle:songPath]]];
+				if (![DirectoryTableViewController isDirectory:[self.directoryPath stringByAppendingPathComponent:songPath]]) {
+					Song * song = [Song songWithSongTitle:[DirectoryTableViewController pathNameToSongTitle:songPath]];
+					if (i == indexPath.row)
+						thisSong = song;
+					[songs addObject:song];
+				}
 			}
             
+			[next setFirstSongIndex:[songs indexOfObject:thisSong]];
 			[next setSongs:songs];
+            
 			[self.navigationController pushViewController:next animated:YES];
 		}
 	}

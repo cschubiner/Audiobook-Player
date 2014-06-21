@@ -61,7 +61,7 @@
 	//	FolderCellTableViewCell * cell = [[FolderCellTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"FolderCellTableViewCell"];
     
     
-        cell.textLabel.text = @"Getting started...";
+        cell.textLabel.text = @"Getting started";
         [cell setSong:nil];
     
         return cell;

@@ -21,6 +21,8 @@
 - (IBAction)previousSong:(UIButton *)sender;
 - (IBAction)nextSong:(id)sender;
 
+@property (nonatomic) NSUInteger firstSongIndex;
+
 -(Song*)getSong;
 -(void)recordCurrNoSave;
 @end

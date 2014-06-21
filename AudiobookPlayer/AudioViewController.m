@@ -71,7 +71,7 @@ BOOL isSliding;
 
 -(void)viewDidLoad {
 	[super viewDidLoad];
-	self.song = [self.songs objectAtIndex:0];
+	self.song = [self.songs objectAtIndex:self.firstSongIndex];
 	[self configureAudioSession];
 	[self configureAudioPlayer];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
@@ -314,7 +314,7 @@ BOOL canChangePlayingState = true;
 	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
     
 	if (currIndex == self.songs.count - 1) {
-		self.gestureLabel.text = @"No songs in queue";
+		self.gestureLabel.text = @"No more songs";
 		[self flashGestureLabel];
 		return;
 	}
