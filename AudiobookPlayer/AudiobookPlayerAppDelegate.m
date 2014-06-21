@@ -282,23 +282,23 @@ BOOL canSave;
 	//	else DebugLog(@"not saving");
 }
 
--(void)pStore {
-	NSPersistentStoreCoordinator * psc = self.managedObjectContext.persistentStoreCoordinator;
-    
-	NSMutableDictionary * pragmaOptions = [NSMutableDictionary dictionary];
-	[pragmaOptions setObject:@"FULL" forKey:@"synchronous"];
-	[pragmaOptions setObject:@"2" forKey:@"fullfsync"];
-    
-	NSDictionary * storeOptions =
-    [NSDictionary dictionaryWithObject:pragmaOptions forKey:NSSQLitePragmasOption];
-	NSPersistentStore * store;
-	NSError * error = nil;
-	store = [psc addPersistentStoreWithType:NSSQLiteStoreType
-                              configuration:nil
-                                        URL:((NSPersistentStore*)psc.persistentStores[0]).URL
-                                    options:storeOptions
-                                      error:&error];
-}
+//-(void)pStore {
+//	NSPersistentStoreCoordinator * psc = self.managedObjectContext.persistentStoreCoordinator;
+//    
+//	NSMutableDictionary * pragmaOptions = [NSMutableDictionary dictionary];
+//	[pragmaOptions setObject:@"FULL" forKey:@"synchronous"];
+//	[pragmaOptions setObject:@"2" forKey:@"fullfsync"];
+//    
+//	NSDictionary * storeOptions =
+//    [NSDictionary dictionaryWithObject:pragmaOptions forKey:NSSQLitePragmasOption];
+//	NSPersistentStore * store;
+//	NSError * error = nil;
+//	store = [psc addPersistentStoreWithType:NSSQLiteStoreType
+//                              configuration:nil
+//                                        URL:((NSPersistentStore*)psc.persistentStores[0]).URL
+//                                    options:storeOptions
+//                                      error:&error];
+//}
 
 -(void)saveContext {
 	[self saveContextAndForce:NO];

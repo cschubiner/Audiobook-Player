@@ -171,22 +171,34 @@ BOOL canChangePlayingState = true;
 
 
 -(void)recordCurrentPosition {
-    [self recordCurrNoSave];
-	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
+	static double lastPos = -5;
+	if (lastPos == -5 || self.backgroundMusicPlayer.currentTime != lastPos) {
+		[self recordCurrNoSave];
+		[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
+	}
+	else
+		DebugLog(@"not recording");
+    
+	lastPos = self.backgroundMusicPlayer.currentTime;
 }
 
 -(void)recordCurrNoSave {
 	self.song.currentPosition = [NSNumber numberWithDouble:self.backgroundMusicPlayer.currentTime];
-    DebugLog(@"recorded position: %@", self.song.currentPosition);
+	DebugLog(@"recorded position: %@", self.song.currentPosition);
 }
 
 - (void)updateTime:(NSTimer *)timer {
+	DebugLog(@"aa");
 	if (isSliding)
 		return;
     
+	DebugLog(@"ab");
 	self.seekSlider.value = self.backgroundMusicPlayer.currentTime;
+	DebugLog(@"ac");
 	[self updateCurrentTimeLabel];
+	DebugLog(@"ad");
 	[self recordCurrentPosition];
+	DebugLog(@"af");
 }
 
 - (void)tryPlayMusic {

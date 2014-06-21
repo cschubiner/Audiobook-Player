@@ -71,6 +71,7 @@ bool isLoading = false;
 	isLoading = true;
 	[self.refreshControl beginRefreshing];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    if (delegate.managedObjectContext) {
 	[delegate.managedObjectContext performBlock:^{
         [self reloadFiles];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -79,6 +80,7 @@ bool isLoading = false;
             [self.refreshControl endRefreshing];
         });
     }];
+    }
 }
 
 -(void)updateColorScheme {

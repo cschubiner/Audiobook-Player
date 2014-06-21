@@ -25,40 +25,51 @@
 
 
 -(void)updateProgress {
+    DebugLog(@"aaa");
 	if (self.isDirectory && timer) {
 		[timer invalidate];
 		timer = nil;
 	}
+    DebugLog(@"aab");
     
 	if (!self.song) {
 		//		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.2 blue:.2 alpha:.30]];
 		//        [self.progressView setFrame:self.frame];
 		return;
 	}
+    DebugLog(@"aac");
     
 	BOOL isPlaying = self.lastPosition.doubleValue + .000001 < self.song.currentPosition.doubleValue;
 	//	isPlaying = self.song.isLastPlayed.boolValue;
     
+    DebugLog(@"aaf");
 	originalFrame = self.frame;
+    DebugLog(@"aad");
     
 	if (isPlaying)
 		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.7 green:.5 blue:1.0 alpha:.30]];
 	else
 		[self.progressView setBackgroundColor:[UIColor colorWithRed:0.0 green:.5 blue:1.0 alpha:.30]];
+    DebugLog(@"aag");
     
 	if ([self.song.currentPosition isEqualToNumber:[NSNumber numberWithInt:0]]) {
 		[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, 0, self.progressView.frame.size.height)];
+    DebugLog(@"aah");
 	}
 	else if (isPlaying) {
 		double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
 		if (isnan(progress))
 			progress = 0;
+    DebugLog(@"aai");
         
 		[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, originalFrame.size.width * progress, self.progressView.frame.size.height)];
+    DebugLog(@"aaj");
 		self.lastPosition = self.song.currentPosition;
+    DebugLog(@"aak");
 	}
     
 	[self bringSubviewToFront:self.progressView];
+    DebugLog(@"aal");
     
 }
 
