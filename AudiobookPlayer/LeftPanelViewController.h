@@ -9,6 +9,6 @@
 #import "UIViewController+JASidePanel.h"
 #import <UIKit/UIKit.h>
 
-@interface LeftPanelViewController : UITableViewController
+@interface LeftPanelViewController : UITableViewController <UIAlertViewDelegate>
 
 @end

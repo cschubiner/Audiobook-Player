@@ -58,9 +58,9 @@
 {
 	// Return the number of rows in the section.
 	if ([PFUser currentUser] && [[PFUser currentUser] objectForKey:@"name"])
-		return 4;
+		return 5;
     
-	return 3;
+	return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -97,6 +97,9 @@
 		cell.textLabel.text = @"Downloader";
 	}
 	else if (indexPath.row == 3) {
+		cell.textLabel.text = @"Sleep Timer";
+	}
+	else if (indexPath.row == 4) {
 		cell.textLabel.text = [[PFUser currentUser] objectForKey:@"name"];
 	}
     
@@ -104,7 +107,7 @@
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-	return indexPath.row != 3;
+	return indexPath.row != 4;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,16 +133,39 @@
 		return;
 	}
 	else if (indexPath.row == 3) {
-		UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"View profile"
-                                                         message:@"Sorry, the profile viewer is currently unimplemented."
+		UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Sleep Timer"
+                                                         message:@"How many minutes should Audiobook Player wait until pausing the audio?"
                                                         delegate:self
-                                               cancelButtonTitle:@"Dismiss"
-                                               otherButtonTitles:nil];
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:@"Set Timer", nil];
+		alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+		[alert setDelegate:self];
+        
+		alert.tag = 2;
+		UITextField* tf = [alert textFieldAtIndex:0];
+		tf.keyboardType = UIKeyboardTypeNumberPad;
 		[alert show];
 	}
     
 	[standardUserDefaults synchronize];
 	[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (alertView.tag == 2 && buttonIndex == 1) {
+		UITextField * alertTextField = [alertView textFieldAtIndex:0];
+		@try {
+			NSInteger sleepDur = alertTextField.text.integerValue;
+			NSDate * datePlusOneMinute = [[NSDate date] dateByAddingTimeInterval:sleepDur * 60];
+			AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+			[delegate setSleepTimer:datePlusOneMinute];
+		}
+		@catch (NSException * exception) {
+			DebugLog(@"EXCEPTION!!!! sleep timer");
+		}
+		@finally {
+		}
+	}
 }
 
 @end

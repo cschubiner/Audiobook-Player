@@ -19,6 +19,7 @@
 @property (nonatomic, weak) CenterPanelTableViewController * centerPanelController;
 @property (nonatomic, strong) DownloadWebViewController * downloadViewController;
 
+-(void)setSleepTimer:(NSDate*)date;
 -(void)saveContext;
 
 @end

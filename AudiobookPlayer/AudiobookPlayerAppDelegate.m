@@ -140,6 +140,28 @@
 	}
 }
 
+NSDate * sleepDate;
+NSTimer * timer11;
+
+-(void)checkSleepTimer {
+	if (!sleepDate) return;
+    
+	if ([[NSDate date] compare:sleepDate] == NSOrderedDescending) {
+		[timer11 invalidate];
+		timer11 = nil;
+		sleepDate = nil;
+		DebugLog(@"Stopping music because of timer");
+		[self.currentAudioViewController stopAudio:nil];
+	}
+}
+
+-(void)setSleepTimer:(NSDate *)date {
+	sleepDate = date;
+	if (!timer11) {
+		timer11 = [NSTimer scheduledTimerWithTimeInterval:6.0 target:self selector:@selector(checkSleepTimer) userInfo:nil repeats:YES];
+	}
+}
+
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	if (url != nil && [url isFileURL]) {
@@ -205,6 +227,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [self checkSleepTimer];
 	[PFPush handlePush:userInfo];
     
 	if (application.applicationState == UIApplicationStateInactive) {
@@ -274,7 +297,7 @@ BOOL canSave;
 			context = context.parentContext;
 		}
         
-        //		[self pStore];
+		//		[self pStore];
 		DebugLog(@"successful save!");
 		canSave = false;
 	}
@@ -284,11 +307,11 @@ BOOL canSave;
 
 //-(void)pStore {
 //	NSPersistentStoreCoordinator * psc = self.managedObjectContext.persistentStoreCoordinator;
-//    
+//
 //	NSMutableDictionary * pragmaOptions = [NSMutableDictionary dictionary];
 //	[pragmaOptions setObject:@"FULL" forKey:@"synchronous"];
 //	[pragmaOptions setObject:@"2" forKey:@"fullfsync"];
-//    
+//
 //	NSDictionary * storeOptions =
 //    [NSDictionary dictionaryWithObject:pragmaOptions forKey:NSSQLitePragmasOption];
 //	NSPersistentStore * store;
@@ -306,6 +329,7 @@ BOOL canSave;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
+    [self checkSleepTimer];
 	[self saveContextAndForce:YES];
 	completionHandler(UIBackgroundFetchResultNoData);
 }
