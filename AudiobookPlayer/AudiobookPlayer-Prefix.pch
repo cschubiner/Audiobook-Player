@@ -22,7 +22,7 @@
 #endif
 
 #ifdef DEBUG
-#define DebugLog(...) NGLog(__VA_ARGS__)
+#define DebugLog(...) NSLog(__VA_ARGS__)
 #else
 #define DebugLog(...) { }
 #endif
