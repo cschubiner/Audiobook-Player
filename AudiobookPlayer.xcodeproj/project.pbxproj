@@ -17,8 +17,6 @@
 		09ABC07413A1D52D009C3FCF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABC07313A1D52D009C3FCF /* Foundation.framework */; };
 		09BEF34C13D51C3F001BBCDB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BEF34B13D51C3F001BBCDB /* Security.framework */; };
 		0C029E93193814C000EB961B /* LeftPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029E92193814C000EB961B /* LeftPanelViewController.m */; };
-		0C029EC51938153400EB961B /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029EC21938153400EB961B /* JASidePanelController.m */; };
-		0C029EC61938153400EB961B /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029EC41938153400EB961B /* UIViewController+JASidePanel.m */; };
 		0C029ECD19381A9B00EB961B /* CenterPanelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */; };
 		0C029ED019382B8B00EB961B /* DirectoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ECF19382B8B00EB961B /* DirectoryTableViewController.m */; };
 		0C029ED31938512F00EB961B /* ProgressCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C029ED21938512F00EB961B /* ProgressCellTableViewCell.m */; };
@@ -28,6 +26,8 @@
 		0C029EDC1938A1EE00EB961B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C029EDB1938A1EE00EB961B /* MediaPlayer.framework */; };
 		0C0CD9C91942E9AD0086BBE2 /* backgroundLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C0CD9C81942E9AD0086BBE2 /* backgroundLogin.png */; };
 		0C4E446A1942906A00EC4C71 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4E44691942906A00EC4C71 /* Song.m */; };
+		0C67489C195687BE0019C518 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C674899195687BE0019C518 /* JASidePanelController.m */; };
+		0C67489D195687BE0019C518 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67489B195687BE0019C518 /* UIViewController+JASidePanel.m */; };
 		0CB642D81942DF2D0032D616 /* UINavigationController+rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */; };
 		0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */; };
 		0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A551935B01200C5C411 /* Default-568h@2x.png */; };
@@ -80,10 +80,6 @@
 		09BEF34B13D51C3F001BBCDB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0C029E91193814C000EB961B /* LeftPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftPanelViewController.h; sourceTree = "<group>"; };
 		0C029E92193814C000EB961B /* LeftPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftPanelViewController.m; sourceTree = "<group>"; };
-		0C029EC11938153400EB961B /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JASidePanelController.h; path = JASidePanels/JASidePanels/Source/JASidePanelController.h; sourceTree = "<group>"; };
-		0C029EC21938153400EB961B /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JASidePanelController.m; path = JASidePanels/JASidePanels/Source/JASidePanelController.m; sourceTree = "<group>"; };
-		0C029EC31938153400EB961B /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+JASidePanel.h"; path = "JASidePanels/JASidePanels/Source/UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
-		0C029EC41938153400EB961B /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+JASidePanel.m"; path = "JASidePanels/JASidePanels/Source/UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		0C029ECB19381A9B00EB961B /* CenterPanelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterPanelTableViewController.h; sourceTree = "<group>"; };
 		0C029ECC19381A9B00EB961B /* CenterPanelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterPanelTableViewController.m; sourceTree = "<group>"; };
 		0C029ECE19382B8B00EB961B /* DirectoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryTableViewController.h; sourceTree = "<group>"; };
@@ -98,6 +94,10 @@
 		0C0CD9C81942E9AD0086BBE2 /* backgroundLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundLogin.png; sourceTree = "<group>"; };
 		0C4E44681942906A00EC4C71 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		0C4E44691942906A00EC4C71 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		0C674898195687BE0019C518 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
+		0C674899195687BE0019C518 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
+		0C67489A195687BE0019C518 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
+		0C67489B195687BE0019C518 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		0CB642D61942DF2D0032D616 /* UINavigationController+rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+rotation.h"; sourceTree = "<group>"; };
 		0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+rotation.m"; sourceTree = "<group>"; };
 		0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AudiobookPlayer-Info.plist"; sourceTree = "<group>"; };
@@ -236,10 +236,10 @@
 		0C029EC71938153700EB961B /* JASidePanelController */ = {
 			isa = PBXGroup;
 			children = (
-				0C029EC11938153400EB961B /* JASidePanelController.h */,
-				0C029EC21938153400EB961B /* JASidePanelController.m */,
-				0C029EC31938153400EB961B /* UIViewController+JASidePanel.h */,
-				0C029EC41938153400EB961B /* UIViewController+JASidePanel.m */,
+				0C674898195687BE0019C518 /* JASidePanelController.h */,
+				0C674899195687BE0019C518 /* JASidePanelController.m */,
+				0C67489A195687BE0019C518 /* UIViewController+JASidePanel.h */,
+				0C67489B195687BE0019C518 /* UIViewController+JASidePanel.m */,
 			);
 			name = JASidePanelController;
 			path = ..;
@@ -519,7 +519,6 @@
 				0CEA204E19418ED600A833D8 /* SongDatabase.m in Sources */,
 				0CE27A6A1935B01200C5C411 /* main.m in Sources */,
 				0CF72C361942C64000469DD0 /* SVWebViewControllerActivityChrome.m in Sources */,
-				0C029EC51938153400EB961B /* JASidePanelController.m in Sources */,
 				0C029ED31938512F00EB961B /* ProgressCellTableViewCell.m in Sources */,
 				0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */,
 				0CF72C3C1942C64000469DD0 /* SVWebViewControllerActivity.m in Sources */,
@@ -531,9 +530,10 @@
 				0CB642D81942DF2D0032D616 /* UINavigationController+rotation.m in Sources */,
 				0C029ECD19381A9B00EB961B /* CenterPanelTableViewController.m in Sources */,
 				0CF72BE71942BF1200469DD0 /* DownloadWebViewController.m in Sources */,
+				0C67489C195687BE0019C518 /* JASidePanelController.m in Sources */,
+				0C67489D195687BE0019C518 /* UIViewController+JASidePanel.m in Sources */,
 				0C029ED6193860FA00EB961B /* AudioViewController.m in Sources */,
 				0CF72C3A1942C64000469DD0 /* SVWebViewControllerActivitySafari.m in Sources */,
-				0C029EC61938153400EB961B /* UIViewController+JASidePanel.m in Sources */,
 				0CEA204B19418E7400A833D8 /* Song+Create.m in Sources */,
 				0CF72C331942C64000469DD0 /* SVWebViewController.m in Sources */,
 				0CEA204419418D1500A833D8 /* Model.xcdatamodeld in Sources */,
