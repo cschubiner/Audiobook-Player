@@ -30,9 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView * backgroundImageView;
 
 #define PI 3.1415926535897932384626
-@property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
-@property (weak, nonatomic) IBOutlet UIButton *prevButton;
+@property (weak, nonatomic) IBOutlet UIButton * playButton;
+@property (weak, nonatomic) IBOutlet UIButton * nextButton;
+@property (weak, nonatomic) IBOutlet UIButton * prevButton;
 
 @end
 
@@ -80,15 +80,15 @@ BOOL isSliding;
 	NSInteger colorScheme = [standardUserDefaults integerForKey:@"colorScheme"];
 	if (colorScheme == 0) {
 		self.backgroundImageView.image = [UIImage imageNamed:@"backgroundspace.png"];
-        self.currentTimeLabel.textColor = [UIColor whiteColor];
-        self.durationLabel.textColor = [UIColor whiteColor];
-        [self.playButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.prevButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
+		self.currentTimeLabel.textColor = [UIColor whiteColor];
+		self.durationLabel.textColor = [UIColor whiteColor];
+		[self.playButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+		[self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+		[self.prevButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	}
 	else {
 		self.backgroundImageView.image = [UIImage imageNamed:@"backgroundLogin.png"];
-    }
+	}
     
 	[self configureAudioSession];
 	[self configureAudioPlayer];

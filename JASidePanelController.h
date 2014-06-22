@@ -26,14 +26,14 @@
 #import <UIKit/UIKit.h>
 
 typedef enum _JASidePanelStyle {
-    JASidePanelSingleActive = 0,
-    JASidePanelMultipleActive
+	JASidePanelSingleActive = 0,
+	JASidePanelMultipleActive
 } JASidePanelStyle;
 
 typedef enum _JASidePanelState {
-    JASidePanelCenterVisible = 1,
-    JASidePanelLeftVisible,
-    JASidePanelRightVisible
+	JASidePanelCenterVisible = 1,
+	JASidePanelLeftVisible,
+	JASidePanelRightVisible
 } JASidePanelState;
 
 @interface JASidePanelController : UIViewController<UIGestureRecognizerDelegate>
@@ -41,9 +41,9 @@ typedef enum _JASidePanelState {
 #pragma mark - Usage
 
 // set the panels
-@property (nonatomic, strong) UIViewController *leftPanel;   // optional
-@property (nonatomic, strong) UIViewController *centerPanel; // required
-@property (nonatomic, strong) UIViewController *rightPanel;  // optional
+@property (nonatomic, strong) UIViewController * leftPanel;   // optional
+@property (nonatomic, strong) UIViewController * centerPanel; // required
+@property (nonatomic, strong) UIViewController * rightPanel;  // optional
 
 // show the panels
 - (void)showLeftPanel:(BOOL)animated __attribute__((deprecated("Use -showLeftPanelAnimated: instead")));
@@ -60,7 +60,7 @@ typedef enum _JASidePanelState {
 - (void)toggleRightPanel:(id)sender;
 
 // Calling this while the left or right panel is visible causes the center panel to be completely hidden
-- (void)setCenterPanelHidden:(BOOL)centerPanelHidden animated:(BOOL)animated duration:(NSTimeInterval) duration;
+- (void)setCenterPanelHidden:(BOOL)centerPanelHidden animated:(BOOL)animated duration:(NSTimeInterval)duration;
 
 #pragma mark - Look & Feel
 
@@ -71,7 +71,7 @@ typedef enum _JASidePanelState {
 @property (nonatomic, assign) BOOL pushesSidePanels;
 
 // size the left panel based on % of total screen width
-@property (nonatomic) CGFloat leftGapPercentage; 
+@property (nonatomic) CGFloat leftGapPercentage;
 
 // size the left panel based on this fixed size. overrides leftGapPercentage
 @property (nonatomic) CGFloat leftFixedWidth;
@@ -142,7 +142,7 @@ typedef enum _JASidePanelState {
 @property (nonatomic, assign) BOOL centerPanelHidden;
 
 // The currently visible panel
-@property (nonatomic, weak, readonly) UIViewController *visiblePanel;
+@property (nonatomic, weak, readonly) UIViewController * visiblePanel;
 
 // If set to yes, "shouldAutorotateToInterfaceOrientation:" will be passed to self.visiblePanel instead of handled directly
 @property (nonatomic, assign) BOOL shouldDelegateAutorotateToVisiblePanel; // defaults to YES
@@ -164,8 +164,8 @@ typedef enum _JASidePanelState {
 @property (nonatomic, assign) BOOL allowRightSwipe; // defaults to YES
 
 // Containers for the panels.
-@property (nonatomic, strong, readonly) UIView *leftPanelContainer;
-@property (nonatomic, strong, readonly) UIView *rightPanelContainer;
-@property (nonatomic, strong, readonly) UIView *centerPanelContainer;
+@property (nonatomic, strong, readonly) UIView * leftPanelContainer;
+@property (nonatomic, strong, readonly) UIView * rightPanelContainer;
+@property (nonatomic, strong, readonly) UIView * centerPanelContainer;
 
 @end
