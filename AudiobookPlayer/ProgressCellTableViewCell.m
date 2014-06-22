@@ -5,7 +5,8 @@
 //  Created by Clay Schubiner on 5/29/14.
 //
 //
-
+#import "AudioViewController.h"
+#import "PanelsViewController.h"
 #import "ProgressCellTableViewCell.h"
 
 @interface ProgressCellTableViewCell ()
@@ -23,6 +24,27 @@
 	}
 }
 
+- (UIViewController*)topViewController {
+	return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
+	if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+		UITabBarController* tabBarController = (UITabBarController*)rootViewController;
+		return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+	}
+	else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+		UINavigationController* navigationController = (UINavigationController*)rootViewController;
+		return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
+	}
+	else if (rootViewController.presentedViewController) {
+		UIViewController* presentedViewController = rootViewController.presentedViewController;
+		return [self topViewControllerWithRootViewController:presentedViewController];
+	}
+	else {
+		return rootViewController;
+	}
+}
 
 -(void)updateProgress {
 	DebugLog(@"aaa");
@@ -30,6 +52,12 @@
 		[timer invalidate];
 		timer = nil;
 	}
+    
+	UIViewController * tvc = [self topViewController];
+	if (tvc.class == [PanelsViewController class] &&
+        [((UINavigationController*)((PanelsViewController*)tvc).centerPanel).visibleViewController class] == [AudioViewController class]
+	    )
+		return;
     
 	DebugLog(@"aab");
     

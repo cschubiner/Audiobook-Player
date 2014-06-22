@@ -59,6 +59,7 @@
 	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
 	NSTimer * timer;
 	timer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(enableSave2) userInfo:nil repeats:YES];
+    //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
 	[self setupAudioSession];
 	[self setupDB];
@@ -144,15 +145,21 @@ NSDate * sleepDate;
 NSTimer * timer11;
 
 -(void)checkSleepTimer {
+	DebugLog(@"aaaa");
 	if (!sleepDate) return;
     
 	if ([[NSDate date] compare:sleepDate] == NSOrderedDescending) {
+		DebugLog(@"aaab");
 		[timer11 invalidate];
 		timer11 = nil;
+		DebugLog(@"aaac");
 		sleepDate = nil;
 		DebugLog(@"Stopping music because of timer");
 		[self.currentAudioViewController stopAudio:nil];
+		DebugLog(@"aaad");
 	}
+    
+	DebugLog(@"aaae");
 }
 
 -(void)setSleepTimer:(NSDate *)date {
@@ -253,7 +260,9 @@ NSTimer * timer11;
 BOOL canSave;
 
 -(void)enableSave2 {
+	DebugLog(@"aaaaa");
 	canSave = true;
+	DebugLog(@"aaaab");
 }
 
 
@@ -280,7 +289,7 @@ BOOL canSave;
 		BOOL success = [context save:&error];
 		if (error || !success) {
 			DebugLog(@"success: %@ - error: %@", success ? @"true" : @"false", error);
-			abort();
+            //			abort();
 		}
         
 		[context performSelectorOnMainThread:@selector(save:) withObject:nil waitUntilDone:YES];
