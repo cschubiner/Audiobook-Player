@@ -172,7 +172,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundLogin.png" translatesAutoresizingMaskIntoConstraints="NO" id="kuo-Xk-Iyd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kuo-Xk-Iyd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -324,9 +324,13 @@
                     <navigationItem key="navigationItem" id="Wlx-Sg-312"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="backgroundImageView" destination="kuo-Xk-Iyd" id="qNf-ih-pZK"/>
                         <outlet property="currentTimeLabel" destination="tag-bG-BY4" id="Tu6-dT-PMS"/>
                         <outlet property="durationLabel" destination="DxP-gh-ggr" id="fJN-J6-Ntc"/>
                         <outlet property="gestureLabel" destination="doc-Rl-iER" id="a6O-6B-d0N"/>
+                        <outlet property="nextButton" destination="F5s-7g-p5h" id="OzQ-WF-3Hc"/>
+                        <outlet property="playButton" destination="Oo7-rw-3ym" id="C7w-Bz-H3v"/>
+                        <outlet property="prevButton" destination="ihc-uC-krj" id="EJe-Xq-hl3"/>
                         <outlet property="seekSlider" destination="WsN-3d-tyB" id="MQa-vA-yh9"/>
                     </connections>
                 </viewController>

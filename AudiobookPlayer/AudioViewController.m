@@ -27,8 +27,12 @@
 @property (weak, nonatomic) IBOutlet UILabel * currentTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel * durationLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView * backgroundImageView;
 
 #define PI 3.1415926535897932384626
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *prevButton;
 
 @end
 
@@ -72,6 +76,20 @@ BOOL isSliding;
 -(void)viewDidLoad {
 	[super viewDidLoad];
 	self.song = [self.songs objectAtIndex:self.firstSongIndex];
+	NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
+	NSInteger colorScheme = [standardUserDefaults integerForKey:@"colorScheme"];
+	if (colorScheme == 0) {
+		self.backgroundImageView.image = [UIImage imageNamed:@"backgroundspace.png"];
+        self.currentTimeLabel.textColor = [UIColor whiteColor];
+        self.durationLabel.textColor = [UIColor whiteColor];
+        [self.playButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.prevButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+	else {
+		self.backgroundImageView.image = [UIImage imageNamed:@"backgroundLogin.png"];
+    }
+    
 	[self configureAudioSession];
 	[self configureAudioPlayer];
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
@@ -206,7 +224,7 @@ BOOL canChangePlayingState = true;
 		return;
 	}
     
-    //	BOOL playSuccess =
+	//	BOOL playSuccess =
 	[self.backgroundMusicPlayer play];
 	self.backgroundMusicPlaying = YES;
     
@@ -257,7 +275,7 @@ BOOL canChangePlayingState = true;
     
 	self.backgroundMusicPlayer.delegate = self;
 	self.backgroundMusicPlayer.numberOfLoops = 0;
-    //	BOOL loadSuccess =
+	//	BOOL loadSuccess =
 	[self.backgroundMusicPlayer prepareToPlay];
 }
 

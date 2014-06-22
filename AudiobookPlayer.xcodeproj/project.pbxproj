@@ -28,6 +28,7 @@
 		0C4E446A1942906A00EC4C71 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4E44691942906A00EC4C71 /* Song.m */; };
 		0C67489C195687BE0019C518 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C674899195687BE0019C518 /* JASidePanelController.m */; };
 		0C67489D195687BE0019C518 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67489B195687BE0019C518 /* UIViewController+JASidePanel.m */; };
+		0C6748A119568AB20019C518 /* backgroundspace.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6748A019568AB20019C518 /* backgroundspace.png */; };
 		0CB642D81942DF2D0032D616 /* UINavigationController+rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */; };
 		0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27A541935B01200C5C411 /* AudiobookPlayerAppDelegate.m */; };
 		0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE27A551935B01200C5C411 /* Default-568h@2x.png */; };
@@ -98,6 +99,7 @@
 		0C674899195687BE0019C518 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
 		0C67489A195687BE0019C518 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
 		0C67489B195687BE0019C518 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
+		0C6748A019568AB20019C518 /* backgroundspace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundspace.png; sourceTree = "<group>"; };
 		0CB642D61942DF2D0032D616 /* UINavigationController+rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+rotation.h"; sourceTree = "<group>"; };
 		0CB642D71942DF2D0032D616 /* UINavigationController+rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+rotation.m"; sourceTree = "<group>"; };
 		0CE27A511935B01200C5C411 /* AudiobookPlayer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AudiobookPlayer-Info.plist"; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		0C4191331943C3CD00AF020D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0C6748A019568AB20019C518 /* backgroundspace.png */,
 				0C0CD9C81942E9AD0086BBE2 /* backgroundLogin.png */,
 				0CF72BE01942A02B00469DD0 /* Media.xcassets */,
 			);
@@ -464,6 +467,7 @@
 				0C0CD9C91942E9AD0086BBE2 /* backgroundLogin.png in Resources */,
 				0CE27A681935B01200C5C411 /* iPhoneStoryboard.storyboard in Resources */,
 				0CE27A641935B01200C5C411 /* Default.png in Resources */,
+				0C6748A119568AB20019C518 /* backgroundspace.png in Resources */,
 				0CE27A631935B01200C5C411 /* Default-568h@2x.png in Resources */,
 				0CF72C341942C64000469DD0 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
 				0CF72C381942C64000469DD0 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,

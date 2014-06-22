@@ -119,12 +119,12 @@
 	else if (indexPath.row == 1) {
 		NSInteger colorScheme = [standardUserDefaults integerForKey:@"colorScheme"];
 		[standardUserDefaults setInteger:1 - colorScheme forKey:@"colorScheme"];
-		UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Color scheme saved"
-                                                         message:@"The color scheme will enable next time you start the app."
-                                                        delegate:self
-                                               cancelButtonTitle:@"Dismiss"
-                                               otherButtonTitles:nil];
-		[alert show];
+//		UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Color scheme saved"
+//                                                         message:@"The color scheme will enable next time you start the app."
+//                                                        delegate:self
+//                                               cancelButtonTitle:@"Dismiss"
+//                                               otherButtonTitles:nil];
+//		[alert show];
 	}
 	else if (indexPath.row == 2) {
 		AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
