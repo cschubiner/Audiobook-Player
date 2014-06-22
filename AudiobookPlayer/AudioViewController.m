@@ -206,6 +206,7 @@ BOOL canChangePlayingState = true;
 		return;
 	}
     
+    //	BOOL playSuccess =
 	[self.backgroundMusicPlayer play];
 	self.backgroundMusicPlaying = YES;
     
@@ -251,9 +252,12 @@ BOOL canChangePlayingState = true;
 
 - (void)configureAudioPlayer {
 	NSURL * backgroundMusicURL = [NSURL fileURLWithPath:self.song.path];
-	self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:nil];
+	NSError * error;
+	self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+    
 	self.backgroundMusicPlayer.delegate = self;
 	self.backgroundMusicPlayer.numberOfLoops = 0;
+    //	BOOL loadSuccess =
 	[self.backgroundMusicPlayer prepareToPlay];
 }
 

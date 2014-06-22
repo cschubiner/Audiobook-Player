@@ -227,7 +227,7 @@ NSTimer * timer11;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [self checkSleepTimer];
+	[self checkSleepTimer];
 	[PFPush handlePush:userInfo];
     
 	if (application.applicationState == UIApplicationStateInactive) {
@@ -329,7 +329,7 @@ BOOL canSave;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    [self checkSleepTimer];
+	[self checkSleepTimer];
 	[self saveContextAndForce:YES];
 	completionHandler(UIBackgroundFetchResultNoData);
 }

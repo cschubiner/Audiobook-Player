@@ -35,7 +35,15 @@
 
 -(NSNumber *)getDurationOfFilePath:(NSString*)pathName {
 	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
-	return [NSNumber numberWithFloat:[[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:fullPath] error:nil].duration];
+    
+	NSURL * afUrl = [NSURL fileURLWithPath:fullPath];
+	AudioFileID fileID;
+	OSStatus result = AudioFileOpenURL((__bridge CFURLRef)afUrl, kAudioFileReadPermission, 0, &fileID);
+	Float64 outDataSize = 0;
+	UInt32 thePropSize = sizeof(Float64);
+	result = AudioFileGetProperty(fileID, kAudioFilePropertyEstimatedDuration, &thePropSize, &outDataSize);
+	AudioFileClose(fileID);
+	return [NSNumber numberWithInt:result];
 }
 
 -(void)reloadFiles {
@@ -53,8 +61,8 @@
 			NSDictionary * dict = @{ SONG_TITLE : [DirectoryTableViewController pathNameToSongTitle:pathName], SONG_DURATION : [self getDurationOfFilePath:pathName],
                                      SONG_PATH : fullPath};
 			Song * song = [Song songWithSongInfo:dict];
-			if (!song.path)
-				song.path = [dict valueForKeyPath:SONG_PATH];
+			//			if (!song.path)
+			song.path = [dict valueForKeyPath:SONG_PATH];
             
 		}
 	}
@@ -225,6 +233,7 @@ bool isLoading = false;
 					Song * song = [Song songWithSongTitle:[DirectoryTableViewController pathNameToSongTitle:songPath]];
 					if (i == indexPath.row)
 						thisSong = song;
+                    
 					[songs addObject:song];
 				}
 			}
