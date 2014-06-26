@@ -138,13 +138,25 @@ BOOL canChangePlayingState = true;
 	self.currentTimeLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.seekSlider.value / 60), ((int)self.seekSlider.value % 60)];
 }
 
+double skipToTime = -1;
+
 - (void)skipWithDuration:(CGFloat)skipDuration {
 	[self.gestureLabel setText:[NSString stringWithFormat:@"%@ %d secs", skipDuration >= 0 ? @"Jumping" :@"Reversing", abs((int)skipDuration)]];
 	[self flashGestureLabel];
-	self.backgroundMusicPlayer.currentTime += skipDuration;
-	self.seekSlider.value += skipDuration;
-	[self updateCurrentTimeLabel];
-	[self recordCurrentPosition];
+    double newTime = self.backgroundMusicPlayer.currentTime + skipDuration;
+    if (newTime > self.backgroundMusicPlayer.duration) {
+        skipToTime = newTime - self.backgroundMusicPlayer.duration;
+        self.backgroundMusicPlayer.currentTime += skipDuration;
+    	[self recordCurrentPosition];
+        [self nextSong:nil];
+    }
+    else {
+        skipToTime = -1;
+    	self.backgroundMusicPlayer.currentTime += skipDuration;
+    	self.seekSlider.value += skipDuration;
+    	[self updateCurrentTimeLabel];
+    	[self recordCurrentPosition];
+    }
 }
 
 - (IBAction)didPan:(UIPanGestureRecognizer *)sender {
@@ -343,10 +355,15 @@ BOOL canChangePlayingState = true;
     
 	[self stopAudio:nil];
 	self.song = [self.songs objectAtIndex:(currIndex + 1) % self.songs.count];
+    if (skipToTime != -1) {
+        self.song.currentPosition = [NSNumber numberWithDouble:skipToTime];
+    }
 	[self configureAudioPlayer];
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
 	[self tryPlayMusic];
 }
+
+
 
 - (IBAction)previousSong:(UIButton *)sender {
 	NSUInteger currIndex = [self.songs indexOfObject:self.song];
