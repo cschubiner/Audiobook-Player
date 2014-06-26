@@ -373,6 +373,7 @@ bool shouldSkipCrossTrack;
 	[self tryPlayMusic];
 }
 
+// TODO: add left panel setting for skipping/seeking across tracks
 
 
 - (IBAction)previousSong:(UIButton *)sender {
