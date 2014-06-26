@@ -139,19 +139,28 @@ BOOL canChangePlayingState = true;
 }
 
 double skipToTime = -1;
+bool shouldSkipCrossTrack;
 
 - (void)skipWithDuration:(CGFloat)skipDuration {
 	[self.gestureLabel setText:[NSString stringWithFormat:@"%@ %d secs", skipDuration >= 0 ? @"Jumping" :@"Reversing", abs((int)skipDuration)]];
 	[self flashGestureLabel];
+    shouldSkipCrossTrack = false;
     double newTime = self.backgroundMusicPlayer.currentTime + skipDuration;
     if (newTime > self.backgroundMusicPlayer.duration) {
+        shouldSkipCrossTrack = true;
         skipToTime = newTime - self.backgroundMusicPlayer.duration;
         self.backgroundMusicPlayer.currentTime += skipDuration;
     	[self recordCurrentPosition];
         [self nextSong:nil];
     }
+    else if (newTime < 0) {
+        shouldSkipCrossTrack = true;
+        skipToTime = newTime;
+        self.backgroundMusicPlayer.currentTime += skipDuration;
+    	[self recordCurrentPosition];
+        [self previousSong:nil];
+    }
     else {
-        skipToTime = -1;
     	self.backgroundMusicPlayer.currentTime += skipDuration;
     	self.seekSlider.value += skipDuration;
     	[self updateCurrentTimeLabel];
@@ -355,9 +364,10 @@ double skipToTime = -1;
     
 	[self stopAudio:nil];
 	self.song = [self.songs objectAtIndex:(currIndex + 1) % self.songs.count];
-    if (skipToTime != -1) {
+    if (shouldSkipCrossTrack) {
         self.song.currentPosition = [NSNumber numberWithDouble:skipToTime];
     }
+    
 	[self configureAudioPlayer];
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
 	[self tryPlayMusic];
@@ -376,6 +386,10 @@ double skipToTime = -1;
 	[self stopAudio:nil];
 	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
 	self.song = [self.songs objectAtIndex:(currIndex - 1) % self.songs.count];
+    if (shouldSkipCrossTrack) {
+        self.song.currentPosition = [NSNumber numberWithDouble:self.song.duration.doubleValue + skipToTime];
+    }
+    
 	[self configureAudioPlayer];
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
 	[self tryPlayMusic];
