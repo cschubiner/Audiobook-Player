@@ -10,7 +10,7 @@
 
 @interface AudioToolbar : NSObject
 
--(AudioToolbar*)initWithViewController:(UIViewController*)vc;
+-(AudioToolbar *)initWithViewController:(UIViewController *)vc andTransparency:(CGFloat)transparency;
 -(void)correctPlayPause;
 
 @end

@@ -85,12 +85,14 @@
 		song = [NSEntityDescription insertNewObjectForEntityForName:@"Song"
                                              inManagedObjectContext:context];
 		song.title = [songDictionary valueForKeyPath:SONG_TITLE];
-		song.duration = [songDictionary valueForKeyPath:SONG_DURATION];
-		song.path = [songDictionary valueForKeyPath:SONG_PATH];
 	}
 	else {
 		song = [matches firstObject];
 	}
+    if (song) {
+		song.duration = [songDictionary valueForKeyPath:SONG_DURATION];
+		song.path = [songDictionary valueForKeyPath:SONG_PATH];
+    }
     
 	return song;
 }

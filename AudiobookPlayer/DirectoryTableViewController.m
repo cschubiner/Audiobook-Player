@@ -119,7 +119,7 @@ bool isLoading = false;
 {
 	[self.tableView registerClass:[ProgressCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
  
-    self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self];
+    self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self andTransparency:.9];
     
 	[super viewDidLoad];
 	[self updateColorScheme];

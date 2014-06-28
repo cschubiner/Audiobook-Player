@@ -112,7 +112,7 @@ BOOL isSliding;
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
 	[self setupSlider];
 	[self tryPlayMusic];
-    self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self];
+    self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self andTransparency:.735];
 }
 
 
