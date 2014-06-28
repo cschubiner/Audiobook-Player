@@ -21,6 +21,10 @@
 - (IBAction)previousSong:(UIButton *)sender;
 - (IBAction)nextSong:(id)sender;
 
+- (void)skipWithDuration:(CGFloat)skipDuration;
+
+-(BOOL)audioIsPlaying;
+
 @property (nonatomic) NSUInteger firstSongIndex;
 
 -(Song*)getSong;

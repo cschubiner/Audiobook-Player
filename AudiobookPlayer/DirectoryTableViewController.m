@@ -23,7 +23,35 @@
 
 @implementation DirectoryTableViewController
 
+-(void)playPauseAudio:(id)sender {
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    [delegate.currentAudioViewController playPauseAudio:nil];
+    
+    
+    NSMutableArray * items = [[NSMutableArray alloc] initWithArray:self.toolbarItems];
+    items[4] = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:[delegate.currentAudioViewController audioIsPlaying] ? UIBarButtonSystemItemPause : UIBarButtonSystemItemPlay target:self action:@selector(playPauseAudio:)];
+    self.toolbarItems = items;
+}
 
+-(void)nextTrack:(id)sender {
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    [delegate.currentAudioViewController nextSong:nil];
+}
+
+-(void)prevTrack:(id)sender {
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    [delegate.currentAudioViewController previousSong:nil];
+}
+
+-(void)skipForwards:(id)sender {
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    [delegate.currentAudioViewController skipWithDuration:10];
+}
+
+-(void)skipBackwards:(id)sender {
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+    [delegate.currentAudioViewController skipWithDuration:-10];
+}
 
 - (IBAction)didPullDownRefreshControl:(id)sender {
 	[self refreshTableView];
@@ -113,6 +141,28 @@ bool isLoading = false;
 - (void)viewDidLoad
 {
 	[self.tableView registerClass:[ProgressCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
+ 
+    self.toolbarItems = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc] initWithTitle:@"Prev." style:UIBarButtonItemStylePlain target:self action:@selector(prevTrack:)],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind
+                                                                         target:self
+                                                                         action:@selector(skipBackwards:)],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                                                                         target:self
+                                                                         action:@selector(playPauseAudio:)],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+                                                                         target:self
+                                                                         action:@selector(skipForwards:)],
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(nextTrack:)],
+                           nil];
+    
+    self.navigationController.toolbarHidden = NO;
+
+    
 	[super viewDidLoad];
 	[self updateColorScheme];
 	[self refreshTableView];

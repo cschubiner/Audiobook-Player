@@ -322,6 +322,10 @@ bool shouldSkipCrossTrack;
 	[self flashGestureLabelWithDuration:.4];
 }
 
+-(BOOL)audioIsPlaying {
+    return self.backgroundMusicPlayer.isPlaying;
+}
+
 -(void)flashGestureLabelWithDuration:(float)duration {
 	[self.gestureLabel setAlpha:0];
 	[UIView animateWithDuration:.4 animations:^{
