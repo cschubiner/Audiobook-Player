@@ -90,7 +90,8 @@
 		song = [matches firstObject];
 	}
     if (song) {
-		song.duration = [songDictionary valueForKeyPath:SONG_DURATION];
+        if ([songDictionary valueForKeyPath:SONG_DURATION])
+            song.duration =  [songDictionary valueForKeyPath:SONG_DURATION];
 		song.path = [songDictionary valueForKeyPath:SONG_PATH];
     }
     
