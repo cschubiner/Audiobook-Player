@@ -142,6 +142,7 @@ bool isLoading = false;
 {
 	[self.tableView registerClass:[ProgressCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
  
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
     self.toolbarItems = [NSArray arrayWithObjects:
                            [[UIBarButtonItem alloc] initWithTitle:@"Prev." style:UIBarButtonItemStylePlain target:self action:@selector(prevTrack:)],
                            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
@@ -149,7 +150,7 @@ bool isLoading = false;
                                                                          target:self
                                                                          action:@selector(skipBackwards:)],
                            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:[delegate.currentAudioViewController audioIsPlaying] ? UIBarButtonSystemItemPause : UIBarButtonSystemItemPlay
                                                                          target:self
                                                                          action:@selector(playPauseAudio:)],
                            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
@@ -161,7 +162,6 @@ bool isLoading = false;
                            nil];
     
     self.navigationController.toolbarHidden = NO;
-
     
 	[super viewDidLoad];
 	[self updateColorScheme];

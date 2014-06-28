@@ -69,7 +69,7 @@
     
 	DebugLog(@"aac");
     
-	BOOL isPlaying = self.lastPosition.doubleValue + .000001 < self.song.currentPosition.doubleValue;
+	BOOL isPlaying = self.lastPosition.doubleValue + .000001 < self.song.currentPosition.doubleValue || self.song.isLastPlayed.boolValue;
 	//	isPlaying = self.song.isLastPlayed.boolValue;
     
 	DebugLog(@"aaf");

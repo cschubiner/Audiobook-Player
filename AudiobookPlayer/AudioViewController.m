@@ -341,11 +341,13 @@ bool shouldSkipCrossTrack;
 	if (self.backgroundMusicPlaying) {
 		[self stopAudio:nil];
 		[self.gestureLabel setText:@"Pause"];
+        [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
 	}
 	else
 	{
 		[self playAudio:nil];
 		[self.gestureLabel setText:@"Play"];
+        [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
 	}
     
 	[self flashGestureLabel];
