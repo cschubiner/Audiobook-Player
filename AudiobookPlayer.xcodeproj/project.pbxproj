@@ -65,6 +65,7 @@
 		2FCDD6B014A573F500295AAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCDD6AF14A573F500295AAC /* QuartzCore.framework */; };
 		5DD0FC4F489F46089224B4D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADFCB70F35384ED48E94A608 /* libPods.a */; };
 		743D7B6D157DA60100084B67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743D7B6C157DA60100084B67 /* CoreGraphics.framework */; };
+		B03CBF77195F6A73005F991E /* AudioToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CBF76195F6A73005F991E /* AudioToolbar.m */; };
 		DD952FCB16E7F5CF00470144 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E18B1E1624CB5700B17A67 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,8 @@
 		743D7B6C157DA60100084B67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		97E18B1E1624CB5700B17A67 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		ADFCB70F35384ED48E94A608 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B03CBF75195F6A73005F991E /* AudioToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioToolbar.h; sourceTree = "<group>"; };
+		B03CBF76195F6A73005F991E /* AudioToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioToolbar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,8 @@
 			isa = PBXGroup;
 			children = (
 				0CE27A5B1935B01200C5C411 /* iPhoneStoryboard.storyboard */,
+				B03CBF75195F6A73005F991E /* AudioToolbar.h */,
+				B03CBF76195F6A73005F991E /* AudioToolbar.m */,
 				0C029ED4193860FA00EB961B /* AudioViewController.h */,
 				0C029ED5193860FA00EB961B /* AudioViewController.m */,
 				0C029ED11938512F00EB961B /* ProgressCellTableViewCell.h */,
@@ -524,6 +529,7 @@
 				0CE27A6A1935B01200C5C411 /* main.m in Sources */,
 				0CF72C361942C64000469DD0 /* SVWebViewControllerActivityChrome.m in Sources */,
 				0C029ED31938512F00EB961B /* ProgressCellTableViewCell.m in Sources */,
+				B03CBF77195F6A73005F991E /* AudioToolbar.m in Sources */,
 				0CE27A621935B01200C5C411 /* AudiobookPlayerAppDelegate.m in Sources */,
 				0CF72C3C1942C64000469DD0 /* SVWebViewControllerActivity.m in Sources */,
 				0CE27A6B1935B01200C5C411 /* PanelsViewController.m in Sources */,
