@@ -42,7 +42,9 @@
 	UInt32 thePropSize = sizeof(Float64);
 	result = AudioFileGetProperty(fileID, kAudioFilePropertyEstimatedDuration, &thePropSize, &outDataSize);
 	AudioFileClose(fileID);
-	return [NSNumber numberWithInt:result];
+    if (result > 0)
+        return [NSNumber numberWithInt:result];
+    return [NSNumber numberWithDouble:max(result, outDataSize)];
 }
 
 -(void)reloadFiles {
