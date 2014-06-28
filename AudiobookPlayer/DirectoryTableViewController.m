@@ -109,6 +109,12 @@ bool isLoading = false;
 	}
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.audioToolbar correctPlayPause];
+}
+
 - (void)viewDidLoad
 {
 	[self.tableView registerClass:[ProgressCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];

@@ -11,7 +11,9 @@
 #import <MediaPlayer/MPMediaItem.h>
 #import <MediaPlayer/MPMusicPlayerController.h>
 #import <MediaPlayer/MPNowPlayingInfoCenter.h>
+#import "AudioToolbar.h"
 
+#define PI 3.1415926535897932384626
 
 @interface AudioViewController ()
 
@@ -29,16 +31,22 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView * backgroundImageView;
 
-#define PI 3.1415926535897932384626
 @property (weak, nonatomic) IBOutlet UIButton * playButton;
 @property (weak, nonatomic) IBOutlet UIButton * nextButton;
 @property (weak, nonatomic) IBOutlet UIButton * prevButton;
+@property (nonatomic, strong) AudioToolbar * audioToolbar;
 
 @end
 
 BOOL isSliding;
 
 @implementation AudioViewController
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.audioToolbar correctPlayPause];
+}
 
 - (void)setupSlider {
 	[self.seekSlider setDelegate:self];
@@ -104,6 +112,7 @@ BOOL isSliding;
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
 	[self setupSlider];
 	[self tryPlayMusic];
+    self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self];
 }
 
 

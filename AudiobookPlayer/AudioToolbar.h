@@ -11,5 +11,6 @@
 @interface AudioToolbar : NSObject
 
 -(AudioToolbar*)initWithViewController:(UIViewController*)vc;
+-(void)correctPlayPause;
 
 @end

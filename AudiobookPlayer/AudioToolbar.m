@@ -52,7 +52,11 @@
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
     [delegate.currentAudioViewController playPauseAudio:nil];
     
-    
+    [self correctPlayPause];
+}
+
+-(void)correctPlayPause {
+	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
     NSMutableArray * items = [[NSMutableArray alloc] initWithArray:self.vc.toolbarItems];
     items[4] = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:[delegate.currentAudioViewController audioIsPlaying] ? UIBarButtonSystemItemPause : UIBarButtonSystemItemPlay target:self action:@selector(playPauseAudio:)];
     self.vc.toolbarItems = items;
