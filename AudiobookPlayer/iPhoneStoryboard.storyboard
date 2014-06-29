@@ -169,15 +169,15 @@
                         <viewControllerLayoutGuide type="bottom" id="330-3A-YAo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NWh-YB-RrZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kuo-Xk-Iyd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WsN-3d-tyB" customClass="CPSlider">
-                                <rect key="frame" x="54" y="72" width="212" height="31"/>
+                                <rect key="frame" x="54" y="72" width="460" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <connections>
@@ -185,17 +185,20 @@
                                 </connections>
                             </slider>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKc-6c-cEk" customClass="MPVolumeView">
-                                <rect key="frame" x="20" y="487" width="280" height="45"/>
+                                <rect key="frame" x="20" y="239" width="528" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="41G-BG-iG0"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsX-Iq-Nh0">
-                                <rect key="frame" x="0.0" y="110" width="320" height="369"/>
+                                <rect key="frame" x="0.0" y="110" width="568" height="121"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide down to scrub slower" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="doc-Rl-iER">
-                                        <rect key="frame" x="20" y="132" width="280" height="103"/>
+                                        <rect key="frame" x="20" y="8" width="528" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="103" id="Td6-iB-B6a"/>
@@ -205,7 +208,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap or swipe below to navigate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-Ej-jGi">
-                                        <rect key="frame" x="41" y="0.0" width="238" height="21"/>
+                                        <rect key="frame" x="165" y="0.0" width="238" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -236,7 +239,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DxP-gh-ggr">
-                                <rect key="frame" x="272" y="76" width="43" height="21"/>
+                                <rect key="frame" x="520" y="76" width="43" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -262,15 +265,16 @@
                             <constraint firstItem="xKc-6c-cEk" firstAttribute="leading" secondItem="NWh-YB-RrZ" secondAttribute="leading" constant="20" symbolic="YES" id="j5V-RK-g3D"/>
                             <constraint firstAttribute="trailing" secondItem="xKc-6c-cEk" secondAttribute="trailing" constant="20" symbolic="YES" id="m0F-DL-gYo"/>
                             <constraint firstItem="WsN-3d-tyB" firstAttribute="top" secondItem="NC6-Ro-Zt2" secondAttribute="bottom" constant="20" symbolic="YES" id="na5-bD-5eE"/>
-                            <constraint firstItem="xKc-6c-cEk" firstAttribute="top" secondItem="NWh-YB-RrZ" secondAttribute="top" constant="487" id="pDm-QV-tSZ"/>
                             <constraint firstAttribute="bottom" secondItem="kuo-Xk-Iyd" secondAttribute="bottom" id="uGZ-VI-M4x"/>
                             <constraint firstItem="XsX-Iq-Nh0" firstAttribute="top" secondItem="tag-bG-BY4" secondAttribute="bottom" constant="13" id="xkx-ur-m2p"/>
                             <constraint firstItem="WsN-3d-tyB" firstAttribute="leading" secondItem="tag-bG-BY4" secondAttribute="trailing" constant="8" symbolic="YES" id="xpM-i4-m7Y"/>
                         </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="Wlx-Sg-312"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="kuo-Xk-Iyd" id="qNf-ih-pZK"/>
                         <outlet property="currentTimeLabel" destination="tag-bG-BY4" id="Tu6-dT-PMS"/>
