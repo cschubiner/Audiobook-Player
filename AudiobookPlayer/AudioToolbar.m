@@ -89,11 +89,15 @@
 -(void)nextTrack:(id)sender {
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
 	[delegate.currentAudioViewController nextSong:nil];
+    if ([delegate.currentAudioViewController audioIsPlaying])
+        [self correctPlayPause];
 }
 
 -(void)prevTrack:(id)sender {
 	AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
 	[delegate.currentAudioViewController previousSong:nil];
+    if ([delegate.currentAudioViewController audioIsPlaying])
+        [self correctPlayPause];
 }
 
 -(void)skipForwards:(id)sender {

@@ -256,6 +256,7 @@ bool shouldSkipCrossTrack;
     
 	//	BOOL playSuccess =
 	[self.backgroundMusicPlayer play];
+    [self.audioToolbar correctPlayPause];
 	self.backgroundMusicPlaying = YES;
     
 	if (fabsf(self.song.duration.doubleValue - self.song.currentPosition.doubleValue) < 1) {
