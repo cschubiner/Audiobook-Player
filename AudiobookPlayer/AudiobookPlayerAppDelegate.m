@@ -6,6 +6,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Parse/Parse.h>
 
+@interface AudiobookPlayerAppDelegate ()
+@property (nonatomic) NSTimer * timer34;
+@end
 
 @implementation AudiobookPlayerAppDelegate
 
@@ -57,8 +60,7 @@
 	}
     
 	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
-	NSTimer * timer;
-	timer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(enableSave2) userInfo:nil repeats:YES];
+	self.timer34 = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(enableSave2) userInfo:nil repeats:YES];
     //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
 	[self setupAudioSession];
