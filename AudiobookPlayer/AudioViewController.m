@@ -325,6 +325,7 @@ bool shouldSkipCrossTrack;
 
 - (IBAction)playAudio:(id)sender {
 	[self tryPlayMusic];
+    [self.audioToolbar correctPlayPause];
 }
 
 - (void)flashGestureLabel {
@@ -333,6 +334,12 @@ bool shouldSkipCrossTrack;
 
 -(BOOL)audioIsPlaying {
     return self.backgroundMusicPlayer.isPlaying;
+}
+
+-(void)stopAudio:(id)sender {
+	[self setBackgroundMusicPlaying:NO];
+	[self.backgroundMusicPlayer stop];
+    [self.audioToolbar correctPlayPause];
 }
 
 -(void)flashGestureLabelWithDuration:(float)duration {
@@ -362,10 +369,6 @@ bool shouldSkipCrossTrack;
 	[self flashGestureLabel];
 }
 
--(void)stopAudio:(id)sender {
-	[self setBackgroundMusicPlaying:NO];
-	[self.backgroundMusicPlayer stop];
-}
 
 - (IBAction)nextSong:(id)sender {
 	NSUInteger currIndex = [self.songs indexOfObject:self.song];

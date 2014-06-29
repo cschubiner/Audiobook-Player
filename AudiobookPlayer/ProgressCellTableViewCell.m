@@ -55,7 +55,7 @@
     
 	UIViewController * tvc = [self topViewController];
 	if (tvc.class == [PanelsViewController class] &&
-        [((UINavigationController*)((PanelsViewController*)tvc).centerPanel).visibleViewController class] == [AudioViewController class]
+	    [((UINavigationController*)((PanelsViewController*)tvc).centerPanel).visibleViewController class] == [AudioViewController class]
 	    )
 		return;
     
@@ -69,7 +69,7 @@
     
 	DebugLog(@"aac");
     
-	BOOL isPlaying = self.lastPosition.doubleValue + .000001 < self.song.currentPosition.doubleValue || self.song.isLastPlayed.boolValue;
+	BOOL isPlaying = self.lastPosition.doubleValue + .000001 < self.song.currentPosition.doubleValue;
 	//	isPlaying = self.song.isLastPlayed.boolValue;
     
 	DebugLog(@"aaf");
@@ -87,7 +87,7 @@
 		[self.progressView setFrame:CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, 0, self.progressView.frame.size.height)];
 		DebugLog(@"aah");
 	}
-	else if (isPlaying) {
+	else if (isPlaying || self.song.isLastPlayed.boolValue) {
 		double progress = self.song.currentPosition.doubleValue / self.song.duration.doubleValue;
 		if (isnan(progress))
 			progress = 0;
