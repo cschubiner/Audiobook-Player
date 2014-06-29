@@ -6,12 +6,12 @@
 //
 //
 
+#import "AudioToolbar.h"
 #import "AudioViewController.h"
 #import "AudiobookPlayerAppDelegate.h"
 #import <MediaPlayer/MPMediaItem.h>
 #import <MediaPlayer/MPMusicPlayerController.h>
 #import <MediaPlayer/MPNowPlayingInfoCenter.h>
-#import "AudioToolbar.h"
 
 #define PI 3.1415926535897932384626
 
@@ -43,9 +43,9 @@ BOOL isSliding;
 @implementation AudioViewController
 
 -(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+	[super viewWillAppear:animated];
     
-    [self.audioToolbar correctPlayPause];
+	[self.audioToolbar correctPlayPause];
 }
 
 - (void)setupSlider {
@@ -61,7 +61,22 @@ BOOL isSliding;
               forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
 	[self.seekSlider addTarget:self
                         action:@selector(sliderDidStartSliding:)
+     
               forControlEvents:(UIControlEventTouchDragInside | UIControlEventTouchDragOutside)];
+	UITapGestureRecognizer * gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sliderTapped:)];
+	[self.seekSlider addGestureRecognizer:gr];
+}
+- (void)sliderTapped:(UIGestureRecognizer *)g {
+	UISlider* s = (UISlider*)g.view;
+	if (s.highlighted)
+		return; // tap on thumb, let slider deal with it
+    
+	CGPoint pt = [g locationInView:s];
+	CGFloat percentage = pt.x / s.bounds.size.width;
+	CGFloat delta = percentage * (s.maximumValue - s.minimumValue);
+	CGFloat value = s.minimumValue + delta;
+	[s setValue:value animated:YES];
+	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
 }
 
 - (void)sliderDidStartSliding:(NSNotification *)notification {
@@ -112,7 +127,7 @@ BOOL isSliding;
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
 	[self setupSlider];
 	[self tryPlayMusic];
-    self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self andTransparency:.735];
+	self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self andTransparency:.735];
 }
 
 
@@ -153,28 +168,28 @@ bool shouldSkipCrossTrack;
 - (void)skipWithDuration:(CGFloat)skipDuration {
 	[self.gestureLabel setText:[NSString stringWithFormat:@"%@ %d secs", skipDuration >= 0 ? @"Jumping" :@"Reversing", abs((int)skipDuration)]];
 	[self flashGestureLabel];
-    shouldSkipCrossTrack = false;
-    double newTime = self.backgroundMusicPlayer.currentTime + skipDuration;
-    if (newTime > self.backgroundMusicPlayer.duration) {
-        shouldSkipCrossTrack = true;
-        skipToTime = newTime - self.backgroundMusicPlayer.duration;
-        self.backgroundMusicPlayer.currentTime += skipDuration;
-    	[self recordCurrentPosition];
-        [self nextSong:nil];
-    }
-    else if (newTime < 0) {
-        shouldSkipCrossTrack = true;
-        skipToTime = newTime;
-        self.backgroundMusicPlayer.currentTime += skipDuration;
-    	[self recordCurrentPosition];
-        [self previousSong:nil];
-    }
-    else {
-    	self.backgroundMusicPlayer.currentTime += skipDuration;
-    	self.seekSlider.value += skipDuration;
-    	[self updateCurrentTimeLabel];
-    	[self recordCurrentPosition];
-    }
+	shouldSkipCrossTrack = false;
+	double newTime = self.backgroundMusicPlayer.currentTime + skipDuration;
+	if (newTime > self.backgroundMusicPlayer.duration) {
+		shouldSkipCrossTrack = true;
+		skipToTime = newTime - self.backgroundMusicPlayer.duration;
+		self.backgroundMusicPlayer.currentTime += skipDuration;
+		[self recordCurrentPosition];
+		[self nextSong:nil];
+	}
+	else if (newTime < 0) {
+		shouldSkipCrossTrack = true;
+		skipToTime = newTime;
+		self.backgroundMusicPlayer.currentTime += skipDuration;
+		[self recordCurrentPosition];
+		[self previousSong:nil];
+	}
+	else {
+		self.backgroundMusicPlayer.currentTime += skipDuration;
+		self.seekSlider.value += skipDuration;
+		[self updateCurrentTimeLabel];
+		[self recordCurrentPosition];
+	}
 }
 
 - (IBAction)didPan:(UIPanGestureRecognizer *)sender {
@@ -256,7 +271,7 @@ bool shouldSkipCrossTrack;
     
 	//	BOOL playSuccess =
 	[self.backgroundMusicPlayer play];
-    [self.audioToolbar correctPlayPause];
+	[self.audioToolbar correctPlayPause];
 	self.backgroundMusicPlaying = YES;
     
 	if (fabsf(self.song.duration.doubleValue - self.song.currentPosition.doubleValue) < 1) {
@@ -326,7 +341,7 @@ bool shouldSkipCrossTrack;
 
 - (IBAction)playAudio:(id)sender {
 	[self tryPlayMusic];
-    [self.audioToolbar correctPlayPause];
+	[self.audioToolbar correctPlayPause];
 }
 
 - (void)flashGestureLabel {
@@ -334,13 +349,13 @@ bool shouldSkipCrossTrack;
 }
 
 -(BOOL)audioIsPlaying {
-    return self.backgroundMusicPlayer.isPlaying;
+	return self.backgroundMusicPlayer.isPlaying;
 }
 
 -(void)stopAudio:(id)sender {
 	[self setBackgroundMusicPlaying:NO];
 	[self.backgroundMusicPlayer stop];
-    [self.audioToolbar correctPlayPause];
+	[self.audioToolbar correctPlayPause];
 }
 
 -(void)flashGestureLabelWithDuration:(float)duration {
@@ -358,13 +373,13 @@ bool shouldSkipCrossTrack;
 	if (self.backgroundMusicPlaying) {
 		[self stopAudio:nil];
 		[self.gestureLabel setText:@"Pause"];
-        [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
+		[self.playButton setTitle:@"Play" forState:UIControlStateNormal];
 	}
 	else
 	{
 		[self playAudio:nil];
 		[self.gestureLabel setText:@"Play"];
-        [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
+		[self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
 	}
     
 	[self flashGestureLabel];
@@ -383,9 +398,9 @@ bool shouldSkipCrossTrack;
     
 	[self stopAudio:nil];
 	self.song = [self.songs objectAtIndex:(currIndex + 1) % self.songs.count];
-    if (shouldSkipCrossTrack) {
-        self.song.currentPosition = [NSNumber numberWithDouble:skipToTime];
-    }
+	if (shouldSkipCrossTrack) {
+		self.song.currentPosition = [NSNumber numberWithDouble:skipToTime];
+	}
     
 	[self configureAudioPlayer];
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
@@ -406,9 +421,9 @@ bool shouldSkipCrossTrack;
 	[self stopAudio:nil];
 	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
 	self.song = [self.songs objectAtIndex:(currIndex - 1) % self.songs.count];
-    if (shouldSkipCrossTrack) {
-        self.song.currentPosition = [NSNumber numberWithDouble:self.song.duration.doubleValue + skipToTime];
-    }
+	if (shouldSkipCrossTrack) {
+		self.song.currentPosition = [NSNumber numberWithDouble:self.song.duration.doubleValue + skipToTime];
+	}
     
 	[self configureAudioPlayer];
 	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
