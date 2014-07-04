@@ -1,12 +1,9 @@
 *** SEASONAL SALE -- FREE FOR A LIMITED TIME ***
 
-Play any audio file using intuitive gesture controls. Download any audio file from the Web straight into Audiobook Player and play them offline!
-
---- DOWNLOAD AUDIO FILES ONLINE ---
-Download audio files from the Web to play in Audiobook Player using our embedded browser.
+Play any audio file using intuitive gesture controls and a sleep timer to avoid damaging your ears during nighttime listening. 
 
 --- SLEEP TIMER --- 
-To avoid hearing damage, you can set a timer to automatically pause your audio files after a specified duration. This is useful for nighttime listening!
+To avoid hearing damage, you can set a timer to automatically pause your audio files after a specified duration. 
 
 --- GESTURE CONTROL --- 
 Swipe and tap to seek and pause your music. Swipe in different directions to jump through your audiobook more precisely!
