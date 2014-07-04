@@ -41,7 +41,7 @@
     
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate * dateNotFormatted = [dateFormatter dateFromString:@"2014-07-14"];
+    NSDate * dateNotFormatted = [dateFormatter dateFromString:@"2014-07-04"];
     enableAppleComplaint = [[NSDate date] compare:dateNotFormatted] == NSOrderedDescending;
 }
 

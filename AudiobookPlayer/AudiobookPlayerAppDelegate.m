@@ -134,11 +134,11 @@
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {
 			DebugLog(@"UIEventSubtypeRemoteControlPreviousTrack");
-			[self.currentAudioViewController previousSong:nil];
+			[self.currentAudioViewController skipWithDuration:-10];
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
 			DebugLog(@"UIEventSubtypeRemoteControlNextTrack");
-			[self.currentAudioViewController nextSong:nil];
+			[self.currentAudioViewController skipWithDuration:10];
 		}
 	}
 }
