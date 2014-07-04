@@ -42,9 +42,10 @@
 	UInt32 thePropSize = sizeof(Float64);
 	result = AudioFileGetProperty(fileID, kAudioFilePropertyEstimatedDuration, &thePropSize, &outDataSize);
 	AudioFileClose(fileID);
-    if (result > 0)
-        return [NSNumber numberWithInt:result];
-    return [NSNumber numberWithDouble:max(result, outDataSize)];
+	if (result > 0)
+		return [NSNumber numberWithInt:result];
+    
+	return [NSNumber numberWithDouble:max(result, outDataSize)];
 }
 
 -(void)reloadFiles {
@@ -112,16 +113,16 @@ bool isLoading = false;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+	[super viewWillAppear:animated];
     
-    [self.audioToolbar correctPlayPause];
+	[self.audioToolbar correctPlayPause];
 }
 
 - (void)viewDidLoad
 {
 	[self.tableView registerClass:[ProgressCellTableViewCell class] forCellReuseIdentifier:@"FolderCellTableViewCell"];
- 
-    self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self andTransparency:.9];
+    
+	self.audioToolbar = [[AudioToolbar alloc]initWithViewController:self andTransparency:.9];
     
 	[super viewDidLoad];
 	[self updateColorScheme];
@@ -264,16 +265,9 @@ bool isLoading = false;
 	return UIInterfaceOrientationMaskPortrait;
 }
 
-
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (self.files.count == 0) return false;
-    
-	NSString * pathName = [self.files objectAtIndex:indexPath.row];
-	NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
-    
-	return ![DirectoryTableViewController isDirectory:fullPath];
+	return self.files.count != 0;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -281,17 +275,20 @@ bool isLoading = false;
 	if (self.files.count == 0) return;
     
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
-		// Delete the row from the data source
 		NSString * pathName = [self.files objectAtIndex:indexPath.row];
 		NSString * fullPath = [self.directoryPath stringByAppendingPathComponent:pathName];
         
 		NSFileManager * fileManager = [NSFileManager defaultManager];
 		NSError * error;
-		[fileManager removeItemAtPath:fullPath error:&error];
-		if (!error) {
+		BOOL success = [fileManager removeItemAtPath:fullPath error:&error];
+        
+		if (!error && success) {
 			self.files = [NSMutableArray arrayWithArray:self.files];
 			[((NSMutableArray*)self.files)removeObjectAtIndex : indexPath.row];
-			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			if (self.files.count > 0)
+				[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			else
+                [self.navigationController popViewControllerAnimated:true];
 		}
 	}
 }
