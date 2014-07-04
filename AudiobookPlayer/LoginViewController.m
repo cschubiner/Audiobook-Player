@@ -31,6 +31,12 @@
 	if (currentUser && [currentUser objectForKey:@"name"]) {
 		[self performLoginSegue];
 	}
+	else {
+		NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
+		NSInteger shouldSkipLogin = [standardUserDefaults integerForKey:@"shouldSkipLogin"];
+		if (shouldSkipLogin > 2)
+			[self touchedSkipButton:nil];
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +50,11 @@
 }
 
 - (IBAction)touchedSkipButton:(id)sender {
+	if (sender) {
+		NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
+		[standardUserDefaults setInteger:1 + [standardUserDefaults integerForKey:@"shouldSkipLogin"] forKey:@"shouldSkipLogin"];
+	}
+    
 	[PFAnonymousUtils logInWithBlock:^(PFUser * user, NSError * error) {
         if (error) {
             DebugLog(@"Anonymous login failed.");
