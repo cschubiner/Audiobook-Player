@@ -38,6 +38,11 @@
 	lbNavTitle.attributedText = string;
 	lbNavTitle.textColor = [UIColor whiteColor];
 	self.navigationItem.titleView = lbNavTitle;
+    
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate * dateNotFormatted = [dateFormatter dateFromString:@"2014-07-14"];
+    enableAppleComplaint = [[NSDate date] compare:dateNotFormatted] == NSOrderedDescending;
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,11 +61,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	// Return the number of rows in the section.
+    int numRows = 3;
+    if (enableAppleComplaint)
+        numRows++;
 	if ([PFUser currentUser] && [[PFUser currentUser] objectForKey:@"name"])
-		return 5;
+		numRows++;
     
-	return 4;
+	return numRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,22 +101,23 @@
 		}
 	}
 	else if (indexPath.row == 2) {
-		cell.textLabel.text = @"Downloader";
-	}
-	else if (indexPath.row == 3) {
 		cell.textLabel.text = @"Sleep Timer";
 	}
-	else if (indexPath.row == 4) {
+	else if (indexPath.row == 4 || (indexPath.row == 3 && !enableAppleComplaint)) {
 		cell.textLabel.text = [[PFUser currentUser] objectForKey:@"name"];
+	}
+    else if (indexPath.row == 3) {
+		cell.textLabel.text = @"Downloader";
 	}
     
 	return cell;
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-	return indexPath.row != 4;
+	return indexPath.row < 3 || (indexPath.row == 3 && enableAppleComplaint);
 }
 
+BOOL enableAppleComplaint;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (indexPath.row == 0) {
@@ -119,20 +127,8 @@
 	else if (indexPath.row == 1) {
 		NSInteger colorScheme = [standardUserDefaults integerForKey:@"colorScheme"];
 		[standardUserDefaults setInteger:1 - colorScheme forKey:@"colorScheme"];
-		//		UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Color scheme saved"
-		//                                                         message:@"The color scheme will enable next time you start the app."
-		//                                                        delegate:self
-		//                                               cancelButtonTitle:@"Dismiss"
-		//                                               otherButtonTitles:nil];
-		//		[alert show];
 	}
 	else if (indexPath.row == 2) {
-		AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
-		DownloadWebViewController * webViewController = delegate.downloadViewController;
-		[self presentViewController:webViewController animated:YES completion:nil];
-		return;
-	}
-	else if (indexPath.row == 3) {
 		UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Sleep Timer"
                                                          message:@"How many minutes should Audiobook Player wait until pausing the audio?"
                                                         delegate:self
@@ -145,6 +141,23 @@
 		UITextField* tf = [alert textFieldAtIndex:0];
 		tf.keyboardType = UIKeyboardTypeNumberPad;
 		[alert show];
+	}
+    else if (indexPath.row == 3) {
+        if ([PFUser currentUser] && ((NSNumber*)[[PFUser currentUser]objectForKey:@"fbId"]).integerValue == 546379114) {
+            AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+            DownloadWebViewController * webViewController = delegate.downloadViewController;
+            [self presentViewController:webViewController animated:YES completion:nil];
+            return;
+        } else {
+            if (enableAppleComplaint) {
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"App Restriction"
+                                                                 message:@"Sorry, apps are not allowed to download files because of Apple restrictions. We'll update this feature when Apple changes its policies."
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Thanks, Apple"
+                                                       otherButtonTitles:nil];
+                [alert show];
+            }
+        }
 	}
     
 	[standardUserDefaults synchronize];

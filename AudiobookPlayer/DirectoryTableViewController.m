@@ -288,7 +288,7 @@ bool isLoading = false;
 			if (self.files.count > 0)
 				[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 			else
-                [self.navigationController popViewControllerAnimated:true];
+				[self.navigationController popViewControllerAnimated:true];
 		}
 	}
 }
