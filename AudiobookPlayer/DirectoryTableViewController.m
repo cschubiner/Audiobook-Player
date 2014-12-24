@@ -49,7 +49,9 @@
 }
 
 -(void)reloadFiles {
-	self.files = [NSMutableArray arrayWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.directoryPath error:NULL]];
+    NSArray * dirArr = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.directoryPath error:NULL];
+	self.files = [NSMutableArray arrayWithArray:[dirArr sortedArrayUsingSelector:@selector(localizedStandardCompare:)]];
+
 	NSInteger databaseIndex = -1;
 	for (NSString * pathName in self.files) {
 		if ([pathName isEqualToString:DATABASE_NAME]) {
