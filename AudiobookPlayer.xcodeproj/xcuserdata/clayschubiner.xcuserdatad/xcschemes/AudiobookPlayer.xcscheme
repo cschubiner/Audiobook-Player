@@ -64,12 +64,12 @@
             isEnabled = "YES">
          </AdditionalOption>
          <AdditionalOption
-            key = "NSDOLoggingEnabled"
+            key = "NSZombieEnabled"
             value = "YES"
             isEnabled = "YES">
          </AdditionalOption>
          <AdditionalOption
-            key = "NSZombieEnabled"
+            key = "NSDOLoggingEnabled"
             value = "YES"
             isEnabled = "YES">
          </AdditionalOption>

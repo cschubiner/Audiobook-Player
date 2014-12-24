@@ -39,8 +39,8 @@
     
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate * dateNotFormatted = [dateFormatter dateFromString:@"2014-07-04"];
-    enableAppleComplaint = [[NSDate date] compare:dateNotFormatted] == NSOrderedDescending;
+    enableDownloader = [[NSDate date] compare:[dateFormatter dateFromString:@"2015-01-10"]] == NSOrderedDescending
+                    && [PFUser currentUser];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,7 +60,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int numRows = 3;
-    if (enableAppleComplaint)
+    if (enableDownloader)
         numRows++;
 	if ([PFUser currentUser] && [[PFUser currentUser] objectForKey:@"name"])
 		numRows++;
@@ -96,7 +96,7 @@
 	else if (indexPath.row == 2) {
 		cell.textLabel.text = @"Sleep Timer";
 	}
-	else if (indexPath.row == 4 || (indexPath.row == 3 && !enableAppleComplaint)) {
+	else if (indexPath.row == 4 || (indexPath.row == 3 && !enableDownloader)) {
 		cell.textLabel.text = [[PFUser currentUser] objectForKey:@"name"];
 	}
     else if (indexPath.row == 3) {
@@ -107,10 +107,11 @@
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-	return indexPath.row < 3 || (indexPath.row == 3 && enableAppleComplaint);
+	return indexPath.row < 3 || (indexPath.row == 3 && enableDownloader);
 }
 
-BOOL enableAppleComplaint;
+BOOL enableDownloader;
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (indexPath.row == 0) {
@@ -136,13 +137,19 @@ BOOL enableAppleComplaint;
 		[alert show];
 	}
     else if (indexPath.row == 3) {
-        if ([PFUser currentUser] && ((NSNumber*)[[PFUser currentUser]objectForKey:@"fbId"]).integerValue == 546379114) {
+        if (enableDownloader) {
+            AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
+            DownloadWebViewController * webViewController = delegate.downloadViewController;
+            [self presentViewController:webViewController animated:YES completion:nil];
+            return;
+        }
+       /* if ([PFUser currentUser] && ((NSNumber*)[[PFUser currentUser]objectForKey:@"fbId"]).integerValue == 546379114) {
             AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
             DownloadWebViewController * webViewController = delegate.downloadViewController;
             [self presentViewController:webViewController animated:YES completion:nil];
             return;
         } else {
-            if (enableAppleComplaint) {
+            if (enableDownloader) {
                 UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"App Restriction"
                                                                  message:@"Sorry, apps are not allowed to download files because of Apple restrictions. We'll update this feature when Apple changes its policies."
                                                                 delegate:self
@@ -150,7 +157,7 @@ BOOL enableAppleComplaint;
                                                        otherButtonTitles:nil];
                 [alert show];
             }
-        }
+        }*/
 	}
     
 	[standardUserDefaults synchronize];
