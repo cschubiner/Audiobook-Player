@@ -10,8 +10,6 @@
 #import "CenterPanelTableViewController.h"
 #import "DownloadWebViewController.h"
 #import "LeftPanelViewController.h"
-#import "UITableViewCell+FlatUI.h"
-#import <FlatUIKit/UIColor+FlatUI.h>
 #import <Parse/Parse.h>
 
 @implementation LeftPanelViewController
@@ -73,11 +71,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"settingsCell" forIndexPath:indexPath];
-    
-	[cell configureFlatCellWithColor:[UIColor greenSeaColor]
-                       selectedColor:[UIColor cloudsColor] ];
-	cell.cornerRadius = 5.0f; // optional
-	cell.separatorHeight = 2.0f; // optional
     
 	NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (indexPath.row == 0) {

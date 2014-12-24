@@ -5,48 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C617A937-5362-4E1F-A112-76200AE2C940</string>
+	<string>C15181F6-8990-422D-A4F1-519280E1ADFB</string>
 	<key>IDESourceControlProjectName</key>
 	<string>AudiobookPlayer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>806B3B5F-05F4-4093-B3D8-625D674961F3</key>
-		<string>https://github.com/gotosleep/JASidePanels.git</string>
-		<key>879DCE2A-1FC0-48C6-86C4-435C993403BF</key>
+		<key>51FC436F46601A389224421B8C8003AC4BB0FD5A</key>
 		<string>https://github.com/cschubiner/Audiobook-Player.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>AudiobookPlayer.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>806B3B5F-05F4-4093-B3D8-625D674961F3</key>
-		<string>../JASidePanels</string>
-		<key>879DCE2A-1FC0-48C6-86C4-435C993403BF</key>
+		<key>51FC436F46601A389224421B8C8003AC4BB0FD5A</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/cschubiner/Audiobook-Player.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>879DCE2A-1FC0-48C6-86C4-435C993403BF</string>
+	<string>51FC436F46601A389224421B8C8003AC4BB0FD5A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>879DCE2A-1FC0-48C6-86C4-435C993403BF</string>
+			<string>51FC436F46601A389224421B8C8003AC4BB0FD5A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Audiobook-Player</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>806B3B5F-05F4-4093-B3D8-625D674961F3</string>
-			<key>IDESourceControlWCCName</key>
-			<string>JASidePanels</string>
 		</dict>
 	</array>
 </dict>

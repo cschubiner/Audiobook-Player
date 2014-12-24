@@ -8,86 +8,41 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-CPSlider.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-Facebook-iOS-SDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>Pods-FlatUIKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>247159BF6D3D482E843EF07B</key>
+		<key>0B054CDF301969412275B679</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>31C1F7DEC94F486F8DCC973D</key>
+		<key>5DE935D49B4E72586EC3F6AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3306144D9C3B432089AF4F0D</key>
+		<key>A75086241D7263DD661C4406</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3EAE085ADEBF482F973D99EC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7F2A5C13E4C246E18BA0F26F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8F148228B1DE4F29AF8E1DF4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9CA932A018AC4A08A727E677</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A77D2702575C415B8EAF2994</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DB985136877F457383E0965D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E05EDCE4255B447E80064E17</key>
+		<key>B456390D8C2920745DD920E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
