@@ -73,7 +73,7 @@
 {
     if (self.selected != selected) {
         if (animated) {
-            Class CATransactionClass = [FBDynamicFrameworkLoader loadClass:@"CATransaction" withFramework:@"QuartzCore"];
+            Class CATransactionClass = fbdfl_CATransactionClass();
             CFTimeInterval duration = ([CATransactionClass animationDuration] ?: kFBLikeButtonAnimationDuration);
             UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
             [UIView animateWithDuration:duration delay:0.0 options:options animations:^{
@@ -194,6 +194,7 @@
 
     image = [[FBLikeButtonBackgroundSelectedPNG image] resizableImageWithCapInsets:backgroundCapInsets];
     [self setBackgroundImage:image forState:UIControlStateSelected];
+    [self setBackgroundImage:image forState:(UIControlStateSelected | UIControlStateHighlighted)];
 
     _iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self addSubview:_iconImageView];
@@ -203,6 +204,8 @@
 
     [self setTitle:NSLocalizedString(@"Like", @"FBLB:LikeButton") forState:UIControlStateNormal];
     [self setTitle:NSLocalizedString(@"Liked", @"FBLB:LikeButton") forState:UIControlStateSelected];
+    [self setTitle:NSLocalizedString(@"Liked", @"FBLB:LikeButton")
+          forState:(UIControlStateSelected | UIControlStateHighlighted)];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
 

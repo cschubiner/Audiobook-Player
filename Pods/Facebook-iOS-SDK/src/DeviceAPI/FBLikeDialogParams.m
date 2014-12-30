@@ -32,10 +32,13 @@
 
 - (NSDictionary *)dictionaryMethodArgs
 {
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     NSString *objectID = self.objectID;
-    return (objectID ?
-            @{ @"object_id": objectID } :
-            @{});
+    if (objectID) {
+        dictionary[@"object_id"] = objectID;
+    }
+    dictionary[@"object_type"] = NSStringFromFBLikeControlObjectType(self.objectType);
+    return dictionary;
 }
 
 - (NSError *)validate
@@ -51,4 +54,15 @@
 + (NSString *)methodName {
     return @"like";
 }
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    FBLikeDialogParams *copy = [super copyWithZone:zone];
+    copy->_objectID = [_objectID copyWithZone:zone];
+    copy->_objectType = _objectType;
+    return copy;
+}
+
 @end

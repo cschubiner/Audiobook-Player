@@ -18,14 +18,14 @@
 #import "FBErrorUtility.h"
 #import "FBSDKMacros.h"
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, FBAuthSubcode) {
     FBAuthSubcodeNone = 0,
     FBAuthSubcodeAppNotInstalled = 458,
     FBAuthSubcodeUserCheckpointed = 459,
     FBAuthSubcodePasswordChanged = 460,
     FBAuthSubcodeExpired = 463,
     FBAuthSubcodeUnconfirmedUser = 464,
-} FBAuthSubcode;
+};
 
 FBSDK_EXTERN const int FBOAuthError;
 
@@ -47,5 +47,9 @@ FBSDK_EXTERN const int FBOAuthError;
 + (NSError *)fberrorForSystemPasswordChange:(NSError *)innerError;
 
 + (NSError *)fberrorForRetry:(NSError *)innerError;
+
++ (NSDictionary *)jsonDictionaryForError:(NSError *)error;
+
++ (BOOL)errorIsNetworkError:(NSError *)error;
 
 @end

@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#if !defined SAFE_TO_USE_FBTESTSESSION
 #define SAFE_TO_USE_FBTESTSESSION
+#endif
 
 #import "FBTestSession.h"
 #import "FBTestSession+Internal.h"
@@ -31,13 +34,13 @@
  (created only if necessary, not deleted automatically) or private (created specifically
  for this session, deleted automatically upon close).
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, FBTestSessionMode) {
     // Create and delete a new test user for this session.
     FBTestSessionModePrivate    = 0,
     // Use an existing available test user with the right permissions, or create
     // a new one if none are available. Not automatically deleted.
     FBTestSessionModeShared     = 1,
-} FBTestSessionMode;
+};
 
 static NSString *const FBPLISTTestAppIDKey = @"IOS_SDK_TEST_APP_ID";
 static NSString *const FBPLISTTestAppSecretKey = @"IOS_SDK_TEST_APP_SECRET";
@@ -162,6 +165,7 @@ static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
                                                   parameters:parameters
                                                   HTTPMethod:nil]
                           autorelease];
+    [request overrideVersionPartWith:@"v2.0"];
     [request startWithCompletionHandler:
      ^(FBRequestConnection *connection, id result, NSError *error) {
          id userToken;
@@ -270,8 +274,9 @@ static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
                                                                parameters:@{ @"access_token" : self.appAccessToken }
                                                                HTTPMethod:nil]
                                        autorelease];
+    [requestForAccountIds overrideVersionPartWith:@"v2.0"];
     __block id testAccounts = nil;
-    [connection addRequest:requestForAccountIds completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    [connection addRequest:requestForAccountIds completionHandler:^(FBRequestConnection *innerConnection, id result, NSError *error) {
         if (error ||
             !result) {
             [self raiseException:error];
@@ -284,7 +289,7 @@ static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
                                                                   parameters:@{ @"access_token" : self.appAccessToken }
                                                                   HTTPMethod:nil]
                                           autorelease];
-    [connection addRequest:requestForUsersAndNames completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    [connection addRequest:requestForUsersAndNames completionHandler:^(FBRequestConnection *innerConnection, id result, NSError *error) {
         if (error ||
             !result) {
             [self raiseException:error];

@@ -1,16 +1,19 @@
 PODS:
-  - Bolts (1.1.0)
+  - Bolts (1.1.3)
   - CPSlider (1.0.0)
-  - Facebook-iOS-SDK (3.14.1):
-    - Bolts
+  - Facebook-iOS-SDK (3.21.1):
+    - Bolts (~> 1.0)
+  - FlatUIKit (1.5)
 
 DEPENDENCIES:
   - CPSlider
   - Facebook-iOS-SDK
+  - FlatUIKit
 
 SPEC CHECKSUMS:
-  Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
+  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   CPSlider: 2053252a9c116d3e1a78141663f4506154fcaf19
-  Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
+  Facebook-iOS-SDK: 18c26e86ab25c17854a2ee2a8f60562099c6600f
+  FlatUIKit: 5452fa3fca41e6f04014cca6e81b4c2f961f623c
 
 COCOAPODS: 0.35.0

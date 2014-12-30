@@ -17,8 +17,8 @@
 #import "FBViewController.h"
 #import "FBViewController+Internal.h"
 
+#import "FBInternalSettings.h"
 #import "FBLogger.h"
-#import "FBSettings.h"
 
 @interface FBViewController ()
 
@@ -118,8 +118,11 @@
     self.doneButton.action = @selector(doneButtonPressed:);
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelButtonPressed:);
+}
 
+- (void)viewWillAppear:(BOOL)animated {
     [self updateBar];
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

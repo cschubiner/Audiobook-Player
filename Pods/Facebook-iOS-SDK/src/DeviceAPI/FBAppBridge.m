@@ -251,7 +251,7 @@ static FBAppBridge *g_sharedInstance;
     }
     queryParams[FBBridgeURLParams.methodArgs] = jsonString;
 
-    NSURL *url = [bridgeScheme urlForMethod:appCall.dialogData.method
+    NSURL *url = [bridgeScheme URLForMethod:appCall.dialogData.method
                                 queryParams:queryParams];
 
     // Track the callback and AppCall, now that we are just about to invoke the url
@@ -308,14 +308,8 @@ forFailedAppCall:(FBAppCall *)appCall
 
     BOOL success = NO;
     NSInteger preProcessErrorCode = 0;
-    if (![FBUtility isFacebookBundleIdentifier:sourceApplication]) {
-        // If we're getting a response from another non-FB app, let's drop
-        // our old symmetric key, since it might have been compromised.
-        [FBAppBridge symmetricKeyAndForceRefresh:YES];
-
-        // The bridge only handles URLs from a native Facebook app.
-        preProcessErrorCode = FBErrorUntrustedURL;
-    } else {
+    if ([FBUtility isFacebookBundleIdentifier:sourceApplication] ||
+        [FBUtility isSafariBundleIdentifier:sourceApplication]) {
         NSString *urlPath = nil;
         if ([url.path length] > 1) {
             urlPath = [[url.path lowercaseString] substringFromIndex:1];
@@ -335,14 +329,23 @@ forFailedAppCall:(FBAppCall *)appCall
                                     session:session
                             fallbackHandler:fallbackHandler];
         }
+    } else {
+        // If we're getting a response from another non-FB app, let's drop
+        // our old symmetric key, since it might have been compromised.
+        [FBAppBridge symmetricKeyAndForceRefresh:YES];
+
+        // The bridge only handles URLs from a native Facebook app.
+        preProcessErrorCode = FBErrorUntrustedURL;
     }
 
     if (!success && fallbackHandler) {
+        NSString *failureReasonAndDescription = @"The URL could not be processed for an FBAppCall";
         NSError *preProcessError = [NSError errorWithDomain:FacebookSDKDomain
                                                        code:preProcessErrorCode ?: FBErrorMalformedURL
                                                    userInfo:@{
                                   FBErrorUnprocessedURLKey : url,
-                                 NSLocalizedDescriptionKey : @"The URL could not be processed for an FBAppCall"
+                                  NSLocalizedFailureReasonErrorKey : failureReasonAndDescription,
+                                  NSLocalizedDescriptionKey : failureReasonAndDescription
                                     }];
 
         // NOTE : At this point, we don't have a way to know whether this URL was for a pending AppCall.
@@ -373,11 +376,11 @@ forFailedAppCall:(FBAppCall *)appCall
         @try {
             if (handler) {
                 if (!error) {
+                    NSString *failureReasonAndDescription = @"The user navigated away from the Facebook app prior to completing this AppCall. This AppCall is now cancelled and needs to be retried to get a successful completion";
                     error = [NSError errorWithDomain:FacebookSDKDomain
                                                      code:FBErrorAppActivatedWhilePendingAppCall
-                                                 userInfo:@{NSLocalizedDescriptionKey : @"The user navigated away from "
-                                  @"the Facebook app prior to completing this AppCall. This AppCall is now cancelled "
-                                  @"and needs to be retried to get a successful completion"}];
+                                                 userInfo:@{NSLocalizedFailureReasonErrorKey : failureReasonAndDescription,
+                                                            NSLocalizedDescriptionKey : failureReasonAndDescription}];
                 }
                 call.error = error;
 
@@ -518,7 +521,7 @@ withCompletionHandler:(FBAppCallHandler)handler {
     self.pendingAppCalls[call.ID] = call;
     if (!handler) {
         // a noop handler if nil is passed in
-        handler = ^(FBAppCall *call) {};
+        handler = ^(FBAppCall *innerCall) {};
     }
     // Can immediately autorelease since adding it to self.callbacks causes a retain.
     self.callbacks[call.ID] = [Block_copy(handler) autorelease];
