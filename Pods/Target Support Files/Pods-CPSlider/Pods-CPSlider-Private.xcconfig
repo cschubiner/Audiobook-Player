@@ -1,5 +1,6 @@
 #include "Pods-CPSlider.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/CPSlider" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Bolts" "${PODS_ROOT}/Headers/Public/CPSlider" "${PODS_ROOT}/Headers/Public/Facebook-iOS-SDK" "${PODS_ROOT}/Headers/Public/Facebook-iOS-SDK/FacebookSDK" "${PODS_ROOT}/Headers/Public/FlatUIKit"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/CPSlider" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CPSlider" "${PODS_ROOT}/Headers/Public/FlatUIKit"
 OTHER_LDFLAGS = -ObjC
 PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import <Parse/Parse.h>
+
 
 @interface LoginViewController ()
 
@@ -27,16 +27,12 @@
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	PFUser * currentUser = [PFUser currentUser];
-	if (currentUser && [currentUser objectForKey:@"name"]) {
-		[self performLoginSegue];
-	}
-	else {
+
 		NSUserDefaults * standardUserDefaults = [NSUserDefaults standardUserDefaults];
 		NSInteger shouldSkipLogin = [standardUserDefaults integerForKey:@"shouldSkipLogin"];
 		if (shouldSkipLogin > 2)
 			[self touchedSkipButton:nil];
-	}
+	
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,19 +51,14 @@
 		[standardUserDefaults setInteger:1 + [standardUserDefaults integerForKey:@"shouldSkipLogin"] forKey:@"shouldSkipLogin"];
 	}
     
-	[PFAnonymousUtils logInWithBlock:^(PFUser * user, NSError * error) {
-        if (error) {
-            DebugLog(@"Anonymous login failed.");
-        }
-        else {
             DebugLog(@"Anonymous user logged in.");
             [self performLoginSegue];
-        }
-    }];
+  
 }
 
 - (IBAction)touchedLoginButton:(id)sender {
-	[PFFacebookUtils logInWithPermissions:@[@"public_profile", @"email", @"user_friends"] block:^(PFUser * user, NSError * error) {
+    [self touchedSkipButton:nil];
+  /*  [PFFacebookUtils logInWithPermissions:@[@"public_profile", @"email", @"user_friends"] block:^(PFUser * user, NSError * error) {
         if (!user) {
             DebugLog(@"Uh oh. The user cancelled the Facebook login.");
         }
@@ -91,7 +82,7 @@
             
             DebugLog(@"User logged in through Facebook!");
         }
-    }];
+    }];*/
 }
 
 /*

@@ -4,7 +4,7 @@
 //
 
 /**
- * Copyright (c) 2012 Charles Powell
+ * Copyright (c) 2013 Charles Powell
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -14,10 +14,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,6 +32,8 @@
 
 @interface CPSlider ()
 
+@property (nonatomic) CGFloat startingX;
+@property (nonatomic) float lastValue;
 @property (nonatomic) NSUInteger currentSpeedPositionIndex;
 @property (nonatomic) float effectiveValue;
 @property (nonatomic) float verticalChangeAdjustment;
@@ -42,18 +44,6 @@
 @end
 
 @implementation CPSlider
-
-@synthesize delegate;
-@synthesize scrubbingSpeeds;
-@synthesize scrubbingSpeedPositions;
-@synthesize accelerateWhenReturning;
-@synthesize ignoreDraggingAboveSlider;
-
-@synthesize currentSpeedPositionIndex = _currentSpeedPositionIndex;
-@synthesize effectiveValue = _effectiveValue;
-@synthesize verticalChangeAdjustment;
-@synthesize horizontalChangeAdjustment;
-@synthesize isSliding;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -77,7 +67,7 @@
 {
     self.scrubbingSpeedPositions = [NSArray arrayWithObjects:
                                     [NSNumber numberWithInt:0],
-                                    [NSNumber numberWithInt:50], 
+                                    [NSNumber numberWithInt:50],
                                     [NSNumber numberWithInt:100],
                                     [NSNumber numberWithInt:150], nil];
     
@@ -95,20 +85,31 @@
 #pragma mark - Custom UISlider getters/setters
 
 - (void)setValue:(float)value animated:(BOOL)animated {
+    // Catch "jump" which occurs in iOS 7 and up
+    if (!self.isTracking && self.isSliding) {
+        return;
+    }
+    
     if (self.isSliding) {
         // Adjust effective value
-        float effectiveDifference = (value - [super value]) * self.currentScrubbingSpeed;
+        float effectiveDifference = (value - self.lastValue) * self.currentScrubbingSpeed;
+        
         self.effectiveValue += (effectiveDifference + self.verticalChangeAdjustment + self.horizontalChangeAdjustment);
         // Reset adjustments
         self.verticalChangeAdjustment = 0.0f;
         self.horizontalChangeAdjustment = 0.0f;
+        
+        self.lastValue = value;
+        
     } else {
         // No adjustment
         self.effectiveValue = value;
     }
     
     // Either way, set use super to set true value
-    [super setValue:MAX(MIN(value, self.maximumValue), self.minimumValue) animated:animated];
+    float actual = MAX(MIN(value, self.maximumValue), self.minimumValue);
+    
+    [super setValue:actual animated:animated];
 }
 
 - (float)value {
@@ -129,7 +130,7 @@
     }
     
     if (currentSpeedPositionIndex == NSNotFound) {
-        currentSpeedPositionIndex = self.scrubbingSpeedPositions.count;
+        currentSpeedPositionIndex = self.scrubbingSpeedPositions.count-1;
     }
     _currentSpeedPositionIndex = currentSpeedPositionIndex;
     
@@ -155,31 +156,51 @@
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     self.isSliding = YES;
     self.currentSpeedPositionIndex = 0;
+    
+    float value = [self value];
+    
+    CGRect trackRect = [self trackRectForBounds:self.bounds];
+    
+    CGPoint currentTouchPoint = [touch locationInView:self];
+    
+    CGRect thumbRect = [self thumbRectForBounds:self.bounds trackRect:trackRect value:value];
+    
+    self.startingX = thumbRect.size.width - CGRectGetMaxX(thumbRect) + currentTouchPoint.x;
+    self.lastValue = value;
+    
     return [super beginTrackingWithTouch:touch withEvent:event];
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     if (self.isSliding) {
+        CGRect trackRect = [self trackRectForBounds:self.bounds];
+        
         CGPoint currentTouchPoint = [touch locationInView:self];
+        currentTouchPoint.x -= trackRect.origin.x;
+        
         CGPoint previousTouchPoint = [touch previousLocationInView:self];
-        CGFloat verticalDownrange = currentTouchPoint.y - CGRectGetMidY([self trackRectForBounds:self.bounds]);
+        CGFloat verticalDownrange = currentTouchPoint.y - CGRectGetMidY(trackRect);
         self.currentSpeedPositionIndex = [self scrubbingSpeedPositionForVerticalDownrange:verticalDownrange];
         
         // Check if the touch is returning to the slider
         float maxDownrange = [[self.scrubbingSpeedPositions lastObject] floatValue];
         if (self.accelerateWhenReturning &&
-            fabsf(currentTouchPoint.y < fabsf(previousTouchPoint.y)) && // adjust only if touch is returning
-            fabsf(currentTouchPoint.y) < maxDownrange && // adjust only if it's inside the furthest slider speed position
+            fabs(currentTouchPoint.y) < fabs(previousTouchPoint.y) && // adjust only if touch is returning
+            fabs(currentTouchPoint.y) < maxDownrange && // adjust only if it's inside the furthest slider speed position
             ![self pointInside:currentTouchPoint withEvent:nil]) // do not adjust if the touch is on the slider. Prevents jumpiness when default speed is not 1.0f
         {
             // Calculate and apply any vertical adjustment
-            verticalDownrange = fabsf(verticalDownrange);
+            verticalDownrange = fabs(verticalDownrange);
             float adjustmentRatio = powf((1 - (verticalDownrange/maxDownrange)), 4);
             self.verticalChangeAdjustment = ([super value] - self.effectiveValue) * adjustmentRatio;
         }
         
         // Apply horizontal change (emulation (I think?) of standard UISlider)
-        CGFloat newValue = (self.maximumValue - self.minimumValue) * currentTouchPoint.x / [self trackRectForBounds:self.bounds].size.width;
+        
+        CGRect thumbRect = [self thumbRectForBounds:self.bounds trackRect:trackRect value:0.0f];
+        
+        CGFloat newValue = self.minimumValue + (self.maximumValue - self.minimumValue) * (currentTouchPoint.x - self.startingX) / (trackRect.size.width - thumbRect.size.width);
+        
         [self setValue:newValue animated:NO];
         [self setNeedsLayout];
         
@@ -192,16 +213,16 @@
 }
 
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    // Pre-set value to effective value
+    [super setValue:self.effectiveValue animated:NO];
+    
+    // Call super before changing isSliding to NO, to catch value change
+    // in same logic used for iOS 7+ "jump" fix
+    [super endTrackingWithTouch:touch withEvent:event];
+    
+    // Reset
     self.currentSpeedPositionIndex = 0;
     self.isSliding = NO;
-    
-    // Move value to new value
-    [super setValue:self.effectiveValue animated:NO];
-    [self setNeedsLayout];
-    
-    // UIControl cleanup
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
-    self.highlighted = NO;
 }
 
 #pragma mark - UISlider Rect methods
@@ -220,7 +241,7 @@
 
 #pragma mark - Other Helpers
 
-- (NSUInteger)scrubbingSpeedPositionForVerticalDownrange:(CGFloat)downrange {    
+- (NSUInteger)scrubbingSpeedPositionForVerticalDownrange:(CGFloat)downrange {
     // Ignore negative downranges if specified
     if (self.ignoreDraggingAboveSlider) {
         downrange = MAX(downrange, 0);

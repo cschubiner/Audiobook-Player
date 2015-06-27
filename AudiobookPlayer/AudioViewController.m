@@ -61,8 +61,8 @@ BOOL isSliding;
               forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
 	[self.seekSlider addTarget:self
                         action:@selector(sliderDidStartSliding:)
-     
               forControlEvents:(UIControlEventTouchDragInside | UIControlEventTouchDragOutside)];
+    
 	UITapGestureRecognizer * gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sliderTapped:)];
 	[self.seekSlider addGestureRecognizer:gr];
 }
@@ -71,12 +71,20 @@ BOOL isSliding;
 	if (s.highlighted)
 		return; // tap on thumb, let slider deal with it
     
+    isSliding = false;
+    
 	CGPoint pt = [g locationInView:s];
 	CGFloat percentage = pt.x / s.bounds.size.width;
 	CGFloat delta = percentage * (s.maximumValue - s.minimumValue);
 	CGFloat value = s.minimumValue + delta;
-	[s setValue:value animated:YES];
-	self.backgroundMusicPlayer.currentTime = self.seekSlider.value;
+	[s setValue:value];
+    
+    CGFloat correctValue = percentage * self.seekSlider.maximumValue;
+    [self.seekSlider setValue:correctValue];
+	self.backgroundMusicPlayer.currentTime = correctValue;
+    [self updateTime:nil];
+    [self recordCurrentPosition];
+
 }
 
 - (void)sliderDidStartSliding:(NSNotification *)notification {
@@ -90,6 +98,8 @@ BOOL isSliding;
 		[self.backgroundMusicPlayer play];
     
 	canChangePlayingState = true;
+    
+    [self recordCurrentPosition];
 }
 
 -(Song *)getSong {
@@ -144,6 +154,7 @@ BOOL isSliding;
 
 BOOL musicWasPlaying = false;
 BOOL canChangePlayingState = true;
+
 - (IBAction)slide {
 	self.currentTimeLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.seekSlider.value / 60), ((int)self.seekSlider.value % 60)];
 	if (canChangePlayingState)
@@ -159,7 +170,7 @@ BOOL canChangePlayingState = true;
 }
 
 - (void)updateCurrentTimeLabel {
-	self.currentTimeLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.seekSlider.value / 60), ((int)self.seekSlider.value % 60)];
+	self.currentTimeLabel.text = [NSString stringWithFormat:@"%d:%02d", ((int)self.backgroundMusicPlayer.currentTime / 60), ((int)self.backgroundMusicPlayer.currentTime % 60)];
 }
 
 double skipToTime = -1;
@@ -206,22 +217,22 @@ bool shouldSkipCrossTrack;
 		BOOL isPanMode = [standardUserDefaults integerForKey:@"panMode"] == 0;
 		if (isPanMode) {
 			const CGFloat maxSecondsToSkip = 29.5;
-			CGFloat skipDuration = -(fabsf(angle) - PI / 2) * maxSecondsToSkip * 30.0 / 7.0 / PI / 2;
+			CGFloat skipDuration = -(fabs(angle) - PI / 2) * maxSecondsToSkip * 30.0 / 7.0 / PI / 2;
 			[self skipWithDuration:skipDuration];
 		}
 		else {
 			//we're in swipe mode
-			CGFloat angle2 =fabsf(angle) - PI / 2;
+			CGFloat angle2 =fabs(angle) - PI / 2;
 			if (angle2 < -1)
-				[self skipWithDuration:25];
+				[self skipWithDuration:30];
 			else if (angle2 > 1)
-				[self skipWithDuration:-20];
+				[self skipWithDuration:-30];
 			else {
 				//handle up/down swipes
 				if (angle > 1)
-					[self skipWithDuration:-7];
+					[self skipWithDuration:-15];
 				else if (angle < -1)
-					[self skipWithDuration:7];
+					[self skipWithDuration:15];
 			}
 		}
 	}
@@ -229,7 +240,6 @@ bool shouldSkipCrossTrack;
 
 - (IBAction)didTapView:(id)sender {
 	[self playPauseAudio:nil];
-	[self recordCurrentPosition];
 }
 
 
@@ -247,7 +257,7 @@ bool shouldSkipCrossTrack;
 
 -(void)recordCurrNoSave {
 	self.song.currentPosition = [NSNumber numberWithDouble:self.backgroundMusicPlayer.currentTime];
-	DebugLog(@"recorded position: %@", self.song.currentPosition);
+	DebugLog(@"recorded position (no save): %@", self.song.currentPosition);
 }
 
 - (void)updateTime:(NSTimer *)timer {
@@ -259,13 +269,11 @@ bool shouldSkipCrossTrack;
 	self.seekSlider.value = self.backgroundMusicPlayer.currentTime;
 	DebugLog(@"ac");
 	[self updateCurrentTimeLabel];
-	DebugLog(@"ad");
-	[self recordCurrentPosition];
-	DebugLog(@"af");
+    DebugLog(@"af");
 }
 
 - (void)tryPlayMusic {
-	if (self.backgroundMusicPlaying || [self.audioSession isOtherAudioPlaying]) {
+	if (self.backgroundMusicPlaying) {
 		return;
 	}
     
@@ -274,7 +282,7 @@ bool shouldSkipCrossTrack;
 	[self.audioToolbar correctPlayPause];
 	self.backgroundMusicPlaying = YES;
     
-	if (fabsf(self.song.duration.doubleValue - self.song.currentPosition.doubleValue) < 1) {
+	if (fabs(self.song.duration.doubleValue - self.song.currentPosition.doubleValue) < 1) {
 		//if the song ended or is about to end, we'll restart it
 		self.backgroundMusicPlayer.currentTime = 0;
 	}
@@ -300,7 +308,7 @@ bool shouldSkipCrossTrack;
 	self.seekSlider.maximumValue = [self.backgroundMusicPlayer duration];
 	[self updateTime:nil];
     
-	static NSTimer * timer;
+	static NSTimer * timer = nil;
 	if (timer) {
 		[timer invalidate];
 		timer = nil;
@@ -341,6 +349,7 @@ bool shouldSkipCrossTrack;
 
 - (IBAction)playAudio:(id)sender {
 	[self tryPlayMusic];
+    [self recordCurrentPosition];
 	[self.audioToolbar correctPlayPause];
 }
 
@@ -356,6 +365,7 @@ bool shouldSkipCrossTrack;
 	[self setBackgroundMusicPlaying:NO];
 	[self.backgroundMusicPlayer stop];
 	[self.audioToolbar correctPlayPause];
+    [self recordCurrentPosition];
 }
 
 -(void)flashGestureLabelWithDuration:(float)duration {
@@ -381,7 +391,7 @@ bool shouldSkipCrossTrack;
 		[self.gestureLabel setText:@"Play"];
 		[self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
 	}
-    
+    [self recordCurrentPosition];
 	[self flashGestureLabel];
 }
 
@@ -403,12 +413,13 @@ bool shouldSkipCrossTrack;
 	}
     
 	[self configureAudioPlayer];
-	[self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
-	[self tryPlayMusic];
+    [self.backgroundMusicPlayer setCurrentTime:0];
+
+//    [self.backgroundMusicPlayer setCurrentTime:self.song.currentPosition.doubleValue];
+    [self tryPlayMusic];
 }
 
 // TODO: add left panel setting for skipping/seeking across tracks
-
 
 - (IBAction)previousSong:(UIButton *)sender {
 	NSUInteger currIndex = [self.songs indexOfObject:self.song];
@@ -420,7 +431,7 @@ bool shouldSkipCrossTrack;
     
 	[self stopAudio:nil];
 	self.song.isLastPlayed = [NSNumber numberWithBool:FALSE];
-	self.song = [self.songs objectAtIndex:(currIndex - 1) % self.songs.count];
+	self.song = [self.songs objectAtIndex:(currIndex - 1)];
 	if (shouldSkipCrossTrack) {
 		self.song.currentPosition = [NSNumber numberWithDouble:self.song.duration.doubleValue + skipToTime];
 	}

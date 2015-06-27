@@ -12,7 +12,7 @@
 #import "LeftPanelViewController.h"
 #import "UITableViewCell+FlatUI.h"
 #import <FlatUIKit/UIColor+FlatUI.h>
-#import <Parse/Parse.h>
+
 
 @implementation LeftPanelViewController
 
@@ -41,8 +41,7 @@
     
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    enableDownloader = [[NSDate date] compare:[dateFormatter dateFromString:@"2015-01-10"]] == NSOrderedDescending
-                    && [PFUser currentUser];
+    enableDownloader = [[NSDate date] compare:[dateFormatter dateFromString:@"2015-01-10"]] == NSOrderedDescending;
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,8 +63,6 @@
     int numRows = 3;
     if (enableDownloader)
         numRows++;
-	if ([PFUser currentUser] && [[PFUser currentUser] objectForKey:@"name"])
-		numRows++;
     
 	return numRows;
 }
@@ -102,9 +99,6 @@
 	}
 	else if (indexPath.row == 2) {
 		cell.textLabel.text = @"Sleep Timer";
-	}
-	else if (indexPath.row == 4 || (indexPath.row == 3 && !enableDownloader)) {
-		cell.textLabel.text = [[PFUser currentUser] objectForKey:@"name"];
 	}
     else if (indexPath.row == 3) {
 		cell.textLabel.text = @"Downloader";
@@ -150,21 +144,6 @@ BOOL enableDownloader;
             [self presentViewController:webViewController animated:YES completion:nil];
             return;
         }
-       /* if ([PFUser currentUser] && ((NSNumber*)[[PFUser currentUser]objectForKey:@"fbId"]).integerValue == 546379114) {
-            AudiobookPlayerAppDelegate * delegate = [UIApplication sharedApplication].delegate;
-            DownloadWebViewController * webViewController = delegate.downloadViewController;
-            [self presentViewController:webViewController animated:YES completion:nil];
-            return;
-        } else {
-            if (enableDownloader) {
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"App Restriction"
-                                                                 message:@"Sorry, apps are not allowed to download files because of Apple restrictions. We'll update this feature when Apple changes its policies."
-                                                                delegate:self
-                                                       cancelButtonTitle:@"Thanks, Apple"
-                                                       otherButtonTitles:nil];
-                [alert show];
-            }
-        }*/
 	}
     
 	[standardUserDefaults synchronize];

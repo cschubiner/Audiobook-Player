@@ -1,17 +1,13 @@
-An important note on FlatUIKit
+Background
 ======
-I originally wrote FlatUIKit in March of 2013. It came about because iOS6's UI was dated and "Flat UI" was popular in the design community. Obviously, iOS7 came along and fixed almost all of the problems that FlatUIKit was originally created to solve. As I see it, the primary reason to use FlatUIKit now is for supporting pre-iOS7 apps. We're now on iOS8, and that's a small enough demographic that I no longer have the interest or time to maintain this library. As such, as of version 1.5 (which I'm currently pushing) there will be no more updates to FlatUIKit.
+FlatUIKit was originally written by Jack Flintermann in March of 2013, before iOS7 had even come out.  The idea was to give a nice flat look to some of the native iOS components.  Then iOS7 came along and introduced a decent API to do most of these tasks.  
 
-Interested in owning FlatUIKit?
-------
-If you'd like to keep working on FlatUIKit, fork the repository and let me know by creating an issue with "NEW OWNER" in the title. I'll then add a note here to use your version instead. Thanks for the flat memories; we now return to your normally scheduled README.
-
-- Jack
+However, for backwards compatability, we will be attempting to maintain iOS6 compatability, as long as feasabilty possible.  If we find a reason to move to iOS7 only support, we will leave a branch for remaining iOS6 support, and move forward.
 
 FlatUIKit
 ======
 
-FlatUIKit is a collection of iOS components styled with the "Flat UI" aesthetic that we created while building [Grouper for iPhone](http://www.joingrouper.com/ios). Its design inspiration comes from [Flat UI](http://designmodo.github.io/Flat-UI/) and [Kyle Miller](http://kylemillercreative.com/grouper-social-club). Styling is implemented via categories on/drop-in replacements for existing UIKit components, so integrating it into your project is very straightforward.
+FlatUIKit is a collection of iOS components styled with the "Flat UI" aesthetic that we created while building [Grouper for iPhone](http://www.joingrouper.com). Its design inspiration comes from [Flat UI](http://designmodo.github.io/Flat-UI/) and [Kyle Miller](http://kylemillercreative.com/grouper-social-club). Styling is implemented via categories on/drop-in replacements for existing UIKit components, so integrating it into your project is very straightforward.
 
 Installation
 -------
@@ -44,6 +40,22 @@ myButton.titleLabel.font = [UIFont boldFlatFontOfSize:16];
 ```
 
 ![FUIButton](https://raw.github.com/Grouper/FlatUIKit/master/Example/README%20images/fuibutton-small.gif)
+
+### TextFields
+
+FUITextField is a drop-in subclass of UITextField that exposes the additional properties edgeInsets, textFieldColor, borderColor, borderWidth and cornerRadius. Note that if you set any of these, you have to set all of them.
+
+```objective-c
+myTextField.font = [UIFont flatFontOfSize:16];
+myTextField.backgroundColor = [UIColor clearColor];
+myTextField.edgeInsets = UIEdgeInsetsMake(4.0f, 15.0f, 4.0f, 15.0f);
+myTextField.textFieldColor = [UIColor whiteColor];
+myTextField.borderColor = [UIColor turquoiseColor];
+myTextField.borderWidth = 2.0f;
+myTextField.cornerRadius = 3.0f;
+```
+
+![FUITextField](Example/README%20images/fuitextfield-small.gif)
 
 ### SegmentedControls
 
@@ -96,7 +108,12 @@ alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
 alertView.defaultButtonTitleColor = [UIColor asbestosColor];
 [alertView show];
 ```
-
+    
+NOTE: to create FUIAlertView instance in Swift please use default initializer
+s
+```swift
+let alertView = FUIAlertView()
+```
 <img src='https://raw.github.com/Grouper/FlatUIKit/master/Example/README%20images/fuialertview.gif' alt='FUIAlertView' width=316 height=336 />
 
 ### Sliders/Steppers/Progress Views
@@ -197,7 +214,21 @@ FlatUIKit comes bundled with Lato, a clean, beautiful open font. More info on La
 UIFont *myFont = [UIFont flatFontOfSize:16];
 ```
 
+Icons
+-------
+
+You can now use the great icons provided by [FlatUIKit](http://designmodo.github.io/Flat-UI/) in your app.  The easiest way is to use a label, but I will be adding support to use them in buttons, ImageViews, and other conveniences.  
+
+```objective-c
+#import "NSString+Icons.h"
+UILabel *label = [...]
+label.font = [UIFont iconFontWithSize:16];
+label.text = [NSString iconStringForEnum:FUIHeart];
+```
+
+The icons follow roughly the same naming scheme as FlatUI, but you can look up the enumeration in NSString+Icons.h
+
 Contributions
 --------
 
-Contributions are totally welcome. We'll review all pull requests and if you send us a good one/are interested we're happy to give you push access to the repo. Or, you know, you could just [come work with us](http://www.joingrouper.com/jobs).
+Contributions are totally welcome. We'll review all pull requests and if you send us a good one/are interested we're happy to give you push access to the repo. 

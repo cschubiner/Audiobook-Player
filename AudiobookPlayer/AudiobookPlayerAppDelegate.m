@@ -4,10 +4,8 @@
 #import "DownloadWebViewController.h"
 #import "SongDatabase.h"
 #import <AVFoundation/AVFoundation.h>
-#import <Parse/Parse.h>
 
 @interface AudiobookPlayerAppDelegate ()
-@property (nonatomic) NSTimer * timer34;
 @end
 
 @implementation AudiobookPlayerAppDelegate
@@ -36,52 +34,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// ****************************************************************************
 	// Uncomment and fill in with your Parse credentials:
-	[Parse setApplicationId:@"LGNARaSB1vmdvfdPa686s0eZkdmtE7dMQs91QpZp"
-                  clientKey:@"Y5i9Ho4nL4DuGYfNq23zsmL0RFP8Mvq2zpD3htiq"];
-	//
-	// If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
-	// described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
-	[PFFacebookUtils initializeFacebook];
-	// ****************************************************************************
-    
-	[PFUser enableAutomaticUser];
-    
-	PFACL * defaultACL = [PFACL ACL];
-    
-	// If you would like all objects to be private by default, remove this line.
-	[defaultACL setPublicReadAccess:YES];
-    
-	[PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
-    
-	// Override point for customization after application launch.
-	NSURL * url = (NSURL*)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
-	if (url != nil && [url isFileURL]) {
-		[self handleOpenURL:url];
-	}
     
 	self.storyboard = [UIStoryboard storyboardWithName:@"iPhoneStoryboard" bundle:[NSBundle mainBundle]];
-	self.timer34 = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(enableSave2) userInfo:nil repeats:YES];
     //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
 	[self setupAudioSession];
 	[self setupDB];
     
-	if (application.applicationState != UIApplicationStateBackground) {
-		// Track an app open here if we launch with a push, unless
-		// "content_available" was used to trigger a background push (introduced
-		// in iOS 7). In that case, we skip tracking here to avoid double
-		// counting the app-open.
-		BOOL preBackgroundPush = ![application respondsToSelector:@selector(backgroundRefreshStatus)];
-		BOOL oldPushHandlerOnly = ![self respondsToSelector:@selector(application:didReceiveRemoteNotification:fetchCompletionHandler:)];
-		BOOL noPushPayload = ![launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-		if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
-			[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-		}
-	}
-    
-	[application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
-	 UIRemoteNotificationTypeAlert |
-	 UIRemoteNotificationTypeSound];
+	
 	return YES;
 }
 
@@ -134,11 +94,11 @@
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {
 			DebugLog(@"UIEventSubtypeRemoteControlPreviousTrack");
-			[self.currentAudioViewController skipWithDuration:-15];
+			[self.currentAudioViewController skipWithDuration:-30];
 		}
 		else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
 			DebugLog(@"UIEventSubtypeRemoteControlNextTrack");
-			[self.currentAudioViewController skipWithDuration:15];
+			[self.currentAudioViewController skipWithDuration:30];
 		}
 	}
 }
@@ -205,25 +165,6 @@ NSTimer * timer11;
  */
 
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-	return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication
-                        withSession:[PFFacebookUtils session]];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-	[FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
-	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContext];
-}
-
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
-	[PFPush storeDeviceToken:newDeviceToken];
-	[PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
-}
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 	if (error.code == 3010) {
@@ -232,21 +173,6 @@ NSTimer * timer11;
 	else {
 		// show some alert or otherwise handle the failure to register.
 		DebugLog(@"application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
-	}
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-	[self checkSleepTimer];
-	[PFPush handlePush:userInfo];
-    
-	if (application.applicationState == UIApplicationStateInactive) {
-		[PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
-	}
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-	if (application.applicationState == UIApplicationStateInactive) {
-		[PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
 	}
 }
 
@@ -261,14 +187,9 @@ NSTimer * timer11;
 
 BOOL canSave;
 
--(void)enableSave2 {
-	DebugLog(@"aaaaa");
-	canSave = true;
-	DebugLog(@"aaaab");
-}
-
 
 -(void)saveContextAndForce:(BOOL)shouldForce {
+    canSave = true;
 	if (canSave || shouldForce) {
         
 		NSManagedObjectContext * context = self.managedObjectContext;
@@ -278,7 +199,6 @@ BOOL canSave;
 		}
         
 		@try {
-			//			if (shouldForce)
 			[self.currentAudioViewController recordCurrNoSave];
 		}
 		@catch (NSException * exception) {
@@ -369,18 +289,6 @@ BOOL canSave;
 	 */
 	[self.currentAudioViewController.getSong setIsLastPlayed:[NSNumber numberWithBool:FALSE]];
 	[((AudiobookPlayerAppDelegate*)[UIApplication sharedApplication].delegate)saveContextAndForce : YES];
-}
-
-
-#pragma mark - ()
-
-- (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
-	if ([result boolValue]) {
-		DebugLog(@"AudiobookPlayer successfully subscribed to push notifications on the broadcast channel.");
-	}
-	else {
-		DebugLog(@"AudiobookPlayer failed to subscribe to push notifications on the broadcast channel.");
-	}
 }
 
 
